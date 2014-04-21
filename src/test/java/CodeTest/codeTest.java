@@ -80,7 +80,7 @@ public class codeTest
 
     public String password()
     {
-        String password="login_2_btt";
+        String password="*****";
         return password;
     }
 
