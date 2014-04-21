@@ -24,7 +24,7 @@ public class AppTest
     {
 
 
-        HSSFSheet inputSheet=getSheet("/Users/Ridhi/ehq_automation_test_suite/Script Input.xls");
+        HSSFSheet inputSheet=getSheet("/Users/Ridhi/ehq_automation_test_suite/Script Input Files/Script Input.xls");
         setSuiteInputs(inputSheet);
         String resultFile=createResultFile(testSuiteName+"/");
 
