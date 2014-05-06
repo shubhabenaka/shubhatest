@@ -11,11 +11,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,10 +38,22 @@ public class CommonFunctions
     public static String hostIP;
     public static String appModule;
     public static String loutEnabled;
+    public static WebDriver testDriver;
     public static boolean keywordResult=true;
-    public static WebDriver testDriver= new FirefoxDriver();
+    public static Objects pageObj;
+    //public static WebDriver testDriver= new FirefoxDriver();
 
-    public static Objects pageObj= new Objects(testDriver);
+
+
+    public static  void browserGrid() throws MalformedURLException
+    {
+        URL url=new URL("http://localhost:4444/wd/hub");
+        DesiredCapabilities cap=new DesiredCapabilities();
+        cap.setBrowserName(browser);
+        cap.setJavascriptEnabled(true);
+        testDriver=new RemoteWebDriver(url,cap);
+        pageObj= new Objects(testDriver);
+    }
 
 
     public static HSSFSheet getSheet(String filePath) throws IOException
@@ -107,22 +122,32 @@ public class CommonFunctions
         loutEnabled=inputArr.get(4).toString();
     }
 
-    public static void Login (ArrayList keywordArr) throws InterruptedException {
+    public static void Login (ArrayList keywordArr) throws InterruptedException, MalformedURLException {
         if (keywordArr.size()==3)
         {
+            browserGrid();
             testDriver.get("http://expproj.abc.engagementhq.com/login");
             waitForPageLoad();
             pageObj.userNameTB.sendKeys(keywordArr.get(1).toString());
             pageObj.passwordTB.sendKeys(keywordArr.get(2).toString());
             pageObj.signBttn.click();
-            Thread.sleep(7000);
+            /*if (pageObj.loadProgress.isDisplayed())
+            {
+                while (!pageObj.loadProgress.getAttribute("nodeValue").equals("width: 104%;"))
+                {
+                    Thread.sleep(2000);
+                }
+            }
+            //if (pageObj.loadProgress.isDisplayed())*/
+            Thread.sleep(10000);
             waitForPageLoad();
             assertTrue("Sign in Failed", waitForElement(pageObj.userLabel));
         }
         else
         {
             keywordResult = false;
-            fail("Incorrect number of parameters passed.Please check the test script.Hence failing test.");
+            //fail("Incorrect number of parameters passed.Please check the test script.Hence failing test.");
+
         }
     }
 

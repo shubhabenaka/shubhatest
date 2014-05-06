@@ -24,6 +24,8 @@ public class Objects
 
         @FindBy(name = "commit") public static WebElement signBttn;
 
+        @FindBy(css="div.tiny-progress") public static WebElement loadProgress;
+
         @FindBy(id = "project_name") public static WebElement projectNameTB;
 
         @FindBy(className = "redactor_redactor") public static WebElement projDescriptionTB;
