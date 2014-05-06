@@ -1,15 +1,17 @@
-package ehq.Automated_Test_Suite;
+package Automated_Test_Suite;
 
 import Ehq_CommonFunctionLibrary.CommonFunctions;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.junit.Test;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import static Ehq_CommonFunctionLibrary.CommonFunctions.*;
 
 
@@ -17,14 +19,14 @@ public class AppTest
 
 {
 
-
    @Test
 
-    public void testApp() throws Exception
+    public void driverScript() throws Exception
     {
-
-
-        HSSFSheet inputSheet=getSheet("/Users/Ridhi/ehq_automation_test_suite/Script Input Files/Script Input.xls");
+        String filename;
+        //filename=System.getProperty(filename);
+        filename="/Users/Ridhi/Ehq_AutomationSuite/Script Input files/Script Input.xls";
+        HSSFSheet inputSheet=getSheet(filename);
         setSuiteInputs(inputSheet);
         String resultFile=createResultFile(testSuiteName+"/");
 
