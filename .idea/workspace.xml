@@ -6,60 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="Code Updates 19-05">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test_suite_videos/Badtameez Dil.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test_suite_videos/Flute.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_forumtopic.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_guestbook.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_newsfeed.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_qanda.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_quickpolls.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_shareproject.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_stories.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_surveysandforms.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Participant_widgets.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_activewidgets.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_administrators.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_advanced.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_customwidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_documentwidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_email.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_facebookwidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_faqs.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_faqwidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_forumtopic.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_guestbook.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_importantlinkswidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_keydate.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_keydatewidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_library.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_manageproject.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_maps.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_newscategorywidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_newsfeed.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_participants.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_photos.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_photowidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_qanda.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_quickpolls.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_relatedprojectswidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_reports.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_signupbannerwidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_staticpages.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_stories.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_surveysandforms.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_videos.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_videowidget.xls" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Script Input files/Siteadmin_visibility.xls" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Script Input files/.~lock.Projectadmin_photowidget.xls#" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Script Input files/Projectadmin_forumtopic.xls" afterPath="$PROJECT_DIR$/Script Input files/Projectadmin_forumtopic.xls" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Script Input files/Projectadmin_relatedprojectwidget.xls" afterPath="$PROJECT_DIR$/Script Input files/Projectadmin_relatedprojectwidget.xls" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Script Input files/Projectadmin_signupbannerwidget.xls" afterPath="$PROJECT_DIR$/Script Input files/Projectadmin_signupbannerwidget.xls" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Script Input files/Projectadmin_visbility.xls" afterPath="$PROJECT_DIR$/Script Input files/Projectadmin_visbility.xls" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" afterPath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
+    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ehq_AutomationSuite.iws" />
@@ -730,6 +677,11 @@
       <created>1397021033288</created>
       <updated>1397021033288</updated>
     </task>
+    <task id="LOCAL-00001" summary="Code Updates 19-05">
+      <created>1400476431539</created>
+      <updated>1400476431539</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
