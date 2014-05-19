@@ -16,7 +16,7 @@ public class Objects
 
 {
 
-    public static WebDriver testDriver;
+    public WebDriver testDriver;
 
         @FindBy(id = "user_email_or_login") public static WebElement userNameTB;
 
@@ -55,7 +55,7 @@ public class Objects
     } */
 
 
-    public static WebElement getLink(String linkText)
+    public WebElement getLink(String linkText)
     {
         if (testDriver.findElements(By.linkText(linkText)).size()!=0)
         {
@@ -67,7 +67,7 @@ public class Objects
             return null;
     }
 
-    public static WebElement linkByIndex(String linkText,Integer index)
+    public WebElement linkByIndex(String linkText,Integer index)
     {
         if (testDriver.findElements(By.linkText(linkText)).size()!=0)
         {

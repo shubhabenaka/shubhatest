@@ -160,7 +160,7 @@ public class CommonFunctions
        }
     }
 
-    public static void Goto (ArrayList keywordArr) throws InterruptedException
+    public static void Goto(ArrayList keywordArr) throws InterruptedException
     {
         if (keywordArr.size()==2)
         {
