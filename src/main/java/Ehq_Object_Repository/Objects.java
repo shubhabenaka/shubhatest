@@ -46,6 +46,14 @@ public class Objects
 
         @FindBy(xpath = "/html/body/div/div/div/div/ul[2]/li/a") public static WebElement loutTab;
 
+        @FindBy(xpath = "html/body/div[2]/div[5]") public static WebElement loginErrorMsg;
+
+        @FindBy(className = "error_messages") public static WebElement projErrorMsg;
+
+        @FindBy(xpath = ".//*[@id='project-listing_filter']/label/input") public static WebElement projSearchTB;
+
+        @FindBy(className = "alert.alert-info") public static WebElement logoutMsg;
+
 
 
  /*   public static WebElement logoutTab(String username)

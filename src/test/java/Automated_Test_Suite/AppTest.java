@@ -37,6 +37,7 @@ public class AppTest
         ArrayList<File> scriptsList= returnCases(testSuiteName);
         for(File testScript:scriptsList)
         {
+            //Parallel logic change
             String scriptName=testScript.getName();
             if (testScript.getName().contains(".xls"))
             {
