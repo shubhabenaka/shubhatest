@@ -170,6 +170,10 @@ public class CommonFunctions
 // INTERNAL FUNCTIONS
 //======================
 
+
+
+
+//Wait for the page to load
     public static boolean waitForPageLoad() throws InterruptedException
     {
         while (!(((JavascriptExecutor)testDriver).executeScript("return document.readyState").equals("complete")))
@@ -179,6 +183,7 @@ public class CommonFunctions
         return true;
     }
 
+//Goto a link using link text and link index on the page as inputs
     public static void gotoLink(String linkName,Integer index)
     {
         pageObj.linkByIndex(linkName, index).click();
@@ -190,12 +195,12 @@ public class CommonFunctions
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
         String dateString = (format.format(date));
         String resultFileName = testSuiteName + "Test Result Log " + dateString + ".txt";
-
         FileWriter fileWriter = new FileWriter(resultFileName,true);
         fileWriter=null;
         return resultFileName;
     }
 
+//Write Results to a text file in the Suite folder currently being executed
     public static void writeResultLog(String scriptName,ArrayList keywordArr,String fileName) throws IOException
     {
         FileWriter fileWriter = new FileWriter(fileName, true);
@@ -207,12 +212,13 @@ public class CommonFunctions
         bufferedWriter.close();
     }
 
+//Verify if an Object physically exists on the page
     public static boolean elementExists(WebElement element)
     {
         try
         {
-            element.isDisplayed();
-            return true;
+        element.isDisplayed();
+        return true;
         }
         catch (NoSuchElementException e)
         {
