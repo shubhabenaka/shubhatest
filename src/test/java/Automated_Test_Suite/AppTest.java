@@ -14,18 +14,17 @@ import java.util.Iterator;
 
 import static Ehq_CommonFunctionLibrary.CommonFunctions.*;
 
-
 public class AppTest
 
 {
 
-   @Test
+    public static String filename;
+
+    @Test
 
     public void driverScript() throws Exception
     {
-        String filename;
-        //filename=System.getProperty(filename);
-        filename="/Users/Ridhi/Ehq_AutomationSuite/Script Input files/Script Input.xls";
+        //filename="/Users/Ridhi/ScriptInput.xls";
         HSSFSheet inputSheet=getSheet(filename);
         setSuiteInputs(inputSheet);
         String resultFile=createResultFile(testSuiteName+"/");
@@ -37,10 +36,10 @@ public class AppTest
         ArrayList<File> scriptsList= returnCases(testSuiteName);
         for(File testScript:scriptsList)
         {
-            //Parallel logic change
             String scriptName=testScript.getName();
             if (testScript.getName().contains(".xls"))
             {
+
                 ArrayList<String> keywordArr=new ArrayList<String>();
                 HSSFSheet scriptSheet=getSheet(testScript.toString());
                 Iterator rowCounter=scriptSheet.rowIterator();

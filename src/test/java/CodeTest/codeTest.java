@@ -1,17 +1,14 @@
 package CodeTest;
 
-import org.junit.Test;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public class codeTest
 {
 
-    @Test
-
-    public void testCode() throws InterruptedException
+    public void testCode() throws InterruptedException, IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 
     {
-    //Code for testing goes here
-     }
-
+        //Code for testing goes here
+    }
 }
-

@@ -9,6 +9,8 @@ public class TestRunner
 {
     public static void main(String[] args)
     {
+        String arg= args[0];
+        AppTest.filename=arg;
         JUnitCore.runClasses(AppTest.class);
     }
 }

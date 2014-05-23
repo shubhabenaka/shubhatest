@@ -50,12 +50,14 @@ public class CommonFunctions
             browserGrid();   //Reference to Browser and grid management Function
             testDriver.get("http://expproj.abc.engagementhq.com/login"); //Pass URL to browser
             waitForPageLoad();
+            pageObj=new Objects(testDriver);
             pageObj.userNameTB.sendKeys(keywordArr.get(1).toString());  //Populate Username
             pageObj.passwordTB.sendKeys(keywordArr.get(2).toString());  //Populate Password
             pageObj.signBttn.click();                                   //Click on Sign in button
             if (elementExists(pageObj.loginErrorMsg))   //Validates presence of Error Message
             {
               errorMsg=(pageObj.loginErrorMsg.getAttribute("textContent").replaceAll("\n","")).replaceAll("×","");   //Populates error message with web message
+
             }
             waitForLoadProgress();   //Wait for Load Progress completion if it exists
             if (!elementExists(pageObj.addProjBtn))     //Validate Add new project button
@@ -230,7 +232,7 @@ public class CommonFunctions
     {
         if (elementExists(pageObj.loadProgress))    //Validates presence of Page load bar
         {
-            while (Integer.parseInt((pageObj.loadProgress.getAttribute("nodeValue").replaceAll("width: ","")).replaceAll("%",""))<103) //Validates load progress
+            while (Integer.parseInt((pageObj.loadProgress.getAttribute("nodeValue").replaceAll("width: ","")).replaceAll("%",""))>103) //Validates load progress
             {
                 try
                 {

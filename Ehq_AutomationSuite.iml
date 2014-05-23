@@ -2,7 +2,7 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
-    <output-test url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/Resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
@@ -61,7 +61,6 @@
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.8" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi:3.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.james:apache-mime4j:0.6" level="project" />
-    <orderEntry type="library" name="Maven: junit:junit:4.11" level="project" />
   </component>
 </module>
 
