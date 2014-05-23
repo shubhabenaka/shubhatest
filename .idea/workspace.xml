@@ -6,15 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/Ehq_AutomationSuite.jar" afterPath="$PROJECT_DIR$/Ehq_AutomationSuite/Ehq_AutomationSuite.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" afterPath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite.iml" afterPath="$PROJECT_DIR$/Ehq_AutomationSuite.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" afterPath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" afterPath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="GitIgnore">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ehq_AutomationSuite.iws" />
@@ -82,11 +75,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestRunner.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestRunner.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53333336" vertical-offset="0" max-vertical-offset="450">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
               <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="427">
+              <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -128,13 +131,13 @@
         <option value="$PROJECT_DIR$/src/main/java/CodeTest/codeTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/TestRunnerPackage/TestRunner.java" />
         <option value="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" />
         <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
         <option value="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
         <option value="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -177,7 +180,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -748,7 +751,11 @@
       <created>1400584005987</created>
       <updated>1400584005987</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ParameterizedJar">
+      <created>1400837162982</created>
+      <updated>1400837162982</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -798,7 +805,8 @@
     <MESSAGE value="Code Updates 19-05" />
     <MESSAGE value="AlternateScenariosUpdate" />
     <MESSAGE value="CodeTestUpdate" />
-    <option name="LAST_COMMIT_MESSAGE" value="CodeTestUpdate" />
+    <MESSAGE value="ParameterizedJar" />
+    <option name="LAST_COMMIT_MESSAGE" value="ParameterizedJar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1114,13 +1122,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Ehq_AutomationSuite.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1095">
@@ -1132,6 +1133,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19305">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,8 +1183,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53333336" vertical-offset="0" max-vertical-offset="450">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="427">
+          <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
           <folding />
         </state>
       </provider>
