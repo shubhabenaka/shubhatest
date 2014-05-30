@@ -11,6 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 
 /**
@@ -38,7 +38,7 @@ public class CommonFunctions
     public static WebDriver testDriver;
     public static boolean keywordResult=true;
     public static Objects pageObj;
-    public static String errorMsg;           //A global reference that can be set by each function to report error messages this also prevents reporting keyword failure if we were expecting it
+    public static String errorMsg="";           //A global reference that can be set by each function to report error messages this also prevents reporting keyword failure if we were expecting it
     //public static WebDriver testDriver= new FirefoxDriver();
 
 
@@ -75,10 +75,11 @@ public class CommonFunctions
         }
     }
 
-    public static void Logout(ArrayList keywordArr) throws InterruptedException
+    public static void Logout(ArrayList<String> keywordArr) throws InterruptedException
     {
            pageObj.loutTab.click();     //Click on the Username labelled dropdown tab on the right top corner
-           pageObj.getLink(keywordArr.get(0).toString().trim()).click();    //Click on Logout option
+           pageObj.logoutLink.click();    //Click on Logout option
+           waitForPageLoad();
            if (!elementExists(pageObj.logoutMsg))
            {
                keywordResult=false;
@@ -90,6 +91,7 @@ public class CommonFunctions
     {
         if (keywordArr.size()==2)
         {
+            waitForPageLoad();
             pageObj.getLink(keywordArr.get(1).toString().trim()).click();   //Click on the first Link matching the parsed text
             waitForPageLoad();  //Wait for page reload post clicking the link
         }
@@ -115,8 +117,8 @@ public class CommonFunctions
             pageObj.projectNameTB.sendKeys(keywordArr.get(1).toString());   //Populate project name
             testDriver.findElement(By.cssSelector("div.form-field:nth-child(1) > label:nth-child(1)")).click();     //Click outside to enable postback for Permalink generation
             String driverHandle = testDriver.getWindowHandle();
-            testDriver.switchTo().frame(pageObj.projDescriptionTB);     //Switch to Description box frame
-            testDriver.findElement(By.cssSelector("body > p > br")).sendKeys("\n" + keywordArr.get(2).toString());      //Populate description
+            testDriver.switchTo().frame(pageObj.redactorFrame(0));     //Switch to Description box frame
+            pageObj.descTB.sendKeys("\n" + keywordArr.get(2).toString());      //Populate description
             testDriver.switchTo().window(driverHandle);     //Switch back to main frame
             if (keywordArr.size() > 3)      //Validate if Truncate check box input is given
             {
@@ -165,6 +167,274 @@ public class CommonFunctions
     }
 
 
+    public static void EnableAddSurvey(ArrayList keywordArr) throws InterruptedException
+    {
+        if (keywordArr.size()>=6)
+        {
+            if (elementExists(pageObj.surveyToolsCB))
+            {
+                pageObj.surveyToolsCB.click();
+                waitForPageLoad();
+                pageObj.surveySaveBtn.get(1).click();
+                waitForPageLoad();
+                if (elementExists(pageObj.projToolsTab))
+                {
+                    if (pageObj.projToolsTab.getAttribute("textContent").contains("Surveys & Forms"))
+                    {
+                        WebElement mngLnk = pageObj.manageLink("survey_tools");
+                        mngLnk.click();
+                        waitForPageLoad();
+                        pageObj.getLink("Add").click();
+                        waitForPageLoad();
+                        if (elementExists(pageObj.surveyNameTB))
+                        {
+
+                            pageObj.surveyNameTB.sendKeys(keywordArr.get(1).toString().trim());
+                            String currHandle=testDriver.getWindowHandle();
+                            testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                            pageObj.descTB.sendKeys("\n" + keywordArr.get(2).toString().trim());
+                            testDriver.switchTo().window(currHandle);
+                            pageObj.surveyPermLinkTB.sendKeys(keywordArr.get(3).toString().trim());
+                            testDriver.switchTo().frame(pageObj.redactorFrame(2));
+                            pageObj.descTB.sendKeys("\n" + keywordArr.get(4).toString().trim());
+                            testDriver.switchTo().window(currHandle);
+                            if ((keywordArr.get(5).toString().trim()).equals("Verified"))
+                            {
+                                //Do Nothing
+                            }
+                            else if ((keywordArr.get(5).toString().trim()).equals("Unverified"))
+                            {
+                                pageObj.surveyUnverPartModeRB.click();
+                            }
+                            else if ((keywordArr.get(5).toString().trim()).equals("Anonymous"))
+                            {
+                                pageObj.surveyAnonPartModeRB.click();
+                            }
+                            if ((keywordArr.get(6).toString().trim()).equals("Post Multiple Times"))
+                            {
+                                 pageObj.surveyAllowMulCB.click();
+                            }
+                            else if ((keywordArr.size()==7))
+                            {
+                                pageObj.surveyAllowMulMsgTB.sendKeys(keywordArr.get(6).toString().trim());
+                            }
+                            pageObj.surveySaveBtn.get(1).click();
+                        }
+                    }
+                    else
+                    testDriver.quit();
+                }
+                else
+                keywordResult=false;
+            }
+        }
+    }
+
+    public static void AddSurveyQuestions(ArrayList keywordArr) throws InterruptedException {
+        pageObj.manageLink(keywordArr.get(1).toString()).click();
+        waitForPageLoad();
+        if (elementExists(pageObj.getLink("Questions")))
+        {
+            for(int i=2;i<keywordArr.size();i++)
+            {
+                String[] arr=(keywordArr.get(i).toString().trim().split(Character.toString((char) 58)));
+                waitForElement(By.linkText("Add"));
+                pageObj.getLink("Add").click();
+                waitForElement(By.id(Objects.surveyQTypeBoxId));
+                int optIndex=setOptionGetIndex(pageObj.dropDownSurveyQType, arr[0]);
+                switch (optIndex)
+                {
+                    case 0:
+                        waitForElement((By.id(Objects.surveyDescQBoxId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        pageObj.surveyQDescTB.sendKeys(arr[2]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        break;
+                    case 1:
+                        waitForElement((By.id(Objects.surveyQLenBoxId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        pageObj.surveyQLenTB.sendKeys(arr[2]);
+                        if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
+                        pageObj.surveyQNotesTB.sendKeys(arr[4]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 2:
+                        waitForElement((By.id(Objects.surveyQReqId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        pageObj.surveyQNotesTB.sendKeys(arr[3]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 3:
+                        waitForElement((By.linkText("Add more")));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        String[] str=arr[3].split(",");
+                        for (int j=0;j<str.length;j++)
+                        {
+                                pageObj.getSurveyOptions(j).sendKeys(str[j]);
+                        }
+                        pageObj.surveyQNotesTB.sendKeys(arr[4]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 4:
+                        waitForElement((By.linkText("Add more")));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
+                        String[] str2=arr[4].split(",");
+                        for (int j=0;j<str2.length;j++)
+                        {
+
+                                pageObj.getSurveyOptions(j).sendKeys(str2[j]);
+
+                        }
+                        pageObj.surveyQNotesTB.sendKeys(arr[5]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 5:
+                        waitForElement((By.linkText("Add more")));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
+                        String[] str3=arr[4].split(",");
+                        for (int j=0;j<str3.length;j++)
+                        {
+
+                                pageObj.getSurveyOptions(j).sendKeys(str3[j]);
+
+                        }
+                        pageObj.surveyQNotesTB.sendKeys(arr[5]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 6:
+                        waitForElement((By.id(Objects.surveyQReqId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        pageObj.surveyQNotesTB.sendKeys(arr[3]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 7:
+                        waitForElement((By.id(Objects.surveyQReqId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        pageObj.surveyQNotesTB.sendKeys(arr[3]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 8:
+                        waitForElement((By.id(Objects.surveyQReqId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        pageObj.surveyQNotesTB.sendKeys(arr[3]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 9:
+                        waitForElement((By.id(Objects.surveyImgTrueId)));
+                        pageObj.surveyImgUpTrueRB.click();
+                        pageObj.surveyImgLinkQTB.sendKeys(arr[2]);
+                        pageObj.surveyQuesTB.sendKeys(arr[3]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 10:
+                        waitForElement((By.linkText("Add More Statements")));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        String[] str4=arr[3].split(",");
+                        for (int j=0;j<str4.length;j++)
+                        {
+
+                                pageObj.getSurveyStatements(j).sendKeys(str4[j]);
+
+                        }
+                        String[] str5=arr[4].split(",");
+                        for (int j=0;j<str5.length;j++)
+                        {
+
+                                pageObj.getSurveyOptions(j).sendKeys(str5[j]);
+
+                        }
+                        pageObj.surveyQNotesTB.sendKeys(arr[5]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 11:
+                        waitForElement((By.id(Objects.surveyQLenBoxId)));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        pageObj.surveyQLenTB.sendKeys(arr[2]);
+                        if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
+                        pageObj.surveyQNotesTB.sendKeys(arr[4]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                    case 12:
+                        waitForElement((By.linkText("Add more")));
+                        pageObj.surveyQuesTB.sendKeys(arr[1]);
+                        if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
+                        String[] str6=arr[3].split(",");
+                        for (int j=0;j<str6.length;j++)
+                        {
+
+                                pageObj.getSurveyOptions(j).sendKeys(str6[j]);
+
+                        }
+                        pageObj.surveyQNotesTB.sendKeys(arr[4]);
+                        pageObj.surveySaveBtn.get(1).click();
+                        waitForPageLoad();
+                        break;
+                }
+
+            }
+            waitForElement(By.linkText("Add"));
+        }
+    }
+
+    public static void VerifySurvey(ArrayList keywordArr) throws InterruptedException {
+        waitForPageLoad();
+        if (keywordArr.size()==2)
+        {
+            pageObj.manageLink(keywordArr.get(1).toString()).click();
+            waitForPageLoad();
+            ArrayList<String> arr=new ArrayList<String>();
+            for (WebElement element:testDriver.findElements(By.cssSelector("h6.pull-left.nomargin.type")))
+            {
+                arr.add(element.getAttribute("textContent").replaceAll(" ", "_").toLowerCase() + "_answer");
+            }
+            pageObj.getLink("Surveys & Forms").click();
+            waitForPageLoad();
+            pageObj.previewLink(keywordArr.get(1).toString()).click();
+            ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
+            testDriver.switchTo().window(tabs.get(1));
+            if (testDriver.getCurrentUrl().contains(keywordArr.get(1).toString()) && testDriver.getCurrentUrl().contains("preview"))
+            {
+                for (String str :arr)
+                {
+                    if (str.equals("radio_buttons_answer")) str=str.replaceAll("buttons","button");
+                    if (str.equals("checkboxes_answer")) str=str.replaceAll("checkboxes","check_box");
+                    if (str.equals("suburb_answer")) str=str.replaceAll("suburb","region");
+                    if (str.equals("dropdown_answer")) str=str.replaceAll("dropdown","drop_down");
+                    if (str.equals("file_upload_answer")) str=str.replaceAll("file_upload","file");
+                    if (!str.isEmpty())
+                    {
+                        if (testDriver.getPageSource().contains(str)) {//Do Nothing
+                        }
+                        else keywordResult = false;
+                    }
+                }
+            }
+            testDriver.switchTo().window(tabs.get(0));
+        }
+
+    }
+
 
 
 
@@ -207,7 +477,7 @@ public class CommonFunctions
     {
         FileWriter fileWriter = new FileWriter(fileName, true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        if (errorMsg.isEmpty() || errorMsg==null)
+        if (errorMsg.isEmpty())
         {
             bufferedWriter.write("\n" + "FAILED: " + scriptName + keywordArr);
         }
@@ -247,17 +517,18 @@ public class CommonFunctions
 
     }
 
-    public static boolean waitForElement(WebElement element)
+    public static boolean waitForElement(By locator)
     {
         WebElement element2;
         WebDriverWait wait=new WebDriverWait(testDriver,60);
         try
         {
-            element2=wait.until(ExpectedConditions.visibilityOf(element));
+            element2=wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         }
-        catch (NullPointerException ex)
+        catch (NoSuchElementException ex)
         {
             keywordResult=false;
+            testDriver.quit();
             return false;
         }
         if (element2!=null && element2.isDisplayed())
@@ -267,6 +538,7 @@ public class CommonFunctions
         else
         {
             keywordResult=false;
+            testDriver.quit();
             return false;
         }
     }
@@ -307,7 +579,7 @@ public class CommonFunctions
         }
         if (inputArr.size()<row.getLastCellNum())
         {
-            fail("Invalid Input provided for one or more values. Hence, stopping further Test execution.");
+           // fail("Invalid Input provided for one or more values. Hence, stopping further Test execution.");
             System.exit(0);
         }
 
@@ -344,6 +616,13 @@ public class CommonFunctions
         hostIP=inputArr.get(2).toString();
         appModule=inputArr.get(3).toString();
         loutEnabled=inputArr.get(4).toString();
+    }
+
+    public static int setOptionGetIndex(WebElement dropdown,String optionText)
+    {
+       Select dropDown=new Select(dropdown);
+       dropDown.selectByVisibleText(optionText);
+       return Integer.parseInt((dropDown.getFirstSelectedOption().getAttribute("index")));
     }
 
 }

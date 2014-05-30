@@ -24,7 +24,7 @@ public class AppTest
 
     public void driverScript() throws Exception
     {
-        //filename="/Users/Ridhi/ScriptInput.xls";
+        filename="/Users/Ridhi/ScriptInput.xls";
         HSSFSheet inputSheet=getSheet(filename);
         setSuiteInputs(inputSheet);
         String resultFile=createResultFile(testSuiteName+"/");
@@ -77,6 +77,8 @@ public class AppTest
         Method method = libClass.getMethod(keyword, iList.getClass());
         method.invoke(this, keyArr);
     }
+
+
 
 
 }
