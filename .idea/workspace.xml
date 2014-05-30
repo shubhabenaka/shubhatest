@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="Survey Keywords">
+    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ehq_AutomationSuite.iws" />
@@ -728,7 +728,11 @@
       <created>1401455283289</created>
       <updated>1401455283289</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Survey Keywords">
+      <created>1401455437100</created>
+      <updated>1401455437101</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
