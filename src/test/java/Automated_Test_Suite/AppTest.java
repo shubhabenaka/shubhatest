@@ -74,6 +74,7 @@ public class AppTest
         CommonFunctions funcLib=new CommonFunctions();
         Class libClass = funcLib.getClass();
         String keyword=keyArr.get(0).toString().trim();
+        System.out.println(keyArr);
         Method method = libClass.getMethod(keyword, iList.getClass());
         method.invoke(this, keyArr);
     }

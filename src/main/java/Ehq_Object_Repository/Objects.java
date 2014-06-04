@@ -1,13 +1,11 @@
 package Ehq_Object_Repository;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
 
 import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
 
@@ -65,7 +63,7 @@ public class Objects
 
         @FindBy(css = "ul.unstyled.admin-tabs.pinneditempreview") public static WebElement projToolsTab;
 
-        @FindBy(css = "input.btn.btn-primary.btn.btn-primary.js-submit") public static WebElement projSaveTools;
+        @FindBy(css = "input.btn[value=Save]") public static WebElement projSaveToolsBtn;
 
         @FindBy(css = "a.btn.btn-primary.new") public static WebElement addSurveyBtn;
 
@@ -83,7 +81,7 @@ public class Objects
 
         @FindBy(id="survey_tool_multiple_times_msg") public static WebElement surveyAllowMulMsgTB;
 
-        @FindAll ({ @FindBy(name = "commit")}) public static List<WebElement> surveySaveBtn;
+        @FindBy(css="input.btn[value=Create]") public static WebElement projToolsCreateBtn;
 
         public static final String surveyQTypeBoxId="question_type";
         @FindBy(id=surveyQTypeBoxId) public static WebElement dropDownSurveyQType;
@@ -112,6 +110,21 @@ public class Objects
         @FindBy(id=surveyImgLinkBoxId) public static WebElement surveyImgLinkQTB;
 
 
+        @FindBy(id="tools_BlogPost") public static WebElement newsToolsCB;
+
+        @FindBy(id="blog_post_name") public static WebElement newsPostTitleTB;
+
+        @FindBy(id="blog_post_link") public static WebElement newsPostLinkTB;
+
+        @FindBy(id="blog_post_description") public static WebElement newsPostDescTA;
+
+        @FindBy(id="blog_post_description_display_mode") public static WebElement newsPostDescDispCB;
+
+        @FindBy(id="blog_post_commentable") public static WebElement newsPostCommentableCB;
+
+        @FindBy(id="blog_post_allow_unverified_participation") public static WebElement newsUnverPartCB;
+
+        @FindBy(id="blog_post_tag_list") public static WebElement newsPostCategoryTB;
 
 
 
@@ -205,7 +218,7 @@ public class Objects
     }
 
 
-    public Objects(WebDriver driver)
+    public Objects(WebDriver driver) throws StaleElementReferenceException
     {
         PageFactory.initElements(driver, this);
         testDriver=driver;

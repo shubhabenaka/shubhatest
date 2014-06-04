@@ -48,7 +48,8 @@ public class CommonFunctions
         if (keywordArr.size()==3)
         {
             browserGrid();   //Reference to Browser and grid management Function
-            testDriver.get("http://expproj.abc.engagementhq.com/login"); //Pass URL to browser
+            testDriver.get("http://expproj.abc.engagementhq.com/login");
+            testDriver.manage().window().maximize();//Pass URL to browser
             waitForPageLoad();
             pageObj=new Objects(testDriver);
             pageObj.userNameTB.sendKeys(keywordArr.get(1).toString());  //Populate Username
@@ -89,9 +90,8 @@ public class CommonFunctions
 
     public static void Goto(ArrayList keywordArr) throws InterruptedException
     {
-        if (keywordArr.size()==2)
+        if (keywordArr.size()>=2)
         {
-            waitForPageLoad();
             pageObj.getLink(keywordArr.get(1).toString().trim()).click();   //Click on the first Link matching the parsed text
             waitForPageLoad();  //Wait for page reload post clicking the link
         }
@@ -171,15 +171,9 @@ public class CommonFunctions
     {
         if (keywordArr.size()>=6)
         {
-            if (elementExists(pageObj.surveyToolsCB))
+        if (elementExists(pageObj.projToolsTab))
             {
-                pageObj.surveyToolsCB.click();
-                waitForPageLoad();
-                pageObj.surveySaveBtn.get(1).click();
-                waitForPageLoad();
-                if (elementExists(pageObj.projToolsTab))
-                {
-                    if (pageObj.projToolsTab.getAttribute("textContent").contains("Surveys & Forms"))
+                if (pageObj.projToolsTab.getAttribute("textContent").contains("Surveys & Forms"))
                     {
                         WebElement mngLnk = pageObj.manageLink("survey_tools");
                         mngLnk.click();
@@ -214,19 +208,18 @@ public class CommonFunctions
                             {
                                  pageObj.surveyAllowMulCB.click();
                             }
-                            else if ((keywordArr.size()==7))
+                            else if ((keywordArr.size()==8))
                             {
-                                pageObj.surveyAllowMulMsgTB.sendKeys(keywordArr.get(6).toString().trim());
+                                pageObj.surveyAllowMulMsgTB.sendKeys(keywordArr.get(7).toString().trim());
                             }
-                            pageObj.surveySaveBtn.get(1).click();
+                            pageObj.projToolsCreateBtn.click();
                         }
                     }
-                    else
-                    testDriver.quit();
+                     else
+                     testDriver.quit();
                 }
                 else
                 keywordResult=false;
-            }
         }
     }
 
@@ -248,7 +241,7 @@ public class CommonFunctions
                         waitForElement((By.id(Objects.surveyDescQBoxId)));
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         pageObj.surveyQDescTB.sendKeys(arr[2]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         break;
                     case 1:
                         waitForElement((By.id(Objects.surveyQLenBoxId)));
@@ -256,7 +249,7 @@ public class CommonFunctions
                         pageObj.surveyQLenTB.sendKeys(arr[2]);
                         if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
                         pageObj.surveyQNotesTB.sendKeys(arr[4]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 2:
@@ -264,7 +257,7 @@ public class CommonFunctions
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
                         pageObj.surveyQNotesTB.sendKeys(arr[3]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 3:
@@ -277,14 +270,14 @@ public class CommonFunctions
                                 pageObj.getSurveyOptions(j).sendKeys(str[j]);
                         }
                         pageObj.surveyQNotesTB.sendKeys(arr[4]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 4:
                         waitForElement((By.linkText("Add more")));
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
-                        if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
+                        if (arr[3].equals("True")) pageObj.surveyQHorizontalCB.click();
                         String[] str2=arr[4].split(",");
                         for (int j=0;j<str2.length;j++)
                         {
@@ -293,14 +286,14 @@ public class CommonFunctions
 
                         }
                         pageObj.surveyQNotesTB.sendKeys(arr[5]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 5:
                         waitForElement((By.linkText("Add more")));
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
-                        if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
+                        if (arr[3].equals("True")) pageObj.surveyQHorizontalCB.click();
                         String[] str3=arr[4].split(",");
                         for (int j=0;j<str3.length;j++)
                         {
@@ -309,7 +302,7 @@ public class CommonFunctions
 
                         }
                         pageObj.surveyQNotesTB.sendKeys(arr[5]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 6:
@@ -317,7 +310,7 @@ public class CommonFunctions
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
                         pageObj.surveyQNotesTB.sendKeys(arr[3]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 7:
@@ -325,7 +318,7 @@ public class CommonFunctions
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
                         pageObj.surveyQNotesTB.sendKeys(arr[3]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 8:
@@ -333,7 +326,7 @@ public class CommonFunctions
                         pageObj.surveyQuesTB.sendKeys(arr[1]);
                         if (arr[2].equals("True")) pageObj.surveyQReqCB.click();
                         pageObj.surveyQNotesTB.sendKeys(arr[3]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 9:
@@ -341,7 +334,7 @@ public class CommonFunctions
                         pageObj.surveyImgUpTrueRB.click();
                         pageObj.surveyImgLinkQTB.sendKeys(arr[2]);
                         pageObj.surveyQuesTB.sendKeys(arr[3]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 10:
@@ -363,7 +356,7 @@ public class CommonFunctions
 
                         }
                         pageObj.surveyQNotesTB.sendKeys(arr[5]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 11:
@@ -372,7 +365,7 @@ public class CommonFunctions
                         pageObj.surveyQLenTB.sendKeys(arr[2]);
                         if (arr[3].equals("True")) pageObj.surveyQReqCB.click();
                         pageObj.surveyQNotesTB.sendKeys(arr[4]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
                     case 12:
@@ -387,9 +380,10 @@ public class CommonFunctions
 
                         }
                         pageObj.surveyQNotesTB.sendKeys(arr[4]);
-                        pageObj.surveySaveBtn.get(1).click();
+                        pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
                         break;
+                    default:break;
                 }
 
             }
@@ -397,9 +391,9 @@ public class CommonFunctions
         }
     }
 
-    public static void VerifySurvey(ArrayList keywordArr) throws InterruptedException {
-        waitForPageLoad();
-        if (keywordArr.size()==2)
+    public static void VerifySurvey(ArrayList keywordArr) throws InterruptedException
+    {
+        if (keywordArr.size()>=2)
         {
             pageObj.manageLink(keywordArr.get(1).toString()).click();
             waitForPageLoad();
@@ -436,6 +430,75 @@ public class CommonFunctions
     }
 
 
+    public static void AddProjectTool(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size()>=2)
+        {
+            WebElement toolName=null;
+            if (keywordArr.get(1).toString().equals("Surveys and Forms")) toolName=pageObj.surveyToolsCB;
+            if (keywordArr.get(1).toString().equals("News Feed")) toolName=pageObj.newsToolsCB;
+            String toolCBStatus;
+            try {
+                toolCBStatus=toolName.getAttribute("checked");
+            }catch (NullPointerException e){
+                toolCBStatus="false";
+            }
+            if (toolCBStatus==null ||toolCBStatus.equals("false"))
+            {
+                toolName.click();
+                waitForPageLoad();
+                pageObj.projSaveToolsBtn.click();
+                waitForPageLoad();
+            }
+        }
+    }
+
+    public static void AddNewsFeed(ArrayList keywordArr) throws InterruptedException
+    {
+        if (keywordArr.size()>=3)
+        {
+            if (elementExists(pageObj.projToolsTab))
+            {
+                if (pageObj.projToolsTab.getAttribute("textContent").contains("News Feed"))
+                {
+                    WebElement mngLnk = pageObj.manageLink("news_feed");
+                    mngLnk.click();
+                    waitForPageLoad();
+                    pageObj.getLink("Add News Article ").click();
+                    waitForPageLoad();
+                    if (elementExists(pageObj.newsPostTitleTB))
+                    {
+                        pageObj.newsPostTitleTB.sendKeys(keywordArr.get(1).toString().trim());
+                        pageObj.newsPostLinkTB.sendKeys(keywordArr.get(2).toString().trim());
+                        pageObj.newsPostDescTA.sendKeys(keywordArr.get(3).toString().trim());
+                        if (keywordArr.get(4).toString().equals("True")) pageObj.newsPostDescDispCB.click();
+                        if (keywordArr.get(5).toString().equals("True")) pageObj.newsPostCommentableCB.click();
+                        if (keywordArr.get(6).toString().equals("True")) pageObj.newsUnverPartCB.click();
+                        pageObj.newsPostCategoryTB.sendKeys(keywordArr.get(7).toString().trim());
+                        pageObj.projToolsCreateBtn.click();
+                        waitForPageLoad();
+                    }
+                }
+            }
+        }
+        if (elementExists(pageObj.manageLink(keywordArr.get(1).toString().trim())))
+        { //Do nothing
+        }
+        else keywordResult=false;
+    }
+
+    public static void VerifyNewsFeed(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size()>=2)
+        {
+            if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim())))
+            {
+                pageObj.previewLink(keywordArr.get(1).toString().trim()).click();
+                waitForPageLoad();
+                ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
+                testDriver.switchTo().window(tabs.get(1));
+                
+            }
+        }
+    }
 
 
 //======================
@@ -500,6 +563,11 @@ public class CommonFunctions
 
     public static void waitForLoadProgress()
     {
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (elementExists(pageObj.loadProgress))    //Validates presence of Page load bar
         {
             while (Integer.parseInt((pageObj.loadProgress.getAttribute("nodeValue").replaceAll("width: ","")).replaceAll("%",""))>103) //Validates load progress
