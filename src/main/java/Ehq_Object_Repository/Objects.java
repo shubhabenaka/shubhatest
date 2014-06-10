@@ -116,7 +116,7 @@ public class Objects
 
         @FindBy(id="blog_post_link") public static WebElement newsPostLinkTB;
 
-        @FindBy(id="blog_post_description") public static WebElement newsPostDescTA;
+        @FindBy(css="body>p>br") public static WebElement newsPostDescTA;
 
         @FindBy(id="blog_post_description_display_mode") public static WebElement newsPostDescDispCB;
 
@@ -126,7 +126,25 @@ public class Objects
 
         @FindBy(id="blog_post_tag_list") public static WebElement newsPostCategoryTB;
 
+        @FindBy(css="div[class=error_messages]") public static WebElement newsPostErrorMsg;
 
+        @FindBy(id="forum_topic_name") public static WebElement forumNameTB;
+
+        @FindBy(id="forum_topic_description_display_mode") public static WebElement forumDescTruncCB;
+
+        @FindBy(id="forum_topic_allow_unverified_participation") public static WebElement forumUnverPartCB;
+
+        @FindBy(id="forum_topic_related_media_type") public static WebElement forumRelMediaDD;
+
+        @FindBy(id="forum_topic_link") public static WebElement forumTopicLinkTB;
+
+        @FindBy(id="tools_ForumTopic") public static WebElement forumToolsCB;
+
+        @FindBy(id="newsletter_subject") public static WebElement newsLtrSubjectTB;
+
+        @FindBy(id="newsletter_banner_source") public static WebElement newsLtrBannerDD;
+
+        @FindBy(id="newsletter_test_email_emails") public static WebElement newsLtrTestEmailTA;
 
  /*   public static WebElement logoutTab(String username)
     {
@@ -172,6 +190,7 @@ public class Objects
         }
         else
             fail("Frame not found on Page.Hence failing Test");
+            testDriver.quit();
             return null;
     }
 
@@ -207,6 +226,21 @@ public class Objects
         if (testDriver.findElements(By.linkText("Preview")).size()!=0)
         {
             for(WebElement link: testDriver.findElements(By.linkText("Preview")))
+            {
+                if (link.getAttribute("href").contains(hrefTxt))
+                {
+                    return link;
+                }
+            }
+        }
+        return null;
+    }
+
+    public WebElement publishLink(String hrefTxt)
+    {
+        if (testDriver.findElements(By.linkText("Preview")).size()!=0)
+        {
+            for(WebElement link: testDriver.findElements(By.linkText("Publish")))
             {
                 if (link.getAttribute("href").contains(hrefTxt))
                 {

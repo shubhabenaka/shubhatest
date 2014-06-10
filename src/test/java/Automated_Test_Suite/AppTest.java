@@ -56,6 +56,7 @@ public class AppTest
                     executeKeywords(keywordArr);
                     if (!CommonFunctions.keywordResult)
                     {
+                        //logout();
                         writeResultLog(scriptName,keywordArr,resultFile);
                         break rowLoop;
                     }

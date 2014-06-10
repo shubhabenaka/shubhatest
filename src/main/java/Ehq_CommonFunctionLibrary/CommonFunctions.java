@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 
@@ -45,7 +46,7 @@ public class CommonFunctions
 
     public static void Login (ArrayList keywordArr) throws InterruptedException, MalformedURLException
     {
-        if (keywordArr.size()==3)
+        if (keywordArr.size()>=3)
         {
             browserGrid();   //Reference to Browser and grid management Function
             testDriver.get("http://expproj.abc.engagementhq.com/login");
@@ -55,15 +56,16 @@ public class CommonFunctions
             pageObj.userNameTB.sendKeys(keywordArr.get(1).toString());  //Populate Username
             pageObj.passwordTB.sendKeys(keywordArr.get(2).toString());  //Populate Password
             pageObj.signBttn.click();                                   //Click on Sign in button
+            waitForPageLoad();
             if (elementExists(pageObj.loginErrorMsg))   //Validates presence of Error Message
             {
               errorMsg=(pageObj.loginErrorMsg.getAttribute("textContent").replaceAll("\n","")).replaceAll("×","");   //Populates error message with web message
-
+              return;
             }
-            waitForLoadProgress();   //Wait for Load Progress completion if it exists
+            waitForPageLoad();
             if (!elementExists(pageObj.addProjBtn))     //Validate Add new project button
             {
-                Thread.sleep(10);
+                waitForLoadProgress();   //Wait for Load Progress completion if it exists
             }
             if (!elementExists(pageObj.userLabel))
             {
@@ -85,7 +87,7 @@ public class CommonFunctions
            {
                keywordResult=false;
            }
-           testDriver.quit();      //Empty the testDriver object
+           testDriver.close();      //Empty the testDriver object
     }
 
     public static void Goto(ArrayList keywordArr) throws InterruptedException
@@ -141,6 +143,7 @@ public class CommonFunctions
                 if (CommonFunctions.elementExists(pageObj.projErrorMsg))        //Validate if no errors are thrown upon Add Project event
                 {
                     errorMsg=pageObj.projErrorMsg.getAttribute("textContent");
+                    return;
                 }
             } else
             keywordResult=false;    //Set the Test Case Status to failed
@@ -436,6 +439,7 @@ public class CommonFunctions
             WebElement toolName=null;
             if (keywordArr.get(1).toString().equals("Surveys and Forms")) toolName=pageObj.surveyToolsCB;
             if (keywordArr.get(1).toString().equals("News Feed")) toolName=pageObj.newsToolsCB;
+            if (keywordArr.get(1).toString().equals("Forum")) toolName=pageObj.forumToolsCB;
             String toolCBStatus;
             try {
                 toolCBStatus=toolName.getAttribute("checked");
@@ -447,14 +451,15 @@ public class CommonFunctions
                 toolName.click();
                 waitForPageLoad();
                 pageObj.projSaveToolsBtn.click();
-                waitForPageLoad();
             }
+            else pageObj.getLink("MANAGE").click();
+            waitForPageLoad();
         }
     }
 
     public static void AddNewsFeed(ArrayList keywordArr) throws InterruptedException
     {
-        if (keywordArr.size()>=3)
+        if (keywordArr.size()>=4)
         {
             if (elementExists(pageObj.projToolsTab))
             {
@@ -463,40 +468,107 @@ public class CommonFunctions
                     WebElement mngLnk = pageObj.manageLink("news_feed");
                     mngLnk.click();
                     waitForPageLoad();
-                    pageObj.getLink("Add News Article ").click();
+                    pageObj.getLink("Add News Article").click();
                     waitForPageLoad();
                     if (elementExists(pageObj.newsPostTitleTB))
                     {
                         pageObj.newsPostTitleTB.sendKeys(keywordArr.get(1).toString().trim());
                         pageObj.newsPostLinkTB.sendKeys(keywordArr.get(2).toString().trim());
-                        pageObj.newsPostDescTA.sendKeys(keywordArr.get(3).toString().trim());
-                        if (keywordArr.get(4).toString().equals("True")) pageObj.newsPostDescDispCB.click();
-                        if (keywordArr.get(5).toString().equals("True")) pageObj.newsPostCommentableCB.click();
-                        if (keywordArr.get(6).toString().equals("True")) pageObj.newsUnverPartCB.click();
-                        pageObj.newsPostCategoryTB.sendKeys(keywordArr.get(7).toString().trim());
+                        String currWinHandle=testDriver.getWindowHandle();
+                        testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                        pageObj.newsPostDescTA.sendKeys("\n"+keywordArr.get(3).toString().trim());
+                        testDriver.switchTo().window(currWinHandle);
+                        if (keywordArr.size()>5) if (keywordArr.get(4).toString().equals("True")) pageObj.newsPostDescDispCB.click();
+                        if (keywordArr.size()>6) if (keywordArr.get(5).toString().equals("True")) pageObj.newsPostCommentableCB.click();
+                        if (keywordArr.size()>7) if (keywordArr.get(6).toString().equals("True")) pageObj.newsUnverPartCB.click();
+                        if (keywordArr.size()>8) pageObj.newsPostCategoryTB.sendKeys(keywordArr.get(7).toString().trim());
                         pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
+                        if (elementExists(pageObj.newsPostErrorMsg))
+                        {
+                            errorMsg=pageObj.newsPostErrorMsg.getText();
+                            return;
+                        }
+                        waitForPageLoad();
                     }
+
                 }
             }
         }
-        if (elementExists(pageObj.manageLink(keywordArr.get(1).toString().trim())))
+        if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase())))
         { //Do nothing
         }
         else keywordResult=false;
     }
 
-    public static void VerifyNewsFeed(ArrayList keywordArr) throws InterruptedException {
+    public static void VerifyNewsForum(ArrayList keywordArr) throws InterruptedException {
         if (keywordArr.size()>=2)
         {
-            if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim())))
+            if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase())))
             {
-                pageObj.previewLink(keywordArr.get(1).toString().trim()).click();
+                pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
+                pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
                 waitForPageLoad();
                 ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
                 testDriver.switchTo().window(tabs.get(1));
-                
+                if (testDriver.getPageSource().contains("<h1>"+keywordArr.get(1).toString().trim()+" </h1>"))
+                {
+                testDriver.switchTo().window(tabs.get(1)).close();
+                }else keywordResult=false;
+                testDriver.switchTo().window(tabs.get(0));
             }
+        }
+    }
+
+    public static void AddForum(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size() >= 2) {
+            if (elementExists(pageObj.projToolsTab)) {
+                if (pageObj.projToolsTab.getAttribute("textContent").contains("Forum")) {
+                    WebElement mngLnk = pageObj.manageLink("forum_topics");
+                    mngLnk.click();
+                    waitForPageLoad();
+                    pageObj.getLink("Add new topic").click();
+                    waitForPageLoad();
+                    if (elementExists(pageObj.forumNameTB)) {
+                        pageObj.forumNameTB.sendKeys(keywordArr.get(1).toString().trim());
+                        if (keywordArr.size() > 3) {
+                            String currWinHandle = testDriver.getWindowHandle();
+                            testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                            pageObj.descTB.sendKeys("\n" + keywordArr.get(2).toString().trim());
+                            testDriver.switchTo().window(currWinHandle);
+                        }
+                        if (keywordArr.size() > 4)
+                            if (keywordArr.get(3).toString().equals("True")) pageObj.forumDescTruncCB.click();
+                        if (keywordArr.size() > 5)
+                            if (keywordArr.get(4).toString().equals("True")) pageObj.forumUnverPartCB.click();
+                        if (keywordArr.size() > 6) {
+                            Select obj = new Select(pageObj.forumRelMediaDD);
+                            obj.selectByVisibleText(keywordArr.get(5).toString().trim());
+                            Pattern p = Pattern.compile("(?=\\p{Lu})");
+                            String[] s1 = p.split(keywordArr.get(5).toString().trim());
+                            String componentId;
+                            if (s1.length == 2) {
+                                componentId = "forum_topic_related_media_" + (s1[1] + "_" + s1[2]).toLowerCase() + "_id";
+                            } else componentId = "forum_topic_related_media_" + s1[0].toLowerCase() + "_id";
+                            Select element = new Select(testDriver.findElement(By.id(componentId)));
+                            if (element.getOptions().contains(keywordArr.get(6).toString()))
+                                element.selectByVisibleText(keywordArr.get(6).toString().trim());
+                            if (keywordArr.size() > 8)
+                                pageObj.forumTopicLinkTB.sendKeys(keywordArr.get(7).toString().trim());
+                            pageObj.projToolsCreateBtn.click();
+                            waitForPageLoad();
+                            if (elementExists(pageObj.newsPostErrorMsg))
+                            {
+                                errorMsg = pageObj.newsPostErrorMsg.getText();
+                                return;
+                            }
+                            waitForPageLoad();
+                        }
+                    }
+                }
+            }
+            if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()))) { //Do nothing
+            } else keywordResult = false;
         }
     }
 
@@ -505,7 +577,12 @@ public class CommonFunctions
 // INTERNAL FUNCTIONS
 //======================
 
-
+//Logout in case of Failure
+    public static void logout() throws InterruptedException {
+        ArrayList<String> arr=new ArrayList<String>();
+        arr.add("Logout");
+        Logout(arr);
+    }
 
 
 //Wait for the page to load
@@ -536,8 +613,7 @@ public class CommonFunctions
     }
 
 //Write Results to a text file in the Suite folder currently being executed
-    public static void writeResultLog(String scriptName,ArrayList keywordArr,String fileName) throws IOException
-    {
+    public static void writeResultLog(String scriptName,ArrayList keywordArr,String fileName) throws IOException, InterruptedException {
         FileWriter fileWriter = new FileWriter(fileName, true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         if (errorMsg.isEmpty())
@@ -559,12 +635,14 @@ public class CommonFunctions
         {
             return false;
         }
+        catch (NullPointerException e)
+        {return false;}
     }
 
     public static void waitForLoadProgress()
     {
         try {
-            Thread.sleep(7000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -692,6 +770,7 @@ public class CommonFunctions
        dropDown.selectByVisibleText(optionText);
        return Integer.parseInt((dropDown.getFirstSelectedOption().getAttribute("index")));
     }
+
 
 }
 
