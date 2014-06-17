@@ -146,11 +146,41 @@ public class Objects
 
         @FindBy(id="newsletter_test_email_emails") public static WebElement newsLtrTestEmailTA;
 
+        @FindBy(css="div.mail-preview") public static WebElement newsLtrMailPreviewLbl;
+
+        @FindBy(css="input.btn[value=Next") public static WebElement newsLtrNextBtn;
+
+        @FindBy(css="input.btn[value=Send Text Email]") public static WebElement newsLtrSendTestMailBtn;
+
  /*   public static WebElement logoutTab(String username)
     {
         WebElement loutTab=testDriver.findElement(By.partialLinkText(username));
         return loutTab;
     } */
+
+    public WebElement getNewsLtrFilter(String selectParentText)
+    {
+        String str=selectParentText.toLowerCase();
+        int count = testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("input.filter-input.filter-text.moveaway")).size();
+        if (count == 1) return testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("input.filter-input.filter-text.moveaway")).get(0);
+        if (count > 1) return testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("input.filter-input.filter-text.moveaway")).get(count-1); else return null;
+    }
+
+    public WebElement getNewsLtrSelect2(String selectParentText)
+    {
+        String str=selectParentText.toLowerCase();
+        int count = testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("select.mode-condition.moveaway")).size();
+        if (count == 1) return testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("select.mode-condition.moveaway")).get(0);
+        if (count > 1) return testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("select.mode-condition.moveaway")).get(count-1); else return null;
+    }
+
+    public WebElement getNewsLtrSelect(String selectParentText)
+    {
+        String str=selectParentText.toLowerCase();
+        int count = testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("select.mode-name.select")).size();
+        if (count == 1) return testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("select.mode-name.select")).get(0);
+        if (count > 1) return testDriver.findElement(By.xpath(".//*[@id='"+str+"']")).findElements(By.cssSelector("select.mode-name.select")).get(count-1); else return null;
+    }
 
     public WebElement getSurveyOptions(int index) throws InterruptedException {
             if (testDriver.findElements(By.id("question_question_options_attributes_" + index + "_name")).size()!=0)

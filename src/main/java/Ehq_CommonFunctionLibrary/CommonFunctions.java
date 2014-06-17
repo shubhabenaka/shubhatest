@@ -572,6 +572,72 @@ public class CommonFunctions
         }
     }
 
+    public static void AddNewsLetter(ArrayList keywordArr) throws InterruptedException
+    {
+        if (keywordArr.size() > 1)
+        {
+            if (elementExists(pageObj.newsLtrSubjectTB))
+            {
+                pageObj.newsLtrSubjectTB.sendKeys(keywordArr.get(0).toString().trim());
+                Select bannerDD = new Select(pageObj.newsLtrBannerDD);
+                bannerDD.selectByVisibleText(keywordArr.get(1).toString().trim());
+                pageObj.newsLtrNextBtn.click();
+                waitForPageLoad();
+                String winHandle = testDriver.getWindowHandle();
+                testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                pageObj.descTB.sendKeys(keywordArr.get(2).toString().trim());
+                testDriver.switchTo().window(winHandle);
+                waitForPageLoad();
+                if (pageObj.newsLtrMailPreviewLbl.getAttribute("textContent").contains(keywordArr.get(1).toString().trim()))
+                {
+                    pageObj.newsLtrTestEmailTA.sendKeys(keywordArr.get(3).toString().trim());
+                    pageObj.newsLtrSendTestMailBtn.click();
+                }
+                else
+                {
+                    keywordResult=false;
+                    return;
+                }
+                if (keywordArr.get(4).toString().trim().contains(":"))
+                {
+                    String[] inputs=keywordArr.get(4).toString().trim().split(Character.toString((char) 58));
+                    for (String str:inputs)
+                    {
+                        setProjParticipants(str);
+                    }
+                }
+                else
+                {
+                    String str = keywordArr.get(4).toString().trim();
+                    setProjParticipants(str);
+                }
+                pageObj.newsLtrNextBtn.click();
+                waitForPageLoad();
+                if (keywordArr.get(5).toString().trim().contains(","))
+                {
+                    String[] filters=keywordArr.get(4).toString().trim().split(",");
+                    for ( int i=0;i==filters.length;i++)
+                    {
+                        String[] inputs = filters[i].split(":");
+                        if (i!=0)
+                        {
+                            if (inputs[0].toLowerCase().equals("any")) pageObj.linkByIndex("Add Filter",0);
+                            if (inputs[1].toLowerCase().equals("all")) pageObj.linkByIndex("Add Filter",1);
+                            waitForPageLoad();
+                        }
+                        pageObj.getNewsLtrSelect(inputs[0]).sendKeys(inputs[1]);
+                        pageObj.getNewsLtrSelect2(inputs[0]).sendKeys(inputs[2]);
+                        pageObj.getNewsLtrFilter(inputs[0]).sendKeys(inputs[3]);
+                    }
+                }
+                pageObj.newsLtrNextBtn.click();
+                waitForPageLoad();
+                if (elementExists(pageObj.signBttn)) pageObj.signBttn.click();
+                waitForPageLoad();
+            }
+        }
+    }
+
 
 //======================
 // INTERNAL FUNCTIONS
@@ -771,7 +837,11 @@ public class CommonFunctions
        return Integer.parseInt((dropDown.getFirstSelectedOption().getAttribute("index")));
     }
 
-
+    public static void setProjParticipants(String str)
+    {
+        String newsLtrPartProj="input[label='"+ str +"']";
+        testDriver.findElement(By.cssSelector(newsLtrPartProj)).click();
+    }
 }
 
 

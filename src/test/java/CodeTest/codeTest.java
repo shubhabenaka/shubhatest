@@ -1,22 +1,28 @@
 package CodeTest;
 
+import Ehq_Object_Repository.Objects;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.regex.Pattern;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class codeTest
 {
     @Test
-    public void testCode() throws InterruptedException, IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
+    public void testCode() throws InterruptedException
     {
-        //Code for testing goes here
-        Pattern p = Pattern.compile("(?=\\p{Lu})");
-        String[] s1 = p.split("Photo");
-        String componentId;
-        if (s1.length==2) {componentId="forum_topic_related_media_"+(s1[1]+"_"+s1[2]).toLowerCase()+"_id";}
-        else componentId=s1[0];
-        System.out.println(componentId);
+        WebDriver driver=new FirefoxDriver();
+        Objects obj=new Objects(driver);
+        driver.get("http://expproj.abc.engagementhq.com/admin/newsletters/379?step=recipients");
+        obj.userNameTB.sendKeys("ehqtesting");
+        obj.passwordTB.sendKeys("ehqtesting_btt");
+        obj.signBttn.click();
+        Thread.sleep(5000);
+        //obj.getNewsLtrrSelect("any");.mode-condition.moveaway
+        System.out.println(driver.findElement(By.xpath(".//*[@id='any']")).findElements(By.cssSelector("input.filter-input.filter-text.moveaway")).size());
+        driver.findElement(By.xpath(".//*[@id='any']")).findElements(By.cssSelector("input.filter-input.filter-text.moveaway")).get(2).sendKeys("blah blah blah");
+        //sel.selectByVisibleText("does not contain");
+
+
     }
 }
