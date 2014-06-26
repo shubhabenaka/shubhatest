@@ -49,7 +49,7 @@ public class Objects
         public static final String loutTabId="html/body/div[1]/div[1]/div/div/ul[2]/li/a";
         @FindBy(xpath =loutTabId ) public static WebElement loutTab;
 
-        @FindBy(css="a.dropdown-toggle.show-cursor") public static WebElement logoutLink;
+        @FindBy(linkText = "Logout") public static WebElement logoutLink;
 
         @FindBy(xpath = "html/body/div[2]/div[5]") public static WebElement loginErrorMsg;
 
@@ -148,9 +148,25 @@ public class Objects
 
         @FindBy(css="div.mail-preview") public static WebElement newsLtrMailPreviewLbl;
 
-        @FindBy(css="input.btn[value=Next") public static WebElement newsLtrNextBtn;
+        @FindBy(css="input.btn[value=Next]") public static WebElement newsLtrNextBtn;
 
-        @FindBy(css="input.btn[value=Send Text Email]") public static WebElement newsLtrSendTestMailBtn;
+        @FindBy(css="input.btn[value='Send Test Email']") public static WebElement newsLtrSendTestMailBtn;
+
+        @FindBy(id="Email") public static WebElement gmailUsernameTB;
+
+        @FindBy(id="Passwd") public static WebElement gmailPasswordTB;
+
+        @FindBy(id="signIn") public static WebElement gmailSignBtn;
+
+        @FindBy(css="td.xW.xY") public static WebElement mailTimeLbl;
+
+        public final static String gmailSubjectCss="td.xY.a4W";
+        @FindBy(css=gmailSubjectCss) public static WebElement mailSubjectLbl;
+
+        public final static String gmailBodyCss="div.a3s";
+        @FindBy(css=gmailBodyCss) public static WebElement mailBodyLbl;
+
+
 
  /*   public static WebElement logoutTab(String username)
     {

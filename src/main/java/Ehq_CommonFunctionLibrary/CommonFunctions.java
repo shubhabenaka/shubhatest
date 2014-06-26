@@ -18,12 +18,14 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 
 /**
@@ -578,29 +580,31 @@ public class CommonFunctions
         {
             if (elementExists(pageObj.newsLtrSubjectTB))
             {
-                pageObj.newsLtrSubjectTB.sendKeys(keywordArr.get(0).toString().trim());
+                pageObj.newsLtrSubjectTB.sendKeys(keywordArr.get(1).toString().trim());
                 Select bannerDD = new Select(pageObj.newsLtrBannerDD);
-                bannerDD.selectByVisibleText(keywordArr.get(1).toString().trim());
+                if (!(keywordArr.get(2).toString().isEmpty())) bannerDD.selectByVisibleText(keywordArr.get(2).toString().trim());
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
                 String winHandle = testDriver.getWindowHandle();
-                testDriver.switchTo().frame(pageObj.redactorFrame(1));
-                pageObj.descTB.sendKeys(keywordArr.get(2).toString().trim());
+                testDriver.switchTo().frame(pageObj.redactorFrame(0));
+                pageObj.descTB.sendKeys("\n" + keywordArr.get(3).toString().trim());
                 testDriver.switchTo().window(winHandle);
+                pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
                 if (pageObj.newsLtrMailPreviewLbl.getAttribute("textContent").contains(keywordArr.get(1).toString().trim()))
                 {
-                    pageObj.newsLtrTestEmailTA.sendKeys(keywordArr.get(3).toString().trim());
+                    pageObj.newsLtrTestEmailTA.sendKeys(keywordArr.get(4).toString().trim());
                     pageObj.newsLtrSendTestMailBtn.click();
+                    pageObj.newsLtrNextBtn.click();
                 }
                 else
                 {
                     keywordResult=false;
                     return;
                 }
-                if (keywordArr.get(4).toString().trim().contains(":"))
+                if (keywordArr.get(5).toString().trim().contains(":"))
                 {
-                    String[] inputs=keywordArr.get(4).toString().trim().split(Character.toString((char) 58));
+                    String[] inputs=keywordArr.get(5).toString().trim().split(Character.toString((char) 58));
                     for (String str:inputs)
                     {
                         setProjParticipants(str);
@@ -608,34 +612,68 @@ public class CommonFunctions
                 }
                 else
                 {
-                    String str = keywordArr.get(4).toString().trim();
+                    String str = keywordArr.get(5).toString().trim();
                     setProjParticipants(str);
                 }
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
-                if (keywordArr.get(5).toString().trim().contains(","))
-                {
-                    String[] filters=keywordArr.get(4).toString().trim().split(",");
-                    for ( int i=0;i==filters.length;i++)
+                waitForElement(By.cssSelector("div[id=any]"));
+               // if (keywordArr.get(6).toString().trim().contains(","))
+                    String[] filters=keywordArr.get(6).toString().trim().split(Character.toString((char) 44));
+                    for ( int i=0;i<filters.length;i++)
                     {
-                        String[] inputs = filters[i].split(":");
+                        String[] inputs = filters[i].split(Character.toString((char) 58));
                         if (i!=0)
                         {
                             if (inputs[0].toLowerCase().equals("any")) pageObj.linkByIndex("Add Filter",0);
-                            if (inputs[1].toLowerCase().equals("all")) pageObj.linkByIndex("Add Filter",1);
+                            if (inputs[0].toLowerCase().equals("all")) pageObj.linkByIndex("Add Filter",1);
                             waitForPageLoad();
                         }
                         pageObj.getNewsLtrSelect(inputs[0]).sendKeys(inputs[1]);
                         pageObj.getNewsLtrSelect2(inputs[0]).sendKeys(inputs[2]);
                         pageObj.getNewsLtrFilter(inputs[0]).sendKeys(inputs[3]);
                     }
-                }
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
                 if (elementExists(pageObj.signBttn)) pageObj.signBttn.click();
                 waitForPageLoad();
             }
         }
+    }
+
+    public static void VerifyEmail(ArrayList keywordArr) throws InterruptedException, ParseException {
+        JavascriptExecutor executor=(JavascriptExecutor)testDriver;
+        executor.executeScript("javascript:window.open('http://www.gmail.com', '_blank');");
+        ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
+        testDriver.switchTo().window(tabs.get(1));
+        pageObj.gmailUsernameTB.sendKeys(keywordArr.get(1).toString().trim());
+        pageObj.gmailPasswordTB.sendKeys(keywordArr.get(2).toString().trim());
+        pageObj.gmailSignBtn.click();
+        waitForPageLoad();
+        elementExists(pageObj.mailSubjectLbl);
+        WebElement mailTime=pageObj.mailTimeLbl;
+        SimpleDateFormat format=new SimpleDateFormat("HH:mm:ss");
+        Date currDate=new Date(System.currentTimeMillis());
+        String[] sysTime=(currDate.toString().split(" "));
+        String mailDate=(mailTime.getAttribute("textContent").replaceAll(" ",":00 "));
+        long difference=format.parse(sysTime[3]).getTime()-format.parse(mailDate).getTime();
+        if ((difference/(60*1000)%60)<2)
+        {
+            if (pageObj.mailSubjectLbl.getAttribute("textContent").contains(keywordArr.get(3).toString().trim()))
+            {
+                pageObj.mailSubjectLbl.click();
+                waitForPageLoad();
+                elementExists(pageObj.mailBodyLbl);
+                if (!(pageObj.mailBodyLbl.getAttribute("textContent").contains(keywordArr.get(4).toString().trim()))) keywordResult=false;
+            }
+            else
+            {
+                keywordResult=false;
+                return;
+            }
+        }
+        testDriver.switchTo().window(tabs.get(1)).close();
+        testDriver.switchTo().window(tabs.get(0));
     }
 
 
@@ -685,6 +723,7 @@ public class CommonFunctions
         if (errorMsg.isEmpty())
         {
             bufferedWriter.write("\n" + "FAILED: " + scriptName + keywordArr);
+            fail("Script " + fileName+ " has failed.");
         }
         bufferedWriter.close();
     }
