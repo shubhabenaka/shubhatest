@@ -57,7 +57,7 @@ public class Objects
 
         @FindBy(xpath = ".//*[@id='project-listing_filter']/label/input") public static WebElement projSearchTB;
 
-        @FindBy(className = "alert.alert-info") public static WebElement logoutMsg;
+        @FindBy(css="div.alert") public static WebElement logoutMsg;
 
         @FindBy(id = "tools_SurveyTool") public static WebElement surveyToolsCB;
 

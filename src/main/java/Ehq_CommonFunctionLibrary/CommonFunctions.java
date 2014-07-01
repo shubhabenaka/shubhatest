@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 
 /**
@@ -35,9 +34,9 @@ public class CommonFunctions
 {
     public static String testSuiteName;
     public static String browser;
-    public static String hostIP;
+    public static String outputSuite;
     public static String appModule;
-    public static String loutEnabled;
+    public static String resultLogSuite;
     public static WebDriver testDriver;
     public static boolean keywordResult=true;
     public static Objects pageObj;
@@ -85,7 +84,7 @@ public class CommonFunctions
            pageObj.loutTab.click();     //Click on the Username labelled dropdown tab on the right top corner
            pageObj.logoutLink.click();    //Click on Logout option
            waitForPageLoad();
-           if (!elementExists(pageObj.logoutMsg))
+           if (!(elementExists(pageObj.logoutMsg)))
            {
                keywordResult=false;
            }
@@ -172,7 +171,7 @@ public class CommonFunctions
     }
 
 
-    public static void EnableAddSurvey(ArrayList keywordArr) throws InterruptedException
+    public static void AddSurvey(ArrayList keywordArr) throws InterruptedException
     {
         if (keywordArr.size()>=6)
         {
@@ -350,7 +349,7 @@ public class CommonFunctions
                         for (int j=0;j<str4.length;j++)
                         {
 
-                                pageObj.getSurveyStatements(j).sendKeys(str4[j]);
+                                    pageObj.getSurveyStatements(j).sendKeys(str4[j]);
 
                         }
                         String[] str5=arr[4].split(",");
@@ -429,6 +428,7 @@ public class CommonFunctions
                     }
                 }
             }
+            testDriver.switchTo().window(tabs.get(1)).close();
             testDriver.switchTo().window(tabs.get(0));
         }
 
@@ -513,10 +513,13 @@ public class CommonFunctions
                 waitForPageLoad();
                 ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
                 testDriver.switchTo().window(tabs.get(1));
-                if (testDriver.getPageSource().contains("<h1>"+keywordArr.get(1).toString().trim()+" </h1>"))
+                //System.out.println(testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent"));
+                //System.out.println(keywordArr.get(1).toString());
+                if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim()))
                 {
                 testDriver.switchTo().window(tabs.get(1)).close();
-                }else keywordResult=false;
+                }
+                else {keywordResult=false;}
                 testDriver.switchTo().window(tabs.get(0));
             }
         }
@@ -676,6 +679,22 @@ public class CommonFunctions
         testDriver.switchTo().window(tabs.get(0));
     }
 
+    public static void CleanupProjects(ArrayList keywordArr) throws InterruptedException {
+        for (WebElement x:testDriver.findElements(By.cssSelector("td.sorting_1")))
+        {
+            WebElement y=testDriver.findElement(By.cssSelector("td.sorting_1"));
+            //System.out.println(y.getAttribute("textContent"));
+            y.findElement(By.cssSelector("a")).click();
+            waitForPageLoad();
+            pageObj.getLink("Delete").click();
+            waitForPageLoad();
+            testDriver.findElement(By.cssSelector("input[id=password]")).sendKeys(keywordArr.get(1).toString().trim());
+            testDriver.findElement(By.cssSelector("input.btn[value='Delete Project']")).click();
+            waitForPageLoad();
+            waitForElement(By.linkText("Add new project"));
+        }
+    }
+
 
 //======================
 // INTERNAL FUNCTIONS
@@ -705,25 +724,34 @@ public class CommonFunctions
         pageObj.linkByIndex(linkName, index).click();
     }
 
-    public static String createResultFile(String testSuiteName) throws IOException
+    public static String createResultFile(String testSuiteName,String oldResultLog) throws IOException
     {
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
         String dateString = (format.format(date));
         String resultFileName = testSuiteName + "Test Result Log " + dateString + ".txt";
+        //String folderPath = testSuiteName;
+        File directory = new File(testSuiteName);
+        //File oldDirectory= new File(testSuiteName+"/workspace/");
+        File[] fList = directory.listFiles();
+        for (File file : fList)
+        {
+            file.renameTo(new File(oldResultLog+"/"+file.getName()));
+        }
         FileWriter fileWriter = new FileWriter(resultFileName,true);
         fileWriter=null;
+        //System.out.println(resultFileName);
         return resultFileName;
     }
 
 //Write Results to a text file in the Suite folder currently being executed
     public static void writeResultLog(String scriptName,ArrayList keywordArr,String fileName) throws IOException, InterruptedException {
-        FileWriter fileWriter = new FileWriter(fileName, true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        //FileWriter fileWriter = new FileWriter(fileName, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true));
         if (errorMsg.isEmpty())
         {
             bufferedWriter.write("\n" + "FAILED: " + scriptName + keywordArr);
-            fail("Script " + fileName+ " has failed.");
+            //fail("Script " + scriptName + " has failed.");
         }
         bufferedWriter.close();
     }
@@ -779,7 +807,7 @@ public class CommonFunctions
         catch (NoSuchElementException ex)
         {
             keywordResult=false;
-            testDriver.quit();
+            //testDriver.quit();
             return false;
         }
         if (element2!=null && element2.isDisplayed())
@@ -789,7 +817,7 @@ public class CommonFunctions
         else
         {
             keywordResult=false;
-            testDriver.quit();
+            //testDriver.quit();
             return false;
         }
     }
@@ -864,9 +892,9 @@ public class CommonFunctions
     {
         testSuiteName=inputArr.get(0).toString();
         browser=inputArr.get(1).toString();
-        hostIP=inputArr.get(2).toString();
-        appModule=inputArr.get(3).toString();
-        loutEnabled=inputArr.get(4).toString();
+        outputSuite=inputArr.get(2).toString();
+        appModule=inputArr.get(4).toString();
+        resultLogSuite=inputArr.get(3).toString();
     }
 
     public static int setOptionGetIndex(WebElement dropdown,String optionText)

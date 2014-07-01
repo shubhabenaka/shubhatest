@@ -27,7 +27,7 @@ public class AppTest
         //filename="/Users/Ridhi/ScriptInput.xls";
         HSSFSheet inputSheet=getSheet(filename);
         setSuiteInputs(inputSheet);
-        String resultFile=createResultFile(testSuiteName+"/");
+        String resultFile=createResultFile(outputSuite+"/",resultLogSuite);
 
         //===========================================
         //Picking Test Cases From Test Suite
@@ -64,7 +64,7 @@ public class AppTest
                 }
             }
         }
-
+        testDriver.quit();
     }
 
 
