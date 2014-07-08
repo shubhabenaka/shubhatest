@@ -32,6 +32,7 @@ import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
  */
 public class CommonFunctions
 {
+    public static String siteUrl="http://expproj.abc.engagementhq.com/login";
     public static String testSuiteName;
     public static String browser;
     public static String outputSuite;
@@ -50,7 +51,7 @@ public class CommonFunctions
         if (keywordArr.size()>=3)
         {
             browserGrid();   //Reference to Browser and grid management Function
-            testDriver.get("http://expproj.abc.engagementhq.com/login");
+            testDriver.get(siteUrl);
             testDriver.manage().window().maximize();//Pass URL to browser
             waitForPageLoad();
             pageObj=new Objects(testDriver);
@@ -163,9 +164,14 @@ public class CommonFunctions
                 {
                     pageObj.projSearchTB.sendKeys(keywordArr.get(1).toString());
                 }
-                if (!testDriver.findElements(By.linkText(keywordArr.get(1).toString())).get(0).isDisplayed())
+                try {
+                    if (!testDriver.findElements(By.linkText(keywordArr.get(1).toString())).get(0).isDisplayed()) {
+                        keywordResult = false;
+                    }
+                }
+                catch (IndexOutOfBoundsException e)
                 {
-                    keywordResult=false;
+                    keywordResult = false;
                 }
             }
     }
@@ -660,14 +666,39 @@ public class CommonFunctions
         String[] sysTime=(currDate.toString().split(" "));
         String mailDate=(mailTime.getAttribute("textContent").replaceAll(" ",":00 "));
         long difference=format.parse(sysTime[3]).getTime()-format.parse(mailDate).getTime();
-        if ((difference/(60*1000)%60)<2)
+        //System.out.println(difference/(60*1000)%60);
+        if ((difference/(60*1000)%60)<2) ///CHANGE
         {
             if (pageObj.mailSubjectLbl.getAttribute("textContent").contains(keywordArr.get(3).toString().trim()))
             {
                 pageObj.mailSubjectLbl.click();
                 waitForPageLoad();
                 elementExists(pageObj.mailBodyLbl);
-                if (!(pageObj.mailBodyLbl.getAttribute("textContent").contains(keywordArr.get(4).toString().trim()))) keywordResult=false;
+                if (keywordArr.size()>=6)
+                {
+                  if (keywordArr.get(5).toString().equals("Register"))
+                  {
+                      if(pageObj.mailBodyLbl.getAttribute("textContent").contains("confirmation_token"))
+                      {
+                          pageObj.mailBodyLbl.findElement(By.cssSelector("a")).click();
+                          waitForPageLoad();
+                          ArrayList<String> tabs2=new ArrayList(testDriver.getWindowHandles());
+                          testDriver.switchTo().window(tabs2.get(2));
+                          waitForElement(By.linkText("Home"));
+                          if (elementExists(pageObj.logoutMsg))
+                          {
+                              if (pageObj.logoutMsg.getAttribute("textContent").contains("Your account was successfully confirmed. You are now signed in.")) {
+                                  testDriver.switchTo().window(tabs2.get(2)).close();
+                              } else keywordResult = false;
+                          }else keywordResult=false;
+                      }
+                  }
+                }
+                else
+                {
+                    if (!(pageObj.mailBodyLbl.getAttribute("textContent").contains(keywordArr.get(4).toString().trim())))
+                        keywordResult = false;
+                }
             }
             else
             {
@@ -680,19 +711,77 @@ public class CommonFunctions
     }
 
     public static void CleanupProjects(ArrayList keywordArr) throws InterruptedException {
-        for (WebElement x:testDriver.findElements(By.cssSelector("td.sorting_1")))
+        for (WebElement x:testDriver.findElements(By.cssSelector(pageObj.projectsLinkCss)))
         {
-            WebElement y=testDriver.findElement(By.cssSelector("td.sorting_1"));
+            WebElement y=pageObj.projectLinkTypeLbl;
             //System.out.println(y.getAttribute("textContent"));
             y.findElement(By.cssSelector("a")).click();
             waitForPageLoad();
             pageObj.getLink("Delete").click();
             waitForPageLoad();
-            testDriver.findElement(By.cssSelector("input[id=password]")).sendKeys(keywordArr.get(1).toString().trim());
-            testDriver.findElement(By.cssSelector("input.btn[value='Delete Project']")).click();
+            pageObj.projectDeletePsswdTB.sendKeys(keywordArr.get(1).toString().trim());
+            pageObj.projectDeleteBtn.click();
             waitForPageLoad();
             waitForElement(By.linkText("Add new project"));
         }
+    }
+
+    public static void RegisterUser(ArrayList keywordArr) throws InterruptedException, MalformedURLException {
+        if (keywordArr.size()>4)
+        {
+            browserGrid();
+            testDriver.get(siteUrl);
+            waitForPageLoad();
+            pageObj.registerBtn.click();
+            waitForPageLoad();
+            pageObj.registerNameTB.sendKeys(keywordArr.get(1).toString().trim());
+            pageObj.registerMailTB.sendKeys(keywordArr.get(2).toString().trim());
+            pageObj.registerPsswdTB.sendKeys(keywordArr.get(3).toString().trim());
+            pageObj.registerPsswdConfmTB.sendKeys(keywordArr.get(3).toString().trim());
+            pageObj.registerfrmSuburbDRL.click();
+            waitForElement(By.cssSelector(pageObj.registerSuburbTB));
+            pageObj.registerfrmSuburbTB.sendKeys(keywordArr.get(4).toString().trim());
+            waitForElement(By.cssSelector(pageObj.registerSuburbOpt));
+            pageObj.registerSuburbSelectLI.click();
+            pageObj.registerTnCCB.click();
+            pageObj.signBttn.click();
+            waitForPageLoad();
+            if (elementExists(pageObj.logoutMsg))
+            {
+                if  (pageObj. logoutMsg.getAttribute("textContent").contains("You have been signed up successfully."))
+                {
+                    return;
+                }
+                else errorMsg=pageObj.logoutMsg.getAttribute("textContent");
+            }else keywordResult=false;
+        }
+        else
+        {
+            keywordResult=false;
+        }
+        testDriver.close();
+    }
+
+    public static void ActivateUser(ArrayList keywordArr) throws InterruptedException {
+        String rowIndex=testDriver.findElement(By.xpath(".//tr[contains(td[1],'"+keywordArr.get(1).toString().trim()+"')]")).getAttribute("rowIndex");
+        if (elementExists(testDriver.findElement(By.xpath(".//tr["+rowIndex+"]/td[6]/div/a[text()='Activate user']"))))
+        {
+            testDriver.findElement(By.xpath(".//tr["+rowIndex+"]/td[6]/div/a[text()='Activate user']")).click();
+            waitForPageLoad();
+            if (elementExists(testDriver.findElement(By.xpath(".//tr["+rowIndex+"]/td[6]/div[text()='User activated']"))))
+            {
+                return;
+            }else keywordResult=false;
+        }else keywordResult=false;
+    }
+
+    public static void VerifyUserActivation(ArrayList keywordArr)
+    {
+        String rowIndex=testDriver.findElement(By.xpath(".//tr[contains(td[1],'"+keywordArr.get(1).toString().trim()+"')]")).getAttribute("rowIndex");
+        if (testDriver.findElement(By.xpath(".//tr["+rowIndex+"]/td[6]")).getAttribute("textContent").trim().equals("Yes"))
+        {
+            return;
+        }else keywordResult=false;
     }
 
 
@@ -729,7 +818,7 @@ public class CommonFunctions
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
         String dateString = (format.format(date));
-        String resultFileName = testSuiteName + "Test Result Log " + dateString + ".txt";
+        String resultFileName = testSuiteName + "PASSED - Sanity Suite " + dateString + ".txt";
         //String folderPath = testSuiteName;
         File directory = new File(testSuiteName);
         //File oldDirectory= new File(testSuiteName+"/workspace/");
@@ -747,13 +836,15 @@ public class CommonFunctions
 //Write Results to a text file in the Suite folder currently being executed
     public static void writeResultLog(String scriptName,ArrayList keywordArr,String fileName) throws IOException, InterruptedException {
         //FileWriter fileWriter = new FileWriter(fileName, true);
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, false));
         if (errorMsg.isEmpty())
         {
             bufferedWriter.write("\n" + "FAILED: " + scriptName + keywordArr);
-            //fail("Script " + scriptName + " has failed.");
         }
         bufferedWriter.close();
+        File file=new File(fileName);
+        file.renameTo(new File(fileName.replaceAll("PASSED","FAILED")));
+        file=null;
     }
 
 //Verify if an Object physically exists on the page

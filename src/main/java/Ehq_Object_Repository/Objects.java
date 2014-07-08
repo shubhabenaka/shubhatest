@@ -166,6 +166,34 @@ public class Objects
         public final static String gmailBodyCss="div.a3s";
         @FindBy(css=gmailBodyCss) public static WebElement mailBodyLbl;
 
+        public final static String projectsLinkCss="td.sorting_1";
+        @FindBy(css=projectsLinkCss) public static WebElement projectLinkTypeLbl;
+
+        @FindBy(css="input[id=password]") public static WebElement projectDeletePsswdTB;
+
+        @FindBy(css="input.btn[value='Delete Project']") public static WebElement projectDeleteBtn;
+
+        @FindBy(css="a.btn.btn-primary.local") public static WebElement registerBtn;
+
+        @FindBy(id="signup_form_response_answers_attributes_0_login") public static WebElement registerNameTB;
+
+        @FindBy(id="email_field") public static WebElement registerMailTB;
+
+        @FindBy(id="signup_form_response_answers_attributes_2_password") public static WebElement registerPsswdTB;
+
+        @FindBy(id="signup_form_response_answers_attributes_2_password_confirmation") public static WebElement registerPsswdConfmTB;
+
+        @FindBy(css = "a.select2-choice.script") public static WebElement registerfrmSuburbDRL;
+
+        public static final String registerSuburbTB="input.select2-input";
+        @FindBy(css = registerSuburbTB) public static WebElement registerfrmSuburbTB;
+
+        public static final String registerSuburbOpt="div.select2-result-label";
+        @FindBy(css = registerSuburbOpt) public static  WebElement registerSuburbSelectLI;
+
+        @FindBy(id ="signup_form_response_answers_attributes_4_terms") public static WebElement registerTnCCB;
+
+
 
 
  /*   public static WebElement logoutTab(String username)
