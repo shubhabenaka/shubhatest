@@ -32,7 +32,7 @@ import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
  */
 public class CommonFunctions
 {
-    public static String siteUrl="http://expproj.abc.engagementhq.com/login";
+    public static String siteUrl="http://autotuned.engagementhq.com";
     public static String testSuiteName;
     public static String browser;
     public static String outputSuite;
@@ -51,10 +51,11 @@ public class CommonFunctions
         if (keywordArr.size()>=3)
         {
             browserGrid();   //Reference to Browser and grid management Function
-            testDriver.get(siteUrl);
-            testDriver.manage().window().maximize();//Pass URL to browser
-            waitForPageLoad();
-            pageObj=new Objects(testDriver);
+            if (elementExists(pageObj.getLink("Sign In")))
+            {
+                pageObj.getLink("Sign In").click();
+                waitForPageLoad();
+            }
             pageObj.userNameTB.sendKeys(keywordArr.get(1).toString());  //Populate Username
             pageObj.passwordTB.sendKeys(keywordArr.get(2).toString());  //Populate Password
             pageObj.signBttn.click();                                   //Click on Sign in button
@@ -82,13 +83,24 @@ public class CommonFunctions
 
     public static void Logout(ArrayList<String> keywordArr) throws InterruptedException
     {
-           pageObj.loutTab.click();     //Click on the Username labelled dropdown tab on the right top corner
-           pageObj.logoutLink.click();    //Click on Logout option
+        if (elementExists(pageObj.participantLoutLbl))
+        {
+           pageObj.participantLoutLbl.click();
+           elementExists(pageObj.participantLoutLnk);
+           pageObj.participantLoutLnk.click();
            waitForPageLoad();
-           if (!(elementExists(pageObj.logoutMsg)))
-           {
-               keywordResult=false;
-           }
+        }
+        else
+        if (elementExists(pageObj.loutTab))
+        {
+            pageObj.loutTab.click();     //Click on the Username labelled dropdown tab on the right top corner
+            pageObj.logoutLink.click();    //Click on Logout option
+            waitForPageLoad();
+        }
+        if (!(elementExists(pageObj.logoutMsg)))
+        {
+            keywordResult = false;
+        }
            testDriver.close();      //Empty the testDriver object
     }
 
@@ -444,10 +456,7 @@ public class CommonFunctions
     public static void AddProjectTool(ArrayList keywordArr) throws InterruptedException {
         if (keywordArr.size()>=2)
         {
-            WebElement toolName=null;
-            if (keywordArr.get(1).toString().equals("Surveys and Forms")) toolName=pageObj.surveyToolsCB;
-            if (keywordArr.get(1).toString().equals("News Feed")) toolName=pageObj.newsToolsCB;
-            if (keywordArr.get(1).toString().equals("Forum")) toolName=pageObj.forumToolsCB;
+            WebElement toolName=testDriver.findElement(By.cssSelector("input[label='"+keywordArr.get(1).toString().trim()+"']"));
             String toolCBStatus;
             try {
                 toolCBStatus=toolName.getAttribute("checked");
@@ -514,7 +523,11 @@ public class CommonFunctions
         {
             if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase())))
             {
-                pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
+                if (elementExists(pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase())))
+                {
+                    pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
+                }
+                //else if (elementExists())
                 pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
                 waitForPageLoad();
                 ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
@@ -784,6 +797,104 @@ public class CommonFunctions
         }else keywordResult=false;
     }
 
+    public static void  AddComment(ArrayList keywordArr) throws InterruptedException {
+        pageObj.forumLink(keywordArr.get(1).toString().trim()).click();
+        waitForPageLoad();
+        if (elementExists(pageObj.addCommentBtn))
+        {
+            pageObj.addCommentBtn.click();
+            waitForVisibility(pageObj.addCommentTA);
+            pageObj.addCommentTA.sendKeys(keywordArr.get(2).toString().trim());
+            if (keywordArr.get(3).toString().trim().equals("False"))
+            {
+                pageObj.commentNotifyCB.click();
+            }
+            if (keywordArr.size()>=5) pageObj.commentMailTB.sendKeys(keywordArr.get(4).toString().trim());
+            if (keywordArr.size()>=6) pageObj.commentScreenNameTB.sendKeys(keywordArr.get(5).toString().trim());
+            pageObj.signBttn.click();
+            waitForPageLoad();
+            waitForVisibility(pageObj.addCommentBtn);
+            if (!(pageObj.commentWrapperLbl.getAttribute("textContent").equals(keywordArr.get(2).toString().trim())))
+            {
+                keywordResult=false;
+                return;
+            }
+        }
+    }
+
+    public static void Site(ArrayList keywordArr) throws InterruptedException, MalformedURLException {
+        browserGrid();
+        waitForPageLoad();
+    }
+
+    public static void Close(ArrayList keywordArr){ testDriver.close();}
+
+    public static void AddQuickPoll(ArrayList keywordArr)
+    {
+        if (elementExists(pageObj.projToolsTab))
+        {
+            if (pageObj.projToolsTab.getAttribute("textContent").contains("Quick Poll"))
+            {
+                pageObj.manageLink("quick_polls").click();
+                waitForPageLoad();
+                pageObj.addSurveyBtn.click();
+                waitForPageLoad();
+                if (elementExists(pageObj.qPollQuesTB))
+                {
+                    pageObj.qPollQuesTB.sendKeys(keywordArr.get(1).toString().trim());
+                    String[] pollsOptions=keywordArr.get(2).toString().split(Character.toString((char) 58));
+                    if (pollsOptions.length>pageObj.qPollOptionsTB.size())
+                    {
+                        while (pollsOptions.length!=pageObj.qPollOptionsTB.size())
+                        {
+                            pageObj.getLink("Add more").click();
+                            waitForPageLoad();
+                        }
+                    }
+                    for (int i=0;i<pollsOptions.length;i++)
+                    {
+                        pageObj.qPollOptionsTB.get(i).sendKeys(pollsOptions[i]);
+                    }
+                    if (!(keywordArr.get(3).toString().isEmpty()))pageObj.qPollMsgTA.sendKeys(keywordArr.get(3).toString().trim());
+                    pageObj.qPollPermLnkTB.sendKeys(keywordArr.get(4).toString().trim());
+                    if (keywordArr.size()>5) { if (keywordArr.get(5).toString().trim().equals("True")) pageObj.qPollUnverPartCB.click();}
+                    pageObj.projToolsCreateBtn.click();
+                    waitForPageLoad();
+                }
+                if (!(elementExists(testDriver.findElement(By.xpath(".//li/div/h4[text()='"+keywordArr.get(1).toString().trim() +"']")))))
+                {
+                    keywordResult=false;
+                }
+            }
+        }
+    }
+
+    public static void VerifyQuickPoll(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size()>=2)
+        {
+            if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase())))
+            {
+                if (elementExists(pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase())))
+                {
+                    pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
+                }
+                //else if (elementExists())
+                pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
+                waitForPageLoad();
+                ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
+                testDriver.switchTo().window(tabs.get(1));
+                //System.out.println(testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent"));
+                //System.out.println(keywordArr.get(1).toString());
+                if (elementExists(testDriver.findElement(By.xpath(".//h2/a[text()='"+keywordArr.get(1).toString().trim()+"']"))))
+                {
+                    testDriver.switchTo().window(tabs.get(1)).close();
+                }
+                else {keywordResult=false;}
+                testDriver.switchTo().window(tabs.get(0));
+            }
+        }
+    }
+
 
 //======================
 // INTERNAL FUNCTIONS
@@ -798,11 +909,15 @@ public class CommonFunctions
 
 
 //Wait for the page to load
-    public static boolean waitForPageLoad() throws InterruptedException
+    public static boolean waitForPageLoad()
     {
         while (!(((JavascriptExecutor)testDriver).executeScript("return document.readyState").equals("complete")))
         {
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
@@ -914,7 +1029,7 @@ public class CommonFunctions
     }
 
 
-    public static  void browserGrid() throws MalformedURLException
+    public static  void browserGrid() throws MalformedURLException, InterruptedException
     {
         URL url=new URL("http://localhost:4444/wd/hub");
         DesiredCapabilities cap=new DesiredCapabilities();
@@ -922,6 +1037,9 @@ public class CommonFunctions
         cap.setJavascriptEnabled(true);
         testDriver=new RemoteWebDriver(url,cap);
         pageObj= new Objects(testDriver);
+        testDriver.get(siteUrl);
+        testDriver.manage().window().maximize(); //Pass URL to browser
+        waitForPageLoad();
     }
 
 
@@ -999,6 +1117,23 @@ public class CommonFunctions
     {
         String newsLtrPartProj="input[label='"+ str +"']";
         testDriver.findElement(By.cssSelector(newsLtrPartProj)).click();
+    }
+
+    public static boolean waitForVisibility(WebElement element)
+    {
+        WebElement element2;
+        WebDriverWait wait=new WebDriverWait(testDriver,60);
+        try
+        {
+            element2 = wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        }
+        catch (NoSuchElementException ex)
+        {
+            keywordResult=false;
+            //testDriver.quit();
+            return false;
+        }
     }
 }
 

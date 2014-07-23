@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
 
@@ -40,9 +43,9 @@ public class Objects
 
         @FindBy(css = "a.dropdown-toggle.show-cursor") public static WebElement userLabel;
 
-        @FindBy(css = "a.add-new-photo.add-btn.btn-add.btn.btn-primary") public static WebElement photoAddBttn;
+        @FindBy(css = "a.add-new-photo.add-btn.btn-add.btn.btn-primary") public static WebElement photoAddBtn;
 
-        @FindBy(id = "SWFUpload_0") public static WebElement browserPhotoBttn;
+        @FindBy(id = "SWFUpload_0") public static WebElement browserPhotoBtn;
 
         @FindBy(id = "uploaded_successfully_SWFUpload_0_0") public static WebElement photoUpSuccess;
 
@@ -58,8 +61,6 @@ public class Objects
         @FindBy(xpath = ".//*[@id='project-listing_filter']/label/input") public static WebElement projSearchTB;
 
         @FindBy(css="div.alert") public static WebElement logoutMsg;
-
-        @FindBy(id = "tools_SurveyTool") public static WebElement surveyToolsCB;
 
         @FindBy(css = "ul.unstyled.admin-tabs.pinneditempreview") public static WebElement projToolsTab;
 
@@ -109,9 +110,6 @@ public class Objects
         public static final String surveyImgLinkBoxId="question_image_link";
         @FindBy(id=surveyImgLinkBoxId) public static WebElement surveyImgLinkQTB;
 
-
-        @FindBy(id="tools_BlogPost") public static WebElement newsToolsCB;
-
         @FindBy(id="blog_post_name") public static WebElement newsPostTitleTB;
 
         @FindBy(id="blog_post_link") public static WebElement newsPostLinkTB;
@@ -137,8 +135,6 @@ public class Objects
         @FindBy(id="forum_topic_related_media_type") public static WebElement forumRelMediaDD;
 
         @FindBy(id="forum_topic_link") public static WebElement forumTopicLinkTB;
-
-        @FindBy(id="tools_ForumTopic") public static WebElement forumToolsCB;
 
         @FindBy(id="newsletter_subject") public static WebElement newsLtrSubjectTB;
 
@@ -193,6 +189,32 @@ public class Objects
 
         @FindBy(id ="signup_form_response_answers_attributes_4_terms") public static WebElement registerTnCCB;
 
+        @FindBy(css = "a.btn.btn-primary") public static WebElement addCommentBtn;
+
+        @FindBy(css="textarea[id='comment_comment']") public static WebElement addCommentTA;
+
+        @FindBy(id ="comment_auto_notify") public static WebElement  commentNotifyCB;
+
+        @FindBy(css = "input[class='user-input-email']") public static WebElement commentMailTB;
+
+        @FindBy(css ="input[class='user-input-screen-name']") public static WebElement commentScreenNameTB;
+
+        @FindBy(xpath = ".//div[@class='comment-wrapper']/div[@class='comment']/div[@class='content']") public static WebElement commentWrapperLbl;
+
+        @FindBy(xpath= ".//*[@id='mnav']/ul[2]/li/a") public static WebElement participantLoutLbl;
+
+        @FindBy(xpath=".//*[@id='mnav']/ul[2]/li/ul/li[2]/a") public static WebElement participantLoutLnk;
+
+        @FindBy(id="quick_poll_question_attributes_question") public static WebElement qPollQuesTB;
+
+        @FindBy(id="quick_poll_thanks_msg") public static WebElement qPollMsgTA;
+
+        @FindBy(id="quick_poll_permalink") public static WebElement qPollPermLnkTB;
+
+        @FindBy(id="quick_poll_allow_unverified_participation") public static WebElement qPollUnverPartCB;
+
+        @FindAll({@FindBy(xpath=".//div[@class='sp-form-builder']/div/input")} ) public static List<WebElement> qPollOptionsTB ;
+
 
 
 
@@ -201,6 +223,11 @@ public class Objects
         WebElement loutTab=testDriver.findElement(By.partialLinkText(username));
         return loutTab;
     } */
+
+    public WebElement forumLink(String forumName)
+    {
+        return testDriver.findElement(By.xpath( ".//a[text()='" + forumName + " ']"));
+    }
 
     public WebElement getNewsLtrFilter(String selectParentText)
     {
