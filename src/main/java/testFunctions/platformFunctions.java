@@ -289,22 +289,68 @@ public class platformFunctions {
                         pageObj.addYourCommentBttn.click();
                         pageObj.commentTextArea.sendKeys(keywordArr.get(2).toString().trim());
                         pageObj.commentSubmitBttn.click();
+                        waitForPageLoad();
+                        waitForElement((By.cssSelector(".comment > .content")));
 
-                        if ((testDriver.findElements(By.cssSelector(".comment > .content")).get(0)).equals(keywordArr.get(2).toString().trim()))
-                        {
-                            WebElement replyButton = testDriver.findElements(By.linkText("Reply")).get(0);
-                            replyButton.click();
-                            pageObj.replyTextArea.sendKeys(keywordArr.get(3).toString().trim());
-                            pageObj.replySubmitBttn.click();
-
-                        }
-
+                        WebElement replyButton = testDriver.findElements(By.linkText("Reply")).get(0);
+                        replyButton.click();
+                        waitForElement(pageObj.replyTextArea);
+                        pageObj.replyTextArea.sendKeys(keywordArr.get(3).toString().trim());
+                        pageObj.replySubmitBttn.click();
+                        waitForPageLoad();
 
                     } else {
                         keywordResult = false;
                     }
                     testDriver.switchTo().window(tabs.get(0));
                // }
+        }
+    }
+
+    public static void ValidateComment(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size()>=2)
+        {
+
+            if (elementExists(pageObj.projToolsTab)) {
+                if (pageObj.projToolsTab.getAttribute("textContent").contains("Forum")) {
+                    WebElement mngLnk = pageObj.manageLink("forum_topics");
+                    mngLnk.click();
+                    waitForPageLoad();
+                }
+            }
+
+
+            /*String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
+                if(elementExists(pageObj.previewLink(forumName))) {
+                    pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();*/
+            testDriver.findElement(By.cssSelector(".btn-group-seperators[target=_blank]")).click();
+            waitForPageLoad();
+            ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+            testDriver.switchTo().window(tabs.get(1));
+
+            if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim())) {
+                pageObj.addYourCommentBttn.click();
+                waitForElement(pageObj.commentTextArea);
+                String commentText = pageObj.commentTextArea.getText();
+                pageObj.commentSubmitBttn.click();
+
+                if (commentText.equalsIgnoreCase(""))
+                {
+                    WebDriverWait wait = new WebDriverWait(testDriver, 5);
+                    wait.until(ExpectedConditions.alertIsPresent());
+                    Alert alert = testDriver.switchTo().alert();
+                    if (alert.getText().equalsIgnoreCase("comment cant be left blank"))
+                    {
+                        alert.accept();
+                        System.out.println("Comment was left blank, hence closing test.");
+
+                    }
+                }
+            } else {
+                keywordResult = false;
+            }
+            testDriver.switchTo().window(tabs.get(0));
+            // }
         }
     }
 
