@@ -1031,6 +1031,14 @@ public class CommonFunctions
 
     public static  void browserGrid() throws MalformedURLException, InterruptedException
     {
+        if (browser.equals("chrome"))
+        {
+            System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver.exe");
+        }
+        if (browser.equals("internet explorer"))
+        {
+            System.setProperty("webdriver.ie.driver","src/main/resources/IEDriverServer.exe");
+        }
         URL url=new URL("http://localhost:4444/wd/hub");
         DesiredCapabilities cap=new DesiredCapabilities();
         cap.setBrowserName(browser);
@@ -1135,6 +1143,9 @@ public class CommonFunctions
             return false;
         }
     }
+
+
+
 }
 
 
