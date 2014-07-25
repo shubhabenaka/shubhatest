@@ -1,14 +1,20 @@
 package frameworkTest;
 
+import testFunctions.platformFunctions;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.junit.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import testFunctions.platformFunctions;
+
+import static testFunctions.platformFunctions.*;
+import java.io.File;
 import java.lang.String;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import testFunctions.platformFunctions;
+import java.util.Iterator;
+
+
 
 
 /**
@@ -18,29 +24,62 @@ public class fwTest {
 
     public static String filename;
     ArrayList arr=new ArrayList();
-    public static String browser;
 
     @Test
 
     public void driverScript() throws Exception
     {
+        filename="/home/shubha/ScriptInput.xls";
+        HSSFSheet inputSheet=getSheet(filename);
+        setSuiteInputs(inputSheet);
+        String resultFile=createResultFile(testSuiteName+"/");
 
-        arr.add("Login");
-        arr.add("testing@bangthetable.com");
-        arr.add("ehqtesting_btt");
+        //===========================================
+        //Picking Test Cases From Test Suite
+        //===========================================
 
-        executeKeywords(arr);
+        ArrayList<File> scriptsList= returnCases(testSuiteName);
+        for(File testScript:scriptsList)
+        {
+            String scriptName=testScript.getName();
+            if (testScript.getName().contains(".xls"))
+            {
+
+                ArrayList<String> keywordArr=new ArrayList<String>();
+                HSSFSheet scriptSheet=getSheet(testScript.toString());
+                Iterator rowCounter=scriptSheet.rowIterator();
+                rowLoop:
+                while(rowCounter.hasNext())
+                {
+                    HSSFRow myRow = (HSSFRow) rowCounter.next();
+                    Iterator cellCounter = myRow.cellIterator();
+                    while(cellCounter.hasNext())
+                    {
+                        HSSFCell myCell = (HSSFCell) cellCounter.next();
+                        keywordArr.add(myCell.getStringCellValue());
+                    }
+                    executeKeywords(keywordArr);
+                    if (!platformFunctions.keywordResult)
+                    {
+                        writeResultLog(scriptName,keywordArr,resultFile);
+                        break rowLoop;
+                    }
+                    keywordArr.clear();
+                }
+            }
+        }
 
     }
 
-    public void executeKeywords(ArrayList arr) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
+
+
+    public void executeKeywords(ArrayList keyArr) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
     {
         ArrayList<String> iList = new ArrayList();
         platformFunctions funcLib=new platformFunctions();
         Class libClass = funcLib.getClass();
-        String keyword=arr.get(0).toString().trim();
-        //System.out.println(keyArr);
+        String keyword=keyArr.get(0).toString().trim();
         Method method = libClass.getMethod(keyword, iList.getClass());
-        method.invoke(this, arr);
+        method.invoke(this, keyArr);
     }
 }
