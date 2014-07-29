@@ -92,6 +92,7 @@ public class platformObjects {
     @FindBy(linkText = "Logout") public static WebElement logoutLink;
     @FindBy(css="div.alert") public static WebElement logoutMsg;
 
+    @FindBy(css = ".add-btn.btn.btn-primary.js_dependent_link") public static WebElement addKeydateBttn;
 
 
 

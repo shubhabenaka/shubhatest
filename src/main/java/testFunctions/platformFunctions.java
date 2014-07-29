@@ -49,6 +49,7 @@ public class platformFunctions {
     public  static String regExp2 = "[^\\w]|[\\_]";
 
 
+
     public static void Login (ArrayList keywordArr) throws InterruptedException, MalformedURLException
     {
         if (keywordArr.size()>=3) {
@@ -159,6 +160,16 @@ public class platformFunctions {
         }
     }
 
+    public  static void AddKeyDate(ArrayList keywordArr) throws InterruptedException{
+        if (keywordArr.size()>=2)
+        {
+            if (elementExists(pageObj.addKeydateBttn)) {
+               pageObj.addKeydateBttn.click();
+
+            }
+        }
+    }
+
     public static void AddProjectTool(ArrayList keywordArr) throws InterruptedException {
         if (keywordArr.size()>=2)
         {
@@ -211,15 +222,17 @@ public class platformFunctions {
                             obj.selectByVisibleText(keywordArr.get(5).toString().trim());
                             Pattern p = Pattern.compile("(?=\\p{Lu})");
                             String[] s1 = p.split(keywordArr.get(5).toString().trim());
-                            System.out.println(s1);
+
                             String componentId;
-                            if (s1.length == 2) {
-                                componentId = "forum_topic_related_media_" + (s1[1] + "_" + s1[2]).toLowerCase() + "_id";
+                            if (s1.length >= 2) {
+                                componentId = "forum_topic_related_media_" + s1[1].toLowerCase() + "_" + s1[2].toLowerCase() + "_id";
+
                             } else componentId = "forum_topic_related_media_" + s1[0].toLowerCase() + "_id";
+
                             Select element = new Select(testDriver.findElement(By.id(componentId)));
                             if (element.getOptions().contains(keywordArr.get(6).toString()))
                                 element.selectByVisibleText(keywordArr.get(6).toString().trim());
-                            if (keywordArr.size() > 8)
+                            if (keywordArr.size() == 8)
                                 pageObj.forumTopicLinkTB.sendKeys(keywordArr.get(7).toString().trim());
                             pageObj.projToolsCreateBtn.click();
                             waitForPageLoad();
@@ -233,8 +246,11 @@ public class platformFunctions {
                     }
                 }
             }
-            if (elementExists(pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()))) { //Do nothing
+            if (elementExists(pageObj.previewLink((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase())))
+            {
+               //Do Nothing
             } else keywordResult = false;
+            pageObj.getLink("MANAGE").click();
         }
     }
 
@@ -245,112 +261,126 @@ public class platformFunctions {
         {
             String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
 
-            if (elementExists(pageObj.previewLink(forumName)))
-            {
-                pageObj.publishLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
-                pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();
-                waitForPageLoad();
-                ArrayList<String> tabs=new ArrayList<String>(testDriver.getWindowHandles());
-                testDriver.switchTo().window(tabs.get(1));
-                //System.out.println(testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent"));
-                //System.out.println(keywordArr.get(1).toString());
-                if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim()))
-                {
-                    testDriver.switchTo().window(tabs.get(1)).close();
+            if (elementExists(pageObj.projToolsTab)) {
+                if (pageObj.projToolsTab.getAttribute("textContent").contains("Forum")) {
+                    WebElement mngLnk = pageObj.manageLink("forum_topics");
+                    mngLnk.click();
+                    waitForPageLoad();
+
+                    if (elementExists(pageObj.previewLink(forumName))) {
+                        pageObj.publishLink(forumName).click();
+                        pageObj.previewLink(forumName).click();
+                        waitForPageLoad();
+                        ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                        testDriver.switchTo().window(tabs.get(1));
+
+                        if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim())) {
+                            testDriver.switchTo().window(tabs.get(1)).close();
+                        } else {
+                            keywordResult = false;
+                        }
+                        testDriver.switchTo().window(tabs.get(0));
+                    }
                 }
-                else {keywordResult=false;}
+            }
+        }
+    }
+
+    public static void AddComment(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size()>=2)
+        {
+            String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
+
+            if(elementExists(pageObj.previewLink(forumName))) {
+                pageObj.previewLink(forumName).click();
+                //testDriver.findElement(By.cssSelector(".btn-group-seperators[target=_blank]")).click();
+                waitForPageLoad();
+                ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                testDriver.switchTo().window(tabs.get(1));
+
+                if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim())) {
+                    pageObj.addYourCommentBttn.click();
+                    pageObj.commentTextArea.sendKeys(keywordArr.get(2).toString().trim());
+                    pageObj.commentSubmitBttn.click();
+                    waitForPageLoad();
+                    waitForElement((By.cssSelector(".comment > .content")));
+
+                } else {
+                    keywordResult = false;
+                }
                 testDriver.switchTo().window(tabs.get(0));
             }
         }
     }
 
-    public static void ReplytolatestComment(ArrayList keywordArr) throws InterruptedException {
+    public static void ReplytolatestComment(ArrayList keywordArr) throws InterruptedException
+    {
         if (keywordArr.size()>=2)
         {
+            String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
 
-                if (elementExists(pageObj.projToolsTab)) {
-                    if (pageObj.projToolsTab.getAttribute("textContent").contains("Forum")) {
-                        WebElement mngLnk = pageObj.manageLink("forum_topics");
-                        mngLnk.click();
-                        waitForPageLoad();
-                    }
-                }
+            if(elementExists(pageObj.previewLink(forumName))) {
+                pageObj.previewLink(forumName).click();
+                //testDriver.findElement(By.cssSelector(".btn-group-seperators[target=_blank]")).click();
+                waitForPageLoad();
+                ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                testDriver.switchTo().window(tabs.get(1));
 
-
-            /*String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
-                if(elementExists(pageObj.previewLink(forumName))) {
-                    pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();*/
-                    testDriver.findElement(By.cssSelector(".btn-group-seperators[target=_blank]")).click();
-                    waitForPageLoad();
-                    ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
-                    testDriver.switchTo().window(tabs.get(1));
-
-                    if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim())) {
-                        pageObj.addYourCommentBttn.click();
-                        pageObj.commentTextArea.sendKeys(keywordArr.get(2).toString().trim());
-                        pageObj.commentSubmitBttn.click();
-                        waitForPageLoad();
-                        waitForElement((By.cssSelector(".comment > .content")));
-
+                if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").equals(keywordArr.get(1).toString().trim())) {
+                    if (elementExists(testDriver.findElement(By.cssSelector(".comment > .content")))) {
                         WebElement replyButton = testDriver.findElements(By.linkText("Reply")).get(0);
                         replyButton.click();
+                        waitForElement(pageObj.replyTextArea);
                         waitForElement(pageObj.replyTextArea);
                         pageObj.replyTextArea.sendKeys(keywordArr.get(3).toString().trim());
                         pageObj.replySubmitBttn.click();
                         waitForPageLoad();
+                        waitForElement((By.cssSelector(".comment > .content")));
 
                     } else {
                         keywordResult = false;
                     }
                     testDriver.switchTo().window(tabs.get(0));
-               // }
+                }
+            }
         }
     }
 
     public static void ValidateComment(ArrayList keywordArr) throws InterruptedException {
         if (keywordArr.size()>=2)
         {
+             String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
 
-            if (elementExists(pageObj.projToolsTab)) {
-                if (pageObj.projToolsTab.getAttribute("textContent").contains("Forum")) {
-                    WebElement mngLnk = pageObj.manageLink("forum_topics");
-                    mngLnk.click();
-                    waitForPageLoad();
-                }
-            }
+             if(elementExists(pageObj.previewLink(forumName))) {
+                 pageObj.previewLink(forumName).click();
+                 //testDriver.findElement(By.cssSelector(".btn-group-seperators[target=_blank]")).click();
+                 waitForPageLoad();
+                 ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                 testDriver.switchTo().window(tabs.get(1));
 
+                 if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim())) {
+                     pageObj.addYourCommentBttn.click();
+                     waitForElement(pageObj.commentTextArea);
+                     String commentText = pageObj.commentTextArea.getText();
+                     pageObj.commentSubmitBttn.click();
 
-            /*String forumName=((keywordArr.get(1).toString().trim().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
-                if(elementExists(pageObj.previewLink(forumName))) {
-                    pageObj.previewLink(keywordArr.get(1).toString().trim().toLowerCase()).click();*/
-            testDriver.findElement(By.cssSelector(".btn-group-seperators[target=_blank]")).click();
-            waitForPageLoad();
-            ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
-            testDriver.switchTo().window(tabs.get(1));
+                     if (commentText.equalsIgnoreCase("")) {
+                         WebDriverWait wait = new WebDriverWait(testDriver, 5);
+                         wait.until(ExpectedConditions.alertIsPresent());
+                         Alert alert = testDriver.switchTo().alert();
+                         if (alert.getText().equalsIgnoreCase("comment cant be left blank")) {
+                             alert.accept();
+                             //System.out.println("Comment was left blank, hence closing test.");
 
-            if (testDriver.findElement(By.cssSelector("h1")).getAttribute("textContent").trim().equals(keywordArr.get(1).toString().trim())) {
-                pageObj.addYourCommentBttn.click();
-                waitForElement(pageObj.commentTextArea);
-                String commentText = pageObj.commentTextArea.getText();
-                pageObj.commentSubmitBttn.click();
-
-                if (commentText.equalsIgnoreCase(""))
-                {
-                    WebDriverWait wait = new WebDriverWait(testDriver, 5);
-                    wait.until(ExpectedConditions.alertIsPresent());
-                    Alert alert = testDriver.switchTo().alert();
-                    if (alert.getText().equalsIgnoreCase("comment cant be left blank"))
-                    {
-                        alert.accept();
-                        System.out.println("Comment was left blank, hence closing test.");
-
-                    }
-                }
-            } else {
-                keywordResult = false;
-            }
-            testDriver.switchTo().window(tabs.get(0));
-            // }
+                         }
+                     }
+                 }
+             else
+                 {
+                 keywordResult = false;
+                 }
+                 testDriver.switchTo().window(tabs.get(0));
+             }
         }
     }
 
