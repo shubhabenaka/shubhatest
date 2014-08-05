@@ -215,7 +215,9 @@ public class Objects
 
         @FindAll({@FindBy(xpath=".//div[@class='sp-form-builder']/div/input")} ) public static List<WebElement> qPollOptionsTB ;
 
+        @FindBy(css = "input[id='project_publish_now']") public static WebElement publishProjNowRB;
 
+        @FindBy(css = "a[class='publish_project']") public static WebElement projPublishLnk;
 
 
  /*   public static WebElement logoutTab(String username)
