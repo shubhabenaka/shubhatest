@@ -1,6 +1,7 @@
 package Ehq_CommonFunctionLibrary;
 
 import Ehq_Object_Repository.Objects;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -31,18 +32,18 @@ import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
  * Created by Ridhi on 31/03/14.
  */
 public class CommonFunctions {
-    public static String siteUrl;
-    public static String alternateUrl=null;
-    public static String testSuiteName;
-    public static String browser;
-    public static String outputSuite;
-    public static String appModule;
-    public static String resultLogSuite;
-    public static WebDriver testDriver;
-    public static boolean keywordResult = true;
-    public static Objects pageObj;
+    public static String siteUrl;   //Url for the Site to be tested. Set via XLS.
+    public static String alternateUrl=null; //A reference to an alternate Url which might need to be invoked during the execution, setting a valid value to this reference will lead to the opening of this URL instead of SiteURL. It is hence the Tester's duty to unset(set to null or empty) the value of this  variable post use.
+    public static String testSuiteName; //The name of the Test Suite/Folder containing the scripts intended for execution.Set via XLS.
+    public static String browser;   //The browser type to run the test on, i.e. Chrome,IE or Firefox(Safari/Opera).Set via XLS.
+    public static String outputSuite;   //Path to the folder where the results are intended to be generated. Set via XLS.
+    public static String appModule;     //A reference for future requirement, which would help switch out the Object repository. Set via XLS.
+    public static String resultLogSuite;    //Path to the folder where the results logs of older execution are intended to be archived. Set via XLS.
+    public static WebDriver testDriver;     //The WebDriver object, which acts as a handle to the browser opened via Selenium Test.
+    public static boolean keywordResult = true;     //A boolean value set by each keyword to indicate Success or Failure status. This is evaluated at the end of each keyword execution.
+    public static Objects pageObj;                  //The Object Repository object/instance.
     public static String errorMsg = "";           //A global reference that can be set by each function to report error messages this also prevents reporting keyword failure if we were expecting it
-    //public static WebDriver testDriver= new FirefoxDriver();
+
 
 
     public static void Login(ArrayList keywordArr) throws InterruptedException, MalformedURLException {
@@ -69,8 +70,19 @@ public class CommonFunctions {
             {
                 waitForLoadProgress();   //Wait for Load Progress completion if it exists
             }
-            if (!elementExists(pageObj.userLabel)) {
-                keywordResult = false;
+            if (keywordArr.size()==4)       //To check if the Login keyword has a 4th parameter (True/False) indicating if a new browser has to be opened. This is for logging in as a participant upon redirection.
+            {
+                if (!elementExists(testDriver.findElement(By.cssSelector("a.dropdown-toggle"))))        //Verify Login
+                {
+                    keywordResult = false;
+                }
+            }
+            else
+            {
+                if (!elementExists(pageObj.userLabel))      //Verify Login
+                {
+                    keywordResult = false;
+                }
             }
         } else {
             keywordResult = false;
@@ -118,8 +130,8 @@ public class CommonFunctions {
             pageObj.projectNameTB.sendKeys(keywordArr.get(1).toString());   //Populate project name
             testDriver.findElement(By.cssSelector("div.form-field:nth-child(1) > label:nth-child(1)")).click();     //Click outside to enable postback for Permalink generation
             String driverHandle = testDriver.getWindowHandle();
-            testDriver.switchTo().frame(pageObj.redactorFrame(0));     //Switch to Description box frame
-            pageObj.descTB.sendKeys("\n" + keywordArr.get(2).toString());      //Populate description
+            //testDriver.switchTo().frame(pageObj.redactorFrame(0));     //Switch to Description box frame
+            pageObj.descTB(0).sendKeys("\n" + keywordArr.get(2).toString());      //Populate description
             testDriver.switchTo().window(driverHandle);     //Switch back to main frame
             if (keywordArr.size() > 3)      //Validate if Truncate check box input is given
             {
@@ -159,8 +171,78 @@ public class CommonFunctions {
                 pageObj.projSearchTB.sendKeys(keywordArr.get(1).toString());
             }
             try {
-                if (!testDriver.findElements(By.linkText(keywordArr.get(1).toString())).get(0).isDisplayed()) {
-                    keywordResult = false;
+                if (!testDriver.findElements(By.linkText(keywordArr.get(1).toString())).get(0).isDisplayed())
+                {
+                keywordResult = false;
+                }
+                else
+                {
+                    pageObj.getLink(keywordArr.get(1).toString()).click();
+                    waitForPageLoad();
+                    pageObj.getLink("DETAILS").click();
+                    waitForPageLoad();
+                    String truncateStatus="";
+                    try
+                    {
+                        if (pageObj.truncateDescCB.getAttribute("checked")!=null)
+                        truncateStatus=pageObj.truncateDescCB.getAttribute("checked");
+                    }
+                    catch (NullPointerException e)
+                    {
+                        truncateStatus = "false";
+                    }
+                    System.out.println("Status: "+truncateStatus);
+                    String mainTab=testDriver.getWindowHandle();
+                    testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                    String str = testDriver.findElement(By.xpath("html/body")).getText();
+                    String[] strArr = str.trim().replaceAll(Character.toString((char) 10),"").split("\\s+");
+                    str= StringUtils.join(strArr," ");
+                    String truncDesc = "";
+                    if (strArr.length>100)
+                    {
+                        for (int i = 0; i < 100; i++) {
+                            truncDesc = truncDesc + " " + strArr[i];
+                        }
+                    }
+                    else
+                        truncDesc=StringUtils.join(strArr," ");
+                    testDriver.switchTo().window(mainTab);
+                    pageObj.getLink("MANAGE").click();
+                    pageObj.getLink("Preview").click();
+                    if (testDriver.findElements(By.xpath("div[@class='col-lg-7 project_details' and ./h1[contains(.,'"+ keywordArr.get(1).toString()+"')]]")).size()>1)
+                    {
+                        keywordResult=false;
+                        return;
+                    }
+                    ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                    testDriver.switchTo().window(tabs.get(1));
+                    if (truncateStatus.equals("true"))
+                    {
+                        String desc = testDriver.findElements(By.cssSelector("div.truncated-description")).get(0).getText().replaceAll(Character.toString((char) 10), "").replaceAll("....Read more", "");
+                        if (truncDesc.trim().contains(desc)) {
+                            errorMsg = "Project Created. Project Description successfully truncated.";
+                            testDriver.switchTo().window(tabs.get(1)).close();
+                            testDriver.switchTo().window(tabs.get(0));
+                            return;
+                        } else keywordResult = false;
+                        testDriver.switchTo().window(tabs.get(1)).close();
+                        testDriver.switchTo().window(tabs.get(0));
+                    }
+                    else
+                    {
+                        String desc=testDriver.findElements(By.cssSelector("div.truncated-description")).get(0).getText().replaceAll(Character.toString((char) 10), "");
+                        //System.out.println(str);
+                        //System.out.println(desc);
+                        if (str.trim().equals(desc.trim()))
+                        {
+                            errorMsg = "Project Created.";
+                            testDriver.switchTo().window(tabs.get(1)).close();
+                            testDriver.switchTo().window(tabs.get(0));
+                            return;
+                        }else keywordResult = false;
+                        testDriver.switchTo().window(tabs.get(1)).close();
+                        testDriver.switchTo().window(tabs.get(0));
+                    }
                 }
             } catch (IndexOutOfBoundsException e) {
                 keywordResult = false;
@@ -182,12 +264,12 @@ public class CommonFunctions {
 
                         pageObj.surveyNameTB.sendKeys(keywordArr.get(1).toString().trim());
                         String currHandle = testDriver.getWindowHandle();
-                        testDriver.switchTo().frame(pageObj.redactorFrame(1));
-                        pageObj.descTB.sendKeys("\n" + keywordArr.get(2).toString().trim());
+                        //testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                        pageObj.descTB(1).sendKeys("\n" + keywordArr.get(2).toString().trim());
                         testDriver.switchTo().window(currHandle);
                         pageObj.surveyPermLinkTB.sendKeys(keywordArr.get(3).toString().trim());
-                        testDriver.switchTo().frame(pageObj.redactorFrame(2));
-                        pageObj.descTB.sendKeys("\n" + keywordArr.get(4).toString().trim());
+                        //testDriver.switchTo().frame(pageObj.redactorFrame(2));
+                        pageObj.descTB(2).sendKeys("\n" + keywordArr.get(4).toString().trim());
                         testDriver.switchTo().window(currHandle);
                         if ((keywordArr.get(5).toString().trim()).equals("Verified")) {
                             //Do Nothing
@@ -497,8 +579,8 @@ public class CommonFunctions {
                         pageObj.forumNameTB.sendKeys(keywordArr.get(1).toString().trim());
                         if (keywordArr.size() > 3) {
                             String currWinHandle = testDriver.getWindowHandle();
-                            testDriver.switchTo().frame(pageObj.redactorFrame(1));
-                            pageObj.descTB.sendKeys("\n" + keywordArr.get(2).toString().trim());
+                            //testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                            pageObj.descTB(1).sendKeys("\n" + keywordArr.get(2).toString().trim());
                             testDriver.switchTo().window(currWinHandle);
                         }
                         if (keywordArr.size() > 4)
@@ -545,8 +627,8 @@ public class CommonFunctions {
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
                 String winHandle = testDriver.getWindowHandle();
-                testDriver.switchTo().frame(pageObj.redactorFrame(0));
-                pageObj.descTB.sendKeys("\n" + keywordArr.get(3).toString().trim());
+                //testDriver.switchTo().frame(pageObj.redactorFrame(0));
+                pageObj.descTB(0).sendKeys("\n" + keywordArr.get(3).toString().trim());
                 testDriver.switchTo().window(winHandle);
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
@@ -706,6 +788,7 @@ public class CommonFunctions {
     }
 
     public static void AddComment(ArrayList keywordArr) throws InterruptedException {
+        //System.out.println(keywordArr.get(1).toString().trim());
         pageObj.forumLink(keywordArr.get(1).toString().trim()).click();
         waitForPageLoad();
         if (elementExists(pageObj.addCommentBtn)) {
@@ -924,10 +1007,21 @@ public class CommonFunctions {
         {
             bufferedWriter.write("\n" + "FAILED: " + scriptName + keywordArr);
         }
+        else logResult(scriptName,keywordArr,fileName);
         bufferedWriter.close();
         File file=new File(fileName);
         file.renameTo(new File(fileName.replaceAll("PASSED","FAILED")));
         file=null;
+    }
+
+//Log Results in case of testing negative scenarios
+    public static void logResult(String scriptName,ArrayList keywordArr,String fileName) throws IOException {
+        if (!(errorMsg.isEmpty()))
+        {
+            BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(fileName, false));
+            bufferedWriter.write("\n"+"Passed: "+scriptName+keywordArr+ "\n" +" Message: " +errorMsg);
+            bufferedWriter.close();
+        }
     }
 
 //Verify if an Object physically exists on the page
@@ -1013,7 +1107,6 @@ public class CommonFunctions {
         cap.setJavascriptEnabled(true);
         testDriver=new RemoteWebDriver(url,cap);
         pageObj= new Objects(testDriver);
-        System.out.println(alternateUrl==null||alternateUrl.isEmpty());
         if (alternateUrl==null||alternateUrl.isEmpty())
         {
             testDriver.get(siteUrl);

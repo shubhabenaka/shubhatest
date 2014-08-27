@@ -11,6 +11,7 @@ public class TestRunner
     {
         String arg= args[0];
         AppTest.filename=arg;
+        //AppTest.filename="//Users/Ridhi/SuiteSnippet/ScriptInput.xls";
         JUnitCore.runClasses(AppTest.class);
     }
 }

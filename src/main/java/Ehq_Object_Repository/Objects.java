@@ -1,5 +1,6 @@
 package Ehq_Object_Repository;
 
+import Ehq_CommonFunctionLibrary.CommonFunctions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -32,8 +33,6 @@ public class Objects
         @FindBy(css="div.tiny-progress") public static WebElement loadProgress;
 
         @FindBy(id = "project_name") public static WebElement projectNameTB;
-
-        @FindBy(css = "body > p > br") public static WebElement descTB;
 
         @FindBy(id = "project_description_display_mode") public static WebElement truncateDescCB;
 
@@ -352,6 +351,23 @@ public class Objects
             }
         }
         return null;
+    }
+
+    public WebElement descTB(int index)
+    {
+        //public static WebElement descTB;
+        if (CommonFunctions.browser.equals("chrome"))
+        {
+          //testDriver.switchTo().parentFrame();
+          testDriver.findElement(By.xpath(".//*[@id='new_project']/fieldset/div/div[2]/div[2]/iframe")).click();
+          return testDriver.findElement(By.xpath(".//*[@id='new_project']/fieldset/div/div[2]/div[2]/iframe"));
+        }
+        else
+        {
+            testDriver.switchTo().frame(redactorFrame(index));
+            return testDriver.findElement (By.cssSelector("body > p > br")) ;
+        }
+
     }
 
 

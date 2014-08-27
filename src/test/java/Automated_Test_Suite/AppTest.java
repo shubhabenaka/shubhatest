@@ -24,7 +24,7 @@ public class AppTest
 
     public void driverScript() throws Exception
     {
-        //filename="/Users/Ridhi/ScriptInput.xls";
+        filename="/Users/Ridhi/SuiteSnippet/ScriptInput.xls";
         HSSFSheet inputSheet=getSheet(filename);
         setSuiteInputs(inputSheet);
         String resultFile=createResultFile(outputSuite+"/",resultLogSuite);
@@ -60,6 +60,7 @@ public class AppTest
                         writeResultLog(scriptName,keywordArr,resultFile);
                         break rowLoop;
                     }
+                    logResult(scriptName,keywordArr,resultFile);
                     keywordArr.clear();
                 }
             }
@@ -75,7 +76,7 @@ public class AppTest
         CommonFunctions funcLib=new CommonFunctions();
         Class libClass = funcLib.getClass();
         String keyword=keyArr.get(0).toString().trim();
-        System.out.println(keyArr);
+        //System.out.println(keyArr);
         Method method = libClass.getMethod(keyword, iList.getClass());
         method.invoke(this, keyArr);
     }
