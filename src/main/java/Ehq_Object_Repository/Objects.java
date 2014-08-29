@@ -359,8 +359,8 @@ public class Objects
         if (CommonFunctions.browser.equals("chrome"))
         {
           //testDriver.switchTo().parentFrame();
-          testDriver.findElement(By.xpath(".//*[@id='new_project']/fieldset/div/div[2]/div[2]/iframe")).click();
-          return testDriver.findElement(By.xpath(".//*[@id='new_project']/fieldset/div/div[2]/div[2]/iframe"));
+          testDriver.findElements(By.xpath(".//iframe")).get(index).click();
+          return testDriver.findElements(By.xpath(".//iframe")).get(index);
         }
         else
         {

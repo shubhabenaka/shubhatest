@@ -9,15 +9,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="Login Updates 08-07">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/guava-15.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Register_user.xls" afterPath="" />
+    <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/Ehq_AutomationSuite.jar" afterPath="$PROJECT_DIR$/Ehq_AutomationSuite/Ehq_AutomationSuite.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" afterPath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Resources/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/main/Resources/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" afterPath="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" afterPath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -45,18 +41,18 @@
       <file leaf-file-name="codeTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
-              <caret line="18" column="93" selection-start-line="18" selection-start-column="93" selection-end-line="18" selection-end-column="93" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AppTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-              <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.48165137" vertical-offset="0" max-vertical-offset="1215">
+              <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -75,30 +71,30 @@
       <file leaf-file-name="Objects.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5118" max-vertical-offset="5610">
-              <caret line="366" column="59" selection-start-line="366" selection-start-column="59" selection-end-line="366" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5101" max-vertical-offset="5610">
+              <caret line="362" column="54" selection-start-line="362" selection-start-column="54" selection-end-line="362" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonFunctions.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CommonFunctions.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36480686" vertical-offset="2635" max-vertical-offset="18330">
-              <caret line="187" column="24" selection-start-line="187" selection-start-column="24" selection-end-line="187" selection-end-column="24" />
+            <state vertical-scroll-proportion="-38.846153" vertical-offset="11725" max-vertical-offset="18360">
+              <caret line="851" column="69" selection-start-line="851" selection-start-column="69" selection-end-line="851" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11316#11324#0" expanded="true" />
-                <element signature="e#24060#24068#0" expanded="true" />
-                <element signature="e#24514#24522#0" expanded="true" />
-                <element signature="e#29460#29468#0" expanded="true" />
-                <element signature="e#36777#36785#0" expanded="true" />
-                <element signature="e#46898#46906#0" expanded="true" />
-                <element signature="e#49848#49856#0" expanded="true" />
-                <element signature="e#50051#50059#0" expanded="true" />
-                <element signature="e#50580#50588#0" expanded="true" />
-                <element signature="e#57346#57352#0" expanded="true" />
+                <element signature="e#11146#11154#0" expanded="true" />
+                <element signature="e#24260#24268#0" expanded="true" />
+                <element signature="e#24714#24722#0" expanded="true" />
+                <element signature="e#29657#29665#0" expanded="true" />
+                <element signature="e#36974#36982#0" expanded="true" />
+                <element signature="e#47102#47110#0" expanded="true" />
+                <element signature="e#50052#50060#0" expanded="true" />
+                <element signature="e#50255#50263#0" expanded="true" />
+                <element signature="e#50784#50792#0" expanded="true" />
+                <element signature="e#57547#57553#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,8 +132,8 @@
         <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" />
         <option value="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
-        <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
       </list>
     </option>
   </component>
@@ -800,7 +796,11 @@
       <created>1407229586008</created>
       <updated>1407229586008</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Regression Updates for User/Project Details">
+      <created>1409142638217</created>
+      <updated>1409142638217</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -818,14 +818,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.325811" sideWeight="0.50040483" order="7" side_tool="true" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32863188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32722145" sideWeight="0.49959514" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32722145" sideWeight="0.49959514" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25506073" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24823695" sideWeight="0.49959514" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24823695" sideWeight="0.49959514" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -887,14 +887,15 @@
     <MESSAGE value="QuickPolls Automation" />
     <MESSAGE value="Sanity Update to Cover Custom URL's" />
     <MESSAGE value="Login Updates 08-07" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login Updates 08-07" />
+    <MESSAGE value="Regression Updates for User/Project Details" />
+    <option name="LAST_COMMIT_MESSAGE" value="Regression Updates for User/Project Details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="56" />
+      <option name="time" value="59" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1224,6 +1225,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5101" max-vertical-offset="5610">
+          <caret line="362" column="54" selection-start-line="362" selection-start-column="54" selection-end-line="362" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-38.846153" vertical-offset="11725" max-vertical-offset="18360">
+          <caret line="851" column="69" selection-start-line="851" selection-start-column="69" selection-end-line="851" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11146#11154#0" expanded="true" />
+            <element signature="e#24260#24268#0" expanded="true" />
+            <element signature="e#24714#24722#0" expanded="true" />
+            <element signature="e#29657#29665#0" expanded="true" />
+            <element signature="e#36974#36982#0" expanded="true" />
+            <element signature="e#47102#47110#0" expanded="true" />
+            <element signature="e#50052#50060#0" expanded="true" />
+            <element signature="e#50255#50263#0" expanded="true" />
+            <element signature="e#50784#50792#0" expanded="true" />
+            <element signature="e#57547#57553#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
@@ -1232,47 +1269,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
-          <caret line="18" column="93" selection-start-line="18" selection-start-column="93" selection-end-line="18" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5118" max-vertical-offset="5610">
-          <caret line="366" column="59" selection-start-line="366" selection-start-column="59" selection-end-line="366" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.48165137" vertical-offset="0" max-vertical-offset="1215">
+          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36480686" vertical-offset="2635" max-vertical-offset="18330">
-          <caret line="187" column="24" selection-start-line="187" selection-start-column="24" selection-end-line="187" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11316#11324#0" expanded="true" />
-            <element signature="e#24060#24068#0" expanded="true" />
-            <element signature="e#24514#24522#0" expanded="true" />
-            <element signature="e#29460#29468#0" expanded="true" />
-            <element signature="e#36777#36785#0" expanded="true" />
-            <element signature="e#46898#46906#0" expanded="true" />
-            <element signature="e#49848#49856#0" expanded="true" />
-            <element signature="e#50051#50059#0" expanded="true" />
-            <element signature="e#50580#50588#0" expanded="true" />
-            <element signature="e#57346#57352#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

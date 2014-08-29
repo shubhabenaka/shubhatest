@@ -16,7 +16,7 @@ public class codeTest
 
         //LOGIN
         WebDriver driver = new FirefoxDriver();
-        driver.get("http://autotuned.engagementhq.com/admin/projects/description-project/edit");
+        driver.get("http://autotuned.engagementhq.com/admin/projects/new");
         Thread.sleep(2000);
         Objects obj = new Objects(driver);
         CommonFunctions.testDriver = driver;
@@ -24,6 +24,7 @@ public class codeTest
         obj.passwordTB.sendKeys("ehqtesting_btt");
         obj.signBttn.click();
         Thread.sleep(5000);
-       System.out.println(obj.truncateDescCB.getAttribute("checked"));
+
+
     }
     }

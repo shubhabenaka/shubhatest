@@ -186,12 +186,13 @@ public class CommonFunctions {
                     {
                         if (pageObj.truncateDescCB.getAttribute("checked")!=null)
                         truncateStatus=pageObj.truncateDescCB.getAttribute("checked");
+                        if (pageObj.truncateDescCB.getAttribute("checked").equals("null")) truncateStatus = "false";
                     }
                     catch (NullPointerException e)
                     {
                         truncateStatus = "false";
                     }
-                    System.out.println("Status: "+truncateStatus);
+                    //System.out.println("Status: "+truncateStatus);
                     String mainTab=testDriver.getWindowHandle();
                     testDriver.switchTo().frame(pageObj.redactorFrame(1));
                     String str = testDriver.findElement(By.xpath("html/body")).getText();
@@ -209,13 +210,14 @@ public class CommonFunctions {
                     testDriver.switchTo().window(mainTab);
                     pageObj.getLink("MANAGE").click();
                     pageObj.getLink("Preview").click();
+                    ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                    testDriver.switchTo().window(tabs.get(1));
+                    waitForElement(By.cssSelector("div.truncated-description"));
                     if (testDriver.findElements(By.xpath("div[@class='col-lg-7 project_details' and ./h1[contains(.,'"+ keywordArr.get(1).toString()+"')]]")).size()>1)
                     {
                         keywordResult=false;
                         return;
                     }
-                    ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
-                    testDriver.switchTo().window(tabs.get(1));
                     if (truncateStatus.equals("true"))
                     {
                         String desc = testDriver.findElements(By.cssSelector("div.truncated-description")).get(0).getText().replaceAll(Character.toString((char) 10), "").replaceAll("....Read more", "");
@@ -516,8 +518,8 @@ public class CommonFunctions {
                         pageObj.newsPostTitleTB.sendKeys(keywordArr.get(1).toString().trim());
                         pageObj.newsPostLinkTB.sendKeys(keywordArr.get(2).toString().trim());
                         String currWinHandle = testDriver.getWindowHandle();
-                        testDriver.switchTo().frame(pageObj.redactorFrame(1));
-                        pageObj.newsPostDescTA.sendKeys("\n" + keywordArr.get(3).toString().trim());
+                        //testDriver.switchTo().frame(pageObj.redactorFrame(1));
+                        pageObj.descTB(1).sendKeys("\n" + keywordArr.get(3).toString().trim());
                         testDriver.switchTo().window(currWinHandle);
                         if (keywordArr.size() > 5)
                             if (keywordArr.get(4).toString().equals("True")) pageObj.newsPostDescDispCB.click();
@@ -847,7 +849,7 @@ public class CommonFunctions {
                     pageObj.projToolsCreateBtn.click();
                     waitForPageLoad();
                 }
-                if (!(elementExists(testDriver.findElement(By.xpath(".//li/div/h4[text()='" + keywordArr.get(1).toString().trim() + "']"))))) {
+                if (!(elementExists(testDriver.findElement(By.xpath(".//li/div/div[1]/h4[text()='" + keywordArr.get(1).toString().trim() + "']"))))) {
                     keywordResult = false;
                 }
             }
@@ -1049,7 +1051,7 @@ public class CommonFunctions {
         }
         if (elementExists(pageObj.loadProgress))    //Validates presence of Page load bar
         {
-            while (Integer.parseInt((pageObj.loadProgress.getAttribute("nodeValue").replaceAll("width: ","")).replaceAll("%",""))>103) //Validates load progress
+            while (Float.parseFloat((pageObj.loadProgress.getAttribute("style").replaceAll("width: ","")).replaceAll("%;",""))>103) //Validates load progress
             {
                 try
                 {

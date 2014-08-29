@@ -24,7 +24,7 @@ public class AppTest
 
     public void driverScript() throws Exception
     {
-        filename="/Users/Ridhi/SuiteSnippet/ScriptInput.xls";
+        //filename="/Users/Ridhi/SuiteSnippet/ScriptInput.xls";
         HSSFSheet inputSheet=getSheet(filename);
         setSuiteInputs(inputSheet);
         String resultFile=createResultFile(outputSuite+"/",resultLogSuite);
