@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
 
 
 /**
@@ -279,7 +278,7 @@ public class Objects
             return link;
         }
         else
-            fail("Link not found on the current page. Hence failing Test");
+            CommonFunctions.errorMsg="Link "+linkText+" not found on the current page. Hence failing Test";
             return null;
     }
 
@@ -291,7 +290,7 @@ public class Objects
             return frame;
         }
         else
-            fail("Frame not found on Page.Hence failing Test");
+            CommonFunctions.errorMsg="Frame not found on Page.Hence failing Test";
             testDriver.quit();
             return null;
     }
@@ -304,7 +303,7 @@ public class Objects
             return link;
         }
         else
-            fail("Link not found on the current page. Hence failing Test");
+            CommonFunctions.errorMsg="Link " + linkText + " not found on the current page. Hence failing Test";
         return null;
     }
 
