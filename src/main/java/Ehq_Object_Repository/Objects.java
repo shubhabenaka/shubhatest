@@ -1,16 +1,12 @@
 package Ehq_Object_Repository;
 
 import Ehq_CommonFunctionLibrary.CommonFunctions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-
 
 
 /**
@@ -189,7 +185,7 @@ public class Objects
 
         @FindBy(css = "a.btn.btn-primary") public static WebElement addCommentBtn;
 
-        @FindBy(css="textarea[id='comment_comment']") public static WebElement addCommentTA;
+        @FindBy(xpath=".//form[@id='new_comment']/textarea[@id='comment_comment']") public static WebElement addCommentTA;
 
         @FindBy(id ="comment_auto_notify") public static WebElement  commentNotifyCB;
 
@@ -367,6 +363,72 @@ public class Objects
             return testDriver.findElement (By.cssSelector("body > p > br")) ;
         }
 
+    }
+
+    public WebElement commentObject(String userName,String commentText)
+    {
+        try
+        {
+            return testDriver.findElement(By.xpath(".//div[@class='comment-wrapper' and ./div/span[@class='comment-author' and contains(.,'" + userName + "')] and ./div/div[@class='content' and text()='" + commentText + "']]"));
+        } catch (NoSuchElementException e)
+        {
+            CommonFunctions.errorMsg="No comment from user "+userName+" containing text '"+commentText+" found.";
+            CommonFunctions.keywordResult=false;
+            return null;
+        }
+    }
+
+    public WebElement commentObjectsbyID(String objName,String id)
+    {
+        if (!objName.isEmpty())
+        {
+            if (objName.equals("ReplyBtn")) {
+                return testDriver.findElement(By.xpath(".//*[@id='reply_" + id+"']"));
+            }
+            if (objName.equals("CommentTA"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id='comment_anchor_" + id + "']/div[@id='" + id + "']/div[@class='reply_form']/form/textarea"));
+            }
+            if (objName.equals("NotifyCB"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]/div/form[@id='new_comment']/div[@class='checkbox']"));
+            }
+            if (objName.equals("EmailTB"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]/div/form[@id='new_comment']/div//input[@class='user-input-email']"));
+            }
+            if (objName.equals("ScreenNameTB"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]/div/form[@id='new_comment']/div//input[@class='user-input-screen-name']"));
+            }
+            if (objName.equals("SubmitBtn"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]/div/form[@id='new_comment']/div//input[@name='commit']"));
+            }
+            if (objName.equals("AgreeBtn"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]//a[@class='btn btn-success btn-xs agree script']"));
+            }
+            if (objName.equals("DisagreeBtn"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]//a[@class='btn btn-danger btn-xs disagree script']"));
+            }
+            if (objName.equals("AlertBtn"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]/div[2]/div[2]/div[3]/a"));
+            }
+            if (objName.equals("HideLnk"))
+            {
+                return testDriver.findElement(By.xpath(".//*[@id=" + id + "]/div[2]/div[2]/div[5]/a/span"));
+            }
+            if (objName.equals("replyTextLbl"))
+            {
+                Integer num= testDriver.findElements(By.xpath(".//*[@id="+id+"]//div[@class='comment-wrapper']/div[@class='comment']/div[@class='content']")).size();
+                return testDriver.findElements(By.xpath(".//*[@id="+id+"]//div[@class='comment-wrapper']/div[@class='comment']/div[@class='content']")).get(num-1);
+            }
+            else return null;
+        }
+        else return null;
     }
 
 

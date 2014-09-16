@@ -90,17 +90,21 @@ public class CommonFunctions {
     }
 
     public static void Logout(ArrayList<String> keywordArr) throws InterruptedException {
-        if (elementExists(pageObj.participantLoutLbl)) {
+        if (elementExists(pageObj.participantLoutLbl))
+        {
             pageObj.participantLoutLbl.click();
             elementExists(pageObj.participantLoutLnk);
             pageObj.participantLoutLnk.click();
             waitForPageLoad();
-        } else if (elementExists(pageObj.loutTab)) {
+        } else if (elementExists(pageObj.loutTab))
+        {
             pageObj.loutTab.click();     //Click on the Username labelled dropdown tab on the right top corner
             pageObj.logoutLink.click();    //Click on Logout option
             waitForPageLoad();
         }
-        if (!(elementExists(pageObj.logoutMsg))) {
+        if (!(elementExists(pageObj.logoutMsg)))
+        {
+            errorMsg="Logout unsuccessful";
             keywordResult = false;
         }
         testDriver.close();      //Empty the testDriver object
@@ -173,7 +177,7 @@ public class CommonFunctions {
             try {
                 if (!testDriver.findElements(By.linkText(keywordArr.get(1).toString())).get(0).isDisplayed())
                 {
-                keywordResult = false;
+                    keywordResult = false;
                 }
                 else
                 {
@@ -627,6 +631,7 @@ public class CommonFunctions {
                 if (!(keywordArr.get(2).toString().isEmpty()))
                     bannerDD.selectByVisibleText(keywordArr.get(2).toString().trim());
                 pageObj.newsLtrNextBtn.click();
+
                 waitForPageLoad();
                 String winHandle = testDriver.getWindowHandle();
                 //testDriver.switchTo().frame(pageObj.redactorFrame(0));
@@ -789,23 +794,32 @@ public class CommonFunctions {
         } else keywordResult = false;
     }
 
-    public static void AddComment(ArrayList keywordArr) throws InterruptedException {
+    public static void AddComment(ArrayList keywordArr) throws InterruptedException
+    {
         //System.out.println(keywordArr.get(1).toString().trim());
         pageObj.forumLink(keywordArr.get(1).toString().trim()).click();
         waitForPageLoad();
-        if (elementExists(pageObj.addCommentBtn)) {
+        if (elementExists(pageObj.addCommentBtn))
+        {
             pageObj.addCommentBtn.click();
             waitForVisibility(pageObj.addCommentTA);
             pageObj.addCommentTA.sendKeys(keywordArr.get(2).toString().trim());
-            if (keywordArr.get(3).toString().trim().equals("False")) {
+            if (keywordArr.get(3).toString().trim().equals("False"))
+            {
                 pageObj.commentNotifyCB.click();
             }
             if (keywordArr.size() >= 5) pageObj.commentMailTB.sendKeys(keywordArr.get(4).toString().trim());
             if (keywordArr.size() >= 6) pageObj.commentScreenNameTB.sendKeys(keywordArr.get(5).toString().trim());
             pageObj.signBttn.click();
+            if (!(isAlertPresent(testDriver).equals("false")))   //Validates presence of Error Message
+            {
+                errorMsg = isAlertPresent(testDriver);   //Populates error message with web message
+                return;
+            }
             waitForPageLoad();
             waitForVisibility(pageObj.addCommentBtn);
-            if (!(pageObj.commentWrapperLbl.getAttribute("textContent").equals(keywordArr.get(2).toString().trim()))) {
+            if (!(pageObj.commentWrapperLbl.getAttribute("textContent").equals(keywordArr.get(2).toString().trim())))
+            {
                 keywordResult = false;
                 return;
             }
@@ -920,8 +934,12 @@ public class CommonFunctions {
         }
     }
 
-    public static void ViewPublishedProject(ArrayList keywordArr) throws MalformedURLException, InterruptedException {
-        alternateUrl=siteUrl+"/"+keywordArr.get(1).toString().trim();
+    public static void ViewPublishedProject(ArrayList keywordArr) throws MalformedURLException, InterruptedException
+    {
+        String regExp = "[^\\w\\s\\u2014]";
+        String regExp2 = "[^\\w]|[\\_]";
+        String expPermlink = ((keywordArr.get(1).toString().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
+        alternateUrl=siteUrl+"/"+expPermlink;
         browserGrid();
         waitForPageLoad();
         alternateUrl="";
@@ -949,6 +967,42 @@ public class CommonFunctions {
 
     }
 
+
+    public static void AddReply(ArrayList keywordArr) throws InterruptedException {
+        pageObj.forumLink(keywordArr.get(1).toString().trim()).click();
+        waitForPageLoad();
+        String commentId;
+        if (elementExists(pageObj.commentObject(keywordArr.get(2).toString().trim(),keywordArr.get(3).toString().trim())))
+        {
+            commentId = (pageObj.commentObject(keywordArr.get(2).toString().trim(), keywordArr.get(3).toString().trim())).getAttribute("id").replaceAll("comment_anchor_","");
+        }
+        else commentId="";
+        //System.out.println("comment:"+commentId);
+        pageObj.commentObjectsbyID("ReplyBtn",commentId).click();
+        //waitForAttributeValue(pageObj.commentObjectsbyID("ReplyBtn",commentId),"disabled","true");
+        Thread.sleep(2000);
+        pageObj.commentObjectsbyID("CommentTA",commentId).sendKeys(keywordArr.get(4).toString().trim());
+        if (keywordArr.get(5).toString().trim().equals("False")) {
+            pageObj.commentObjectsbyID("NotifyCB",commentId).click();
+        }
+        if (keywordArr.size() >= 7) pageObj.commentObjectsbyID("EmailTB",commentId).sendKeys(keywordArr.get(6).toString().trim());
+        if (keywordArr.size() >= 8) pageObj.commentObjectsbyID("ScreenNameTB",commentId).sendKeys(keywordArr.get(7).toString().trim());
+        pageObj.commentObjectsbyID("SubmitBtn",commentId).click();
+        if (!(isAlertPresent(testDriver).equals("false")))   //Validates presence of Error Message
+        {
+            errorMsg = isAlertPresent(testDriver);   //Populates error message with web message
+            return;
+        }
+        waitForPageLoad();
+        waitForAttributeValue(pageObj.commentObjectsbyID("ReplyBtn",commentId),"disabled","true");
+        if (!(pageObj.commentObjectsbyID("replyTextLbl",commentId).getAttribute("textContent").equals(keywordArr.get(4).toString().trim())))
+        {
+            errorMsg="Reply to comment "+keywordArr.get(3).toString()+" from user "+keywordArr.get(2).toString()+" not Posted.";
+            keywordResult = false;
+            return;
+        }
+        else errorMsg="Reply posted successfully";
+    }
 //======================
 // INTERNAL FUNCTIONS
 //======================
@@ -1216,7 +1270,41 @@ public class CommonFunctions {
         }
     }
 
+    public static boolean waitForAttributeValue(WebElement element, String propertyName,String propertyValue)
+    {
+        if (propertyValue.equals("false"))
+        {
+            if ((element.getAttribute(propertyName))==null)
+            {
+                return true;
+            }
+        }
+            while ((element.getAttribute(propertyName))==null)
+            {
+                if (element.getTagName().equals("a") && propertyName.equals("disabled")) {
+                    return true;
+                }
+            }
+        if (element.getAttribute(propertyName).equals(propertyValue))
+        {
+            return true;
+        }else return false;
+    }
 
+    public static String isAlertPresent(WebDriver driver)
+    {
+        try
+        {
+            Alert alert=driver.switchTo().alert();
+            String text= alert.getText();
+            alert.accept();
+            return text;
+        }
+        catch (NoAlertPresentException Ex)
+        {
+            return "false";
+        }
+    }
 }
 
 
