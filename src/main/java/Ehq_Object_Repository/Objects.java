@@ -50,7 +50,7 @@ public class Objects
 
         @FindBy(xpath = "html/body/div[2]/div[5]") public static WebElement loginErrorMsg;
 
-        @FindBy(className = "error_messages") public static WebElement projErrorMsg;
+        //@FindBy(className = "error_messages") public static WebElement projErrorMsg;
 
         @FindBy(xpath = ".//*[@id='project-listing_filter']/label/input") public static WebElement projSearchTB;
 
@@ -118,7 +118,7 @@ public class Objects
 
         @FindBy(id="blog_post_tag_list") public static WebElement newsPostCategoryTB;
 
-        @FindBy(css="div[class=error_messages]") public static WebElement newsPostErrorMsg;
+        @FindBy(css="div[class=error_messages]") public static WebElement validationErrMsg;
 
         @FindBy(id="forum_topic_name") public static WebElement forumNameTB;
 
@@ -212,6 +212,11 @@ public class Objects
         @FindBy(css = "input[id='project_publish_now']") public static WebElement publishProjNowRB;
 
         @FindBy(css = "a[class='publish_project']") public static WebElement projPublishLnk;
+
+        @FindBy(xpath=".//a[text()='Home']") public static WebElement homeLink;
+
+        @FindBy(xpath=".//a[text()='Dashboard']") public static WebElement participantDashbrdLnk;
+
 
 
  /*   public static WebElement logoutTab(String username)

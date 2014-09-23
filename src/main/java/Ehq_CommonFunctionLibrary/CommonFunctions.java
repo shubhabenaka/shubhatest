@@ -66,6 +66,12 @@ public class CommonFunctions {
                 return;
             }
             waitForPageLoad();
+            if (elementExists(pageObj.homeLink))
+            {
+                pageObj.participantLoutLbl.click();
+                pageObj.participantDashbrdLnk.click();
+                waitForPageLoad();
+            }
             if (!elementExists(pageObj.addProjBtn))     //Validate Add new project button
             {
                 waitForLoadProgress();   //Wait for Load Progress completion if it exists
@@ -155,9 +161,9 @@ public class CommonFunctions {
             {
                 pageObj.addProjBtn.click();     //Click on the Add Project button based on updation of permalink
                 waitForPageLoad();
-                if (CommonFunctions.elementExists(pageObj.projErrorMsg))        //Validate if no errors are thrown upon Add Project event
+                if (CommonFunctions.elementExists(pageObj.validationErrMsg))        //Validate if no errors are thrown upon Add Project event
                 {
-                    errorMsg = pageObj.projErrorMsg.getAttribute("textContent");
+                    errorMsg = pageObj.validationErrMsg.getAttribute("textContent");
                     return;
                 }
             } else
@@ -535,8 +541,8 @@ public class CommonFunctions {
                             pageObj.newsPostCategoryTB.sendKeys(keywordArr.get(7).toString().trim());
                         pageObj.projToolsCreateBtn.click();
                         waitForPageLoad();
-                        if (elementExists(pageObj.newsPostErrorMsg)) {
-                            errorMsg = pageObj.newsPostErrorMsg.getText();
+                        if (elementExists(pageObj.validationErrMsg)) {
+                            errorMsg = pageObj.validationErrMsg.getText();
                             return;
                         }
                         waitForPageLoad();
@@ -609,8 +615,8 @@ public class CommonFunctions {
                                 pageObj.forumTopicLinkTB.sendKeys(keywordArr.get(7).toString().trim());
                             pageObj.projToolsCreateBtn.click();
                             waitForPageLoad();
-                            if (elementExists(pageObj.newsPostErrorMsg)) {
-                                errorMsg = pageObj.newsPostErrorMsg.getText();
+                            if (elementExists(pageObj.validationErrMsg)) {
+                                errorMsg = pageObj.validationErrMsg.getText();
                                 return;
                             }
                             waitForPageLoad();
@@ -631,18 +637,39 @@ public class CommonFunctions {
                 if (!(keywordArr.get(2).toString().isEmpty()))
                     bannerDD.selectByVisibleText(keywordArr.get(2).toString().trim());
                 pageObj.newsLtrNextBtn.click();
-
                 waitForPageLoad();
+                if (elementExists(pageObj.validationErrMsg))
+                {
+                    errorMsg=pageObj.validationErrMsg.getText();
+                    return;
+                }
                 String winHandle = testDriver.getWindowHandle();
                 //testDriver.switchTo().frame(pageObj.redactorFrame(0));
                 pageObj.descTB(0).sendKeys("\n" + keywordArr.get(3).toString().trim());
                 testDriver.switchTo().window(winHandle);
                 pageObj.newsLtrNextBtn.click();
+                if (elementExists(pageObj.validationErrMsg))
+                {
+                    errorMsg=pageObj.validationErrMsg.getText();
+                    return;
+                }
                 waitForPageLoad();
                 if (pageObj.newsLtrMailPreviewLbl.getAttribute("textContent").contains(keywordArr.get(1).toString().trim())) {
                     pageObj.newsLtrTestEmailTA.sendKeys(keywordArr.get(4).toString().trim());
                     pageObj.newsLtrSendTestMailBtn.click();
+                    waitForPageLoad();
+                    if (elementExists(pageObj.validationErrMsg))
+                    {
+                        errorMsg=pageObj.validationErrMsg.getText();
+                        return;
+                    }
                     pageObj.newsLtrNextBtn.click();
+                    waitForPageLoad();
+                    if (elementExists(pageObj.validationErrMsg))
+                    {
+                        errorMsg=pageObj.validationErrMsg.getText();
+                        return;
+                    }
                 } else {
                     keywordResult = false;
                     return;
@@ -658,6 +685,11 @@ public class CommonFunctions {
                 }
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
+                if (elementExists(pageObj.validationErrMsg))
+                {
+                    errorMsg=pageObj.validationErrMsg.getText();
+                    return;
+                }
                 waitForElement(By.cssSelector("div[id=any]"));
                 // if (keywordArr.get(6).toString().trim().contains(","))
                 String[] filters = keywordArr.get(6).toString().trim().split(Character.toString((char) 44));
@@ -674,8 +706,26 @@ public class CommonFunctions {
                 }
                 pageObj.newsLtrNextBtn.click();
                 waitForPageLoad();
+                if (elementExists(pageObj.validationErrMsg))
+                {
+                    errorMsg=pageObj.validationErrMsg.getText();
+                    return;
+                }
                 if (elementExists(pageObj.signBttn)) pageObj.signBttn.click();
                 waitForPageLoad();
+                if (elementExists(pageObj.validationErrMsg))
+                {
+                    errorMsg=pageObj.validationErrMsg.getText();
+                    return;
+                }
+                else
+                {
+                    if (elementExists(pageObj.addCommentBtn))
+                    {
+                        errorMsg="Newsletter Sent!";
+                        return;
+                    }
+                }
             }
         }
     }
@@ -711,18 +761,31 @@ public class CommonFunctions {
                             ArrayList<String> tabs2 = new ArrayList(testDriver.getWindowHandles());
                             testDriver.switchTo().window(tabs2.get(2));
                             waitForElement(By.linkText("Home"));
-                            if (elementExists(pageObj.logoutMsg)) {
+                            if (elementExists(pageObj.logoutMsg))
+                            {
                                 if (pageObj.logoutMsg.getAttribute("textContent").contains("Your account was successfully confirmed. You are now signed in.")) {
+                                    errorMsg="Email Verified by User";
                                     testDriver.switchTo().window(tabs2.get(2)).close();
-                                } else keywordResult = false;
-                            } else keywordResult = false;
+                                } else
+                                {
+                                    errorMsg="User Email not verified.";
+                                    keywordResult = false;
+                                }
+                            } else
+                            {
+                                errorMsg="Email not verified for user";
+                                    keywordResult = false;
+                            }
                         }
                     }
                 } else {
                     if (!(pageObj.mailBodyLbl.getAttribute("textContent").contains(keywordArr.get(4).toString().trim())))
-                        keywordResult = false;
+                    {keywordResult = false;}
+                    else
+                    {errorMsg="Newsletter Verified"; return;}
                 }
             } else {
+                errorMsg="Email not received";
                 keywordResult = false;
                 return;
             }
@@ -1249,8 +1312,8 @@ public class CommonFunctions {
 
     public static void setProjParticipants(String str)
     {
-        String newsLtrPartProj="input[label='"+ str +"']";
-        testDriver.findElement(By.cssSelector(newsLtrPartProj)).click();
+        String newsLtrPartProj=".//input[@label[contains(.,'"+str+"')]]";
+        testDriver.findElement(By.xpath(newsLtrPartProj)).click();
     }
 
     public static boolean waitForVisibility(WebElement element)
