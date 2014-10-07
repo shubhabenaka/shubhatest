@@ -50,7 +50,7 @@ public class Objects
 
         @FindBy(xpath = "html/body/div[2]/div[5]") public static WebElement loginErrorMsg;
 
-        //@FindBy(className = "error_messages") public static WebElement projErrorMsg;
+        @FindBy(className = "error_messages") public static WebElement projErrorMsg;
 
         @FindBy(xpath = ".//*[@id='project-listing_filter']/label/input") public static WebElement projSearchTB;
 
@@ -217,6 +217,43 @@ public class Objects
 
         @FindBy(xpath=".//a[text()='Dashboard']") public static WebElement participantDashbrdLnk;
 
+    @FindBy(css = ".btn.btn-danger.js-close") public static WebElement qandaCloseBttn;
+
+    @FindBy(css = ".local[href*=qanda]") public static WebElement qandaTabBttn;
+
+    @FindBy(css = ".text.optional.control-label") public static WebElement qandaIntroLabel;
+
+    @FindBy(css = "#qanda_question_question") public static WebElement qandaCommentTA;
+
+    @FindBy(css = ".btn.btn-primary") public static WebElement qandaSubmitBttn;
+
+    @FindBy(css = ".alert") public static WebElement qandaStatusMsg;
+
+    @FindBy(xpath = "id('yield')/div[2]/div[2]/div[7]/div[1]/ul/li[2]/a") public static WebElement qandaDetailsTab;
+
+    @FindBy(css = "#qanda_name") public static WebElement qandaTitleTB;
+
+    @FindBy(css = ".btn.btn-primary.js-submit[value=Update]") public static WebElement qandaUpdateBttn;
+
+    @FindBy(css = "#qanda_allow_unverified_participation") public static WebElement qandaUnverifaccessCB;
+
+    @FindBy(css = "#qanda_archival_reason_message") public static WebElement qandaCloseMsgTB;
+
+    @FindBy(xpath = ".//*[@id='archive-form']/div[3]/div/input") public static WebElement qandaArchiveSubmitBttn;
+
+    @FindBy(xpath = ".//*[@id='yield']/div[2]/div[2]/div[5]/div/div/div/a") public static WebElement qandaReopenBttn;
+
+    @FindBy(css = ".alert.alert-info") public static WebElement qandaArchiveStatusMsg;
+
+    @FindBy(css = ".current span") public static WebElement qandaArchiveTab;
+
+    @FindBy(css=".unstyled.filters>li>a[href*=archived] span.badge-info") public static WebElement qandaArchiveTabCnt;
+
+    @FindBy(css = ".unstyled.filters>li>a[href*=newly]") public static WebElement qandaNewlyAddedTab;
+
+    @FindBy(css = ".unstyled.filters>li>a[href*=newly_added] span.badge-info") public static WebElement qandaNewlyAddedTabCnt;
+
+
 
 
  /*   public static WebElement logoutTab(String username)
@@ -343,6 +380,36 @@ public class Objects
         if (testDriver.findElements(By.linkText("Preview")).size()!=0)
         {
             for(WebElement link: testDriver.findElements(By.linkText("Publish")))
+            {
+                if (link.getAttribute("href").contains(hrefTxt))
+                {
+                    return link;
+                }
+            }
+        }
+        return null;
+    }
+
+    public WebElement archiveQuestion(String hrefTxt)
+    {
+        if (testDriver.findElements(By.linkText("Answer Privately")).size()!=0)
+        {
+            for(WebElement link: testDriver.findElements(By.linkText("Archive")))
+            {
+                if (link.getAttribute("href").contains(hrefTxt))
+                {
+                    return link;
+                }
+            }
+        }
+        return null;
+    }
+
+    public WebElement unarchiveQuestion(String hrefTxt)
+    {
+        if (testDriver.findElements(By.linkText("Junk")).size()!=0)
+        {
+            for(WebElement link: testDriver.findElements(By.linkText("Restore")))
             {
                 if (link.getAttribute("href").contains(hrefTxt))
                 {

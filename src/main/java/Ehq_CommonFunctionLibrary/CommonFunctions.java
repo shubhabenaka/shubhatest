@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
@@ -43,6 +44,7 @@ public class CommonFunctions {
     public static boolean keywordResult = true;     //A boolean value set by each keyword to indicate Success or Failure status. This is evaluated at the end of each keyword execution.
     public static Objects pageObj;                  //The Object Repository object/instance.
     public static String errorMsg = "";           //A global reference that can be set by each function to report error messages this also prevents reporting keyword failure if we were expecting it
+    public static String projPermlink;            //A global reference that has the AddProject permalink value
 
 
 
@@ -118,6 +120,7 @@ public class CommonFunctions {
 
     public static void Goto(ArrayList keywordArr) throws InterruptedException {
         if (keywordArr.size() >= 2) {
+            waitForLoadProgress();
             pageObj.getLink(keywordArr.get(1).toString().trim()).click();   //Click on the first Link matching the parsed text
             waitForPageLoad();  //Wait for page reload post clicking the link
         }
@@ -157,6 +160,8 @@ public class CommonFunctions {
             {
                 Thread.sleep(3000);
             }
+            projPermlink = pageObj.permalinkTB.getAttribute("value");
+
             if (pageObj.permalinkTB.getAttribute("value").contains(expPermlink))        //Verify is the Permalink is valid
             {
                 pageObj.addProjBtn.click();     //Click on the Add Project button based on updation of permalink
@@ -1002,7 +1007,8 @@ public class CommonFunctions {
         String regExp = "[^\\w\\s\\u2014]";
         String regExp2 = "[^\\w]|[\\_]";
         String expPermlink = ((keywordArr.get(1).toString().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
-        alternateUrl=siteUrl+"/"+expPermlink;
+        //alternateUrl=siteUrl+"/"+expPermlink;
+        alternateUrl=siteUrl+"/"+projPermlink;
         browserGrid();
         waitForPageLoad();
         alternateUrl="";
@@ -1066,6 +1072,329 @@ public class CommonFunctions {
         }
         else errorMsg="Reply posted successfully";
     }
+
+    public static void VerifyQandAadmin(ArrayList keywordArr) throws InterruptedException {
+
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+
+            String mainTab=testDriver.getWindowHandle();
+            testDriver.switchTo().window(mainTab);
+
+            if(elementExists(pageObj.qandaCloseBttn)) {
+                pageObj.getLink("Preview").click();
+                ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                testDriver.switchTo().window(tabs.get(1));
+                waitForElement(By.cssSelector(".local"));
+
+                if (elementExists(pageObj.qandaTabBttn)) {
+                    pageObj.qandaTabBttn.click();
+                    waitForPageLoad();
+                    pageObj.qandaIntroLabel.isDisplayed();
+                }
+                else {
+                    keywordResult = false;
+                }
+
+                testDriver.switchTo().window(tabs.get(1)).close();
+                testDriver.switchTo().window(tabs.get(0));
+            }
+        }
+    }
+
+    public static void AddQandAQuestions(ArrayList keywordArr) throws InterruptedException {
+        if (keywordArr.size() > 1) {
+            waitForElement(By.cssSelector(".local"));
+
+            if (elementExists(pageObj.qandaTabBttn)) {
+                pageObj.qandaTabBttn.click();
+                waitForVisibility(pageObj.qandaCommentTA);
+                pageObj.qandaCommentTA.sendKeys(keywordArr.get(1).toString().trim());
+
+                if(keywordArr.size() > 2){
+                    waitForVisibility(testDriver.findElement(By.cssSelector(".control-label.required>span")));
+                    pageObj.commentMailTB.sendKeys(keywordArr.get(2).toString().trim());
+                    pageObj.commentScreenNameTB.sendKeys(keywordArr.get(3).toString().trim());
+
+                }
+                pageObj.qandaSubmitBttn.click();
+                waitForPageLoad();
+                isAlertPresent();
+                String alertQuestion = pageObj.qandaStatusMsg.getText();
+                waitForVisibility(pageObj.qandaStatusMsg);
+
+                if (alertQuestion.equals("Your question has been submitted successfully.")) {
+                    return;
+                } else {
+                    keywordResult = false;
+                }
+            }
+        }
+    }
+
+    public static void UpdateQandA(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+
+            waitForVisibility(pageObj.qandaDetailsTab);
+            pageObj.qandaDetailsTab.click();
+            waitForPageLoad();
+            waitForVisibility(pageObj.qandaTitleTB);
+
+            pageObj.qandaTitleTB.clear();
+            pageObj.qandaTitleTB.sendKeys(keywordArr.get(1).toString().trim());
+            String currHandle = testDriver.getWindowHandle();
+
+            pageObj.descTB(1).sendKeys("\n" + keywordArr.get(2).toString().trim());
+            testDriver.switchTo().window(currHandle);
+
+            pageObj.descTB(2).sendKeys("\n" + keywordArr.get(3).toString().trim());
+            testDriver.switchTo().window(currHandle);
+
+            String unverifPartStatus;
+            try {
+                unverifPartStatus = pageObj.qandaUnverifaccessCB.getAttribute("checked");
+            } catch (NullPointerException e) {
+                unverifPartStatus = "false";
+            }
+
+            System.out.println(unverifPartStatus);
+            if((unverifPartStatus == null || unverifPartStatus.equals("false")))  {
+                if((keywordArr.get(4).toString().trim()).equals("True")){
+                    pageObj.qandaUnverifaccessCB.click();
+                    waitForPageLoad();
+                    waitForVisibility(pageObj.qandaUpdateBttn);
+                }
+            }else if(unverifPartStatus.equals("true")){
+                if((keywordArr.get(4).toString().trim()).equals("False")){
+                    pageObj.qandaUnverifaccessCB.click();
+                    waitForPageLoad();
+                    waitForVisibility(pageObj.qandaUpdateBttn);
+                }
+            }
+            pageObj.qandaUpdateBttn.click();
+            waitForPageLoad();
+
+            if (CommonFunctions.elementExists(pageObj.projErrorMsg))        //Validate if no errors are thrown upon Add Questions event
+            {
+                errorMsg = pageObj.projErrorMsg.getAttribute("textContent");
+                return;
+            }
+        }
+    }
+
+    public static void ArchiveQandA(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+            String mainTab = testDriver.getWindowHandle();
+
+            if(elementExists(pageObj.qandaCloseBttn)) {
+                pageObj.qandaCloseBttn.click();
+                waitForPageLoad();
+                waitForVisibility(pageObj.qandaCloseMsgTB);
+                pageObj.qandaCloseMsgTB.clear();
+                pageObj.qandaCloseMsgTB.sendKeys(keywordArr.get(1).toString().trim());
+                waitForPageLoad();
+                pageObj.qandaArchiveSubmitBttn.click();
+                waitForPageLoad();
+                waitForVisibility(pageObj.qandaReopenBttn);
+            }
+
+            //Verify Archive Qand A Tool
+
+            testDriver.switchTo().window(mainTab);
+            pageObj.getLink("Preview").click();
+            ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+
+            testDriver.switchTo().window(tabs.get(1));
+            waitForElement(By.cssSelector(".local"));
+
+            if (elementExists(pageObj.qandaTabBttn)) {
+                pageObj.qandaTabBttn.click();
+                waitForPageLoad();
+                if (pageObj.qandaArchiveStatusMsg.equals(keywordArr.get(1).toString().trim())) {
+                    //do nothing
+                }
+
+            } else {
+                keywordResult = false;
+            }
+
+            testDriver.switchTo().window(tabs.get(1)).close();
+            testDriver.switchTo().window(tabs.get(0));
+            waitForPageLoad();
+        }
+    }
+
+    public static void UnarchiveQandA(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+            String mainTab = testDriver.getWindowHandle();
+
+            if(elementExists(pageObj.qandaReopenBttn)) {
+                pageObj.qandaReopenBttn.click();
+                waitForPageLoad();
+                waitForVisibility(pageObj.qandaCloseBttn);
+                //Verify Unarchive tool
+                pageObj.getLink("Preview").click();
+                ArrayList<String> tabs = new ArrayList<String>(testDriver.getWindowHandles());
+                testDriver.switchTo().window(tabs.get(1));
+
+                if (elementExists(pageObj.qandaTabBttn)) {
+                    pageObj.qandaTabBttn.click();
+                    waitForPageLoad();
+                    waitForElement(By.cssSelector(".local"));
+                    pageObj.qandaCommentTA.isDisplayed();
+
+                } else {
+                    keywordResult = false;
+                }
+
+                testDriver.switchTo().window(tabs.get(1)).close();
+                testDriver.switchTo().window(tabs.get(0));
+                waitForPageLoad();
+            }
+        }
+    }
+
+    public static boolean isAlertPresent()
+    {
+        try
+        {
+            Alert alert = testDriver.switchTo().alert();
+            errorMsg = alert.getText();
+            return true;
+        }
+        catch (NoAlertPresentException Ex)
+        {
+            return false;
+        }
+    }
+
+    public static void ArchiveQuestions(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+            String beforeArchive = pageObj.qandaArchiveTabCnt.getText();
+            int i = Integer.parseInt(beforeArchive);
+
+            List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+            for(WebElement questionTextcount : allquestions ) {
+                String questiontext =  questionTextcount.getText();
+                if(questiontext.equals(keywordArr.get(1).toString().trim())){
+                    WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
+                    WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                    String linklocate = parent2.getAttribute("id");
+                    String[] arr = (linklocate.split(Character.toString((char) 45)));
+                    pageObj.archiveQuestion(arr[1]).click();
+                    Alert alert = testDriver.switchTo().alert();
+                    alert.accept();
+                    waitForPageLoad();
+                    String archivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+                    waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
+
+                    if(archivestatus.equals("Question archived successfully.")){
+                        //Do Nothing
+                    }
+
+                }
+            }
+
+            //Verify Archive questions
+
+            pageObj.qandaArchiveTab.click();
+            waitForPageLoad();
+            waitForVisibility(pageObj.qandaArchiveTabCnt);
+            String afterArchive = pageObj.qandaArchiveTabCnt.getText();
+            int j = Integer.parseInt(afterArchive);
+
+            if (j == i+1) {
+                pageObj.qandaArchiveTabCnt.click();
+                waitForPageLoad();
+                waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+
+                for(WebElement questionTextcount : allquestions ) {
+                    String questiontext =  questionTextcount.getText();
+                    if(questiontext.equals(keywordArr.get(1).toString().trim())){
+                        //Do nothing
+                    }
+                }
+
+            } else {
+                keywordResult = false;
+            }
+        }
+    }
+
+    public static void UnarchiveQuestions(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+            String beforeUnarchive = pageObj.qandaNewlyAddedTabCnt.getText();
+            int i = Integer.parseInt(beforeUnarchive);
+
+            pageObj.qandaArchiveTabCnt.click();
+            waitForPageLoad();
+
+            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+            List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+            for(WebElement questionTextcount : allquestions ) {
+                String questiontext =  questionTextcount.getText();
+                if(questiontext.equals(keywordArr.get(1).toString().trim())){
+                    WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
+                    WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                    String linklocate = parent2.getAttribute("id");
+                    String[] arr = (linklocate.split(Character.toString((char) 45)));
+                    pageObj.unarchiveQuestion(arr[1]).click();
+                    Alert alert = testDriver.switchTo().alert();
+                    alert.accept();
+                    waitForPageLoad();
+                    String unarchivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+                    waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
+
+                    if(unarchivestatus.equals("Question restored successfully.")){
+                        //Do Nothing
+                    }
+
+                }
+            }
+
+            //Verify Archive questions
+
+            pageObj.qandaNewlyAddedTab.click();
+            waitForPageLoad();
+            waitForVisibility(pageObj.qandaNewlyAddedTabCnt);
+            String afterUnarchive = pageObj.qandaArchiveTabCnt.getText();
+            int j = Integer.parseInt(afterUnarchive);
+
+            if (j == i+1) {
+                pageObj.qandaNewlyAddedTab.click();
+                waitForPageLoad();
+                waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+
+                for(WebElement questionTextcount : allquestions ) {
+                    String questiontext =  questionTextcount.getText();
+                    if(questiontext.equals(keywordArr.get(1).toString().trim())){
+                        //Do nothing
+                    }
+                }
+
+            } else {
+                keywordResult = false;
+            }
+        }
+    }
+
 //======================
 // INTERNAL FUNCTIONS
 //======================
