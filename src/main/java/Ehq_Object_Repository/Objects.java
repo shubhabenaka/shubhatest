@@ -253,6 +253,15 @@ public class Objects
 
     @FindBy(css = ".unstyled.filters>li>a[href*=newly_added] span.badge-info") public static WebElement qandaNewlyAddedTabCnt;
 
+    @FindBy(css = ".unstyled.filters>li>a[href*=privately] span.badge-info") public static WebElement qandaAnswerPrivatelyTabCnt;
+
+    @FindBy(css = ".unstyled.filters>li>a[href*=publicly] span.badge-info") public static WebElement qandaAnswerPubliclyTabCnt;
+
+    @FindBy(css = ".unstyled.filters>li>a[href*=privately]") public static WebElement qandaAnswerPrivatelyTab;
+
+    @FindBy(css = ".unstyled.filters>li>a[href*=publicly]") public static WebElement qandaAnswerPubliclyTab;
+
+    @FindBy(xpath = "id('edit_question')/div[2]/div/input") public static WebElement qandaAnswerSubmitBttn;
 
 
 
@@ -423,7 +432,7 @@ public class Objects
     public WebElement descTB(int index)
     {
         //public static WebElement descTB;
-        if (CommonFunctions.browser.equals("chrome"))
+        if (CommonFunctions.browser.equals("chrome")||CommonFunctions.browser.equals("internet explorer"))
         {
           //testDriver.switchTo().parentFrame();
           testDriver.findElements(By.xpath(".//iframe")).get(index).click();
