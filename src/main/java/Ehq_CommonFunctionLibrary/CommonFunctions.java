@@ -1,6 +1,7 @@
 package Ehq_CommonFunctionLibrary;
 
 import Ehq_Object_Repository.Objects;
+import com.sun.istack.internal.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
@@ -46,6 +48,7 @@ public class CommonFunctions {
     public static String errorMsg = "";           //A global reference that can be set by each function to report error messages this also prevents reporting keyword failure if we were expecting it
     public static String projPermlink;            //A global reference that has the AddProject permalink value
     public static boolean result;           //The visibility object for qanda Question text
+    public static String thankuMsg;
 
 
 
@@ -1009,8 +1012,8 @@ public class CommonFunctions {
         String regExp = "[^\\w\\s\\u2014]";
         String regExp2 = "[^\\w]|[\\_]";
         String expPermlink = ((keywordArr.get(1).toString().replaceAll(regExp, "")).replaceAll(regExp2, "-").toLowerCase());
-        //alternateUrl=siteUrl+"/"+expPermlink;
-        alternateUrl=siteUrl+"/"+projPermlink;
+        alternateUrl=siteUrl+"/"+expPermlink;
+        //alternateUrl=siteUrl+"/"+projPermlink;
         browserGrid();
         waitForPageLoad();
         alternateUrl="";
@@ -1123,12 +1126,13 @@ public class CommonFunctions {
                 }
                 pageObj.qandaSubmitBttn.click();
                 waitForPageLoad();
+
                 isAlertPresent(testDriver);
                 String alertQuestion = pageObj.qandaStatusMsg.getText();
                 waitForVisibility(pageObj.qandaStatusMsg);
 
-                if (alertQuestion.equals("Your question has been submitted successfully.")) {
-                    return;
+                if (alertQuestion.equals("Your question has been submitted successfully.")||(alertQuestion.equals(thankuMsg))) {
+                     return;
                 } else {
                     keywordResult = false;
                 }
@@ -1154,6 +1158,7 @@ public class CommonFunctions {
             pageObj.descTB(1).sendKeys("\n" + keywordArr.get(2).toString().trim());
             testDriver.switchTo().window(currHandle);
 
+            thankuMsg = keywordArr.get(3).toString().trim();
             pageObj.descTB(2).sendKeys("\n" + keywordArr.get(3).toString().trim());
             testDriver.switchTo().window(currHandle);
 
@@ -1276,55 +1281,51 @@ public class CommonFunctions {
             int i = Integer.parseInt(beforeArchive);
 
             List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
-            for (WebElement questionTextcount : allquestions) {
-                    String questiontext = questionTextcount.getText();
-                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
-                        WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
-                        WebElement parent2 = parent.findElement(By.xpath("parent::*"));
-                        String linklocate = parent2.getAttribute("id");
-                        String[] arr = (linklocate.split(Character.toString((char) 45)));
-                        pageObj.archiveQuestion(arr[1]).click();
-                        Alert alert = testDriver.switchTo().alert();
-                        alert.accept();
-                        waitForPageLoad();
-                        waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
-                        String archivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+            //int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+            for (int p =0; p <= allquestions.size(); p++) {
+                 String questionTextcount = String.format(".lead",allquestions.get(p));
+                //waitForVisibility(allquestions.get(p));
+                WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
+                //WebElement questiontext = allquestions.get(p);
+                String text = String.valueOf(questiontext.getText().codePointAt(p));
 
-                        if (archivestatus.equals("Question archived successfully.")) {
-                            //Do Nothing
-                        }
+                if (text.equals(keywordArr.get(1).toString().trim())) {
+                    WebElement parent = questiontext.findElement(By.xpath("parent::*"));
+                    WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                    String linklocate = parent2.getAttribute("id");
+                    String[] arr = (linklocate.split(Character.toString((char) 45)));
+                    pageObj.archiveQuestion(arr[1]).click();
+                    Alert alert = testDriver.switchTo().alert();
+                    alert.accept();
+                    waitForPageLoad();
+                    waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
+                    String archivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
 
-                        //Verify Archive questions
-
-                        pageObj.qandaArchiveTab.click();
-                        waitForPageLoad();
-                        waitForVisibility(pageObj.qandaArchiveTabCnt);
-                        String afterArchive = pageObj.qandaArchiveTabCnt.getText();
-                        int j = Integer.parseInt(afterArchive);
-
-                        if (j == i + 1) {
-                            pageObj.qandaArchiveTabCnt.click();
-                            waitForPageLoad();
-                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-
-
-                            if (questiontext.equals(keywordArr.get(1).toString().trim())) {
-                                //Do nothing
-                            }
-                        }
-                    } else{
-                        try {
-                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-
-                        }catch (StaleElementReferenceException e){
-                            return;
-                        }
+                    if (archivestatus.equals("Question archived successfully.")) {
+                        //Do Nothing
                     }
-
-            }
-        } else {
-                    keywordResult = false;
                 }
+            }  //Verify Archive questions
+               waitForVisibility(pageObj.qandaArchiveTabCnt);
+               String afterArchive = pageObj.qandaArchiveTabCnt.getText();
+               int j = Integer.parseInt(afterArchive);
+
+               if (j == i + 1) {
+                   pageObj.qandaArchiveTabCnt.click();
+                   waitForPageLoad();
+                   waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                   List<WebElement> verifyarchivedques = testDriver.findElements(By.cssSelector(".lead"));
+                   for (WebElement questionTextcount : verifyarchivedques) {
+                       String questiontext = questionTextcount.getText();
+                       if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                           //Do nothing
+                       }
+                   }
+               }
+    }else {
+            keywordResult = false;
+        }
+
 
     }
 
@@ -1336,116 +1337,172 @@ public class CommonFunctions {
             String beforeUnarchive = pageObj.qandaNewlyAddedTabCnt.getText();
             int i = Integer.parseInt(beforeUnarchive);
 
-            pageObj.qandaArchiveTabCnt.click();
-            waitForPageLoad();
-
-            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-            List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
-            for(WebElement questionTextcount : allquestions ) {
-                String questiontext =  questionTextcount.getText();
-                if(questiontext.equals(keywordArr.get(1).toString().trim())){
-                    WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
-                    WebElement parent2 = parent.findElement(By.xpath("parent::*"));
-                    String linklocate = parent2.getAttribute("id");
-                    String[] arr = (linklocate.split(Character.toString((char) 45)));
-                    pageObj.unarchiveQuestion(arr[1]).click();
-                    Alert alert = testDriver.switchTo().alert();
-                    alert.accept();
-                    waitForPageLoad();
-                    waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
-                    String unarchivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
-
-                    if(unarchivestatus.equals("Question restored successfully.")){
-                        //Do Nothing
-                    }
-                //Verify Unarchive questions
-
-                pageObj.qandaNewlyAddedTab.click();
+            if (i > 0) {
+                pageObj.qandaArchiveTabCnt.click();
                 waitForPageLoad();
-                waitForVisibility(pageObj.qandaNewlyAddedTabCnt);
-                String afterUnarchive = pageObj.qandaArchiveTabCnt.getText();
-                int j = Integer.parseInt(afterUnarchive);
 
-                if (j == i+1) {
-                    pageObj.qandaNewlyAddedTab.click();
-                    waitForPageLoad();
-                    waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-                    if(questiontext.equals(keywordArr.get(1).toString().trim())){
-                        //Do nothing
+                waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                //List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+                int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+                for (int p = 0; p <= allquestions; p++) {
+                    String questionTextcount = String.format(".lead", p);
+                    WebElement questionElement = testDriver.findElement(By.cssSelector(questionTextcount));
+                    String questiontext = questionElement.getText();
+
+                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                        WebElement parent = questionElement.findElement(By.xpath("parent::*"));
+                        WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                        String linklocate = parent2.getAttribute("id");
+                        String[] arr = (linklocate.split(Character.toString((char) 45)));
+                        pageObj.unarchiveQuestion(arr[1]).click();
+                        Alert alert = testDriver.switchTo().alert();
+                        alert.accept();
+                        waitForPageLoad();
+                        waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
+                        String unarchivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+
+                        if (unarchivestatus.equals("Question restored successfully.")) {
+                            //Do Nothing
+                        }
+                        //Verify Unarchive questions
+
+                        pageObj.qandaNewlyAddedTab.click();
+                        waitForPageLoad();
+                        waitForVisibility(pageObj.qandaNewlyAddedTabCnt);
+                        String afterUnarchive = pageObj.qandaArchiveTabCnt.getText();
+                        int j = Integer.parseInt(afterUnarchive);
+
+                        if (j == i + 1) {
+                            pageObj.qandaNewlyAddedTab.click();
+                            waitForPageLoad();
+                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                            if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                                //Do nothing
+                            }
+                        }
+
                     }
                 }
-
-            }else{
-                    try {
-                        waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-
-                    }catch (StaleElementReferenceException e){
-                        return;
-                    }
-                }
-
-        }
+            }
         }else {
             keywordResult = false;
         }
-    }
+}
 
     public static void JunkQuestions(ArrayList keywordArr) throws InterruptedException{
         if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
             WebElement mngLnk = pageObj.manageLink("qanda");
             mngLnk.click();
             waitForPageLoad();
-            String beforeUnarchive = pageObj.qandaNewlyAddedTabCnt.getText();
-            int i = Integer.parseInt(beforeUnarchive);
+            String aarchiveCnt = pageObj.qandaArchiveTabCnt.getText();
+            int i = Integer.parseInt(aarchiveCnt);
 
-            pageObj.qandaArchiveTabCnt.click();
-            waitForPageLoad();
+            if(i > 0) {
+                pageObj.qandaArchiveTabCnt.click();
+                waitForPageLoad();
 
-            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-            List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
-            for(WebElement questionTextcount : allquestions ) {
-                String questiontext =  questionTextcount.getText();
-                if(questiontext.equals(keywordArr.get(1).toString().trim())){
-                    WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
-                    WebElement parent2 = parent.findElement(By.xpath("parent::*"));
-                    String linklocate = parent2.getAttribute("id");
-                    String[] arr = (linklocate.split(Character.toString((char) 45)));
-                    pageObj.unarchiveQuestion(arr[1]).click();
-                    Alert alert = testDriver.switchTo().alert();
-                    alert.accept();
-                    waitForPageLoad();
-                    waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
-                    String unarchivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+                waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                //List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+                int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+                for (int p =0; p <= allquestions; p++) {
+                    String questionTextcount = String.format(".lead",p);
+                    WebElement questionElement = testDriver.findElement(By.cssSelector(questionTextcount));
+                    String questiontext = questionElement.getText();
 
-                    if(unarchivestatus.equals("Question restored successfully.")){
-                        //Do Nothing
-                    }
-                    //Verify Unarchive questions
-
-                    pageObj.qandaNewlyAddedTab.click();
-                    waitForPageLoad();
-                    waitForVisibility(pageObj.qandaNewlyAddedTabCnt);
-                    String afterUnarchive = pageObj.qandaArchiveTabCnt.getText();
-                    int j = Integer.parseInt(afterUnarchive);
-
-                    if (j == i+1) {
-                        pageObj.qandaNewlyAddedTab.click();
+                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                        WebElement parent = questionElement.findElement(By.xpath("parent::*"));
+                        WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                        String linklocate = parent2.getAttribute("id");
+                        String[] arr = (linklocate.split(Character.toString((char) 45)));
+                        pageObj.junkQuestion(arr[1]).click();
+                        Alert alert = testDriver.switchTo().alert();
+                        alert.accept();
                         waitForPageLoad();
-                        waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-                        if(questiontext.equals(keywordArr.get(1).toString().trim())){
-                            //Do nothing
+                        waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
+                        String Junkstatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+
+                        if (Junkstatus.equals("Question moved to trash successfully.")) {
+                            //Do Nothing
                         }
-                    }
+                        //Verify Junk questions
 
-                }else{
-                    try {
-                        waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                        pageObj.qandaJunkTab.click();
+                        waitForPageLoad();
+                        waitForVisibility(pageObj.qandaJunkTabCnt);
+                        String afterUnarchive = pageObj.qandaJunkTabCnt.getText();
+                        int j = Integer.parseInt(afterUnarchive);
 
-                    }catch (StaleElementReferenceException e){
-                        return;
+                        if (j == i + 1) {
+                            pageObj.qandaJunkTab.click();
+                            waitForPageLoad();
+                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                            if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                                //Do nothing
+                            }
+                        }
+
+
                     }
                 }
+            }
+        }else {
+            keywordResult = false;
+        }
+    }
 
+    public static void RestoreJunkQuestions(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+            String junkCnt = pageObj.qandaJunkTabCnt.getText();
+            int i = Integer.parseInt(junkCnt);
+            if(i > 0) {
+                pageObj.qandaJunkTabCnt.click();
+                waitForPageLoad();
+
+                waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                //List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+                int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+                for (int p =1; p <= allquestions; p++) {
+                    String questionTextcount = String.format(".lead",p);
+                    WebElement questionElement = testDriver.findElement(By.cssSelector(questionTextcount));
+                    String questiontext = questionElement.getText();
+
+                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                        WebElement parent = questionElement.findElement(By.xpath("parent::*"));
+                        WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                        String linklocate = parent2.getAttribute("id");
+                        String[] arr = (linklocate.split(Character.toString((char) 45)));
+                        pageObj.RestoreJunkQuestion(arr[1]).click();
+                        Alert alert = testDriver.switchTo().alert();
+                        alert.accept();
+                        waitForPageLoad();
+                        waitForVisibility(testDriver.findElement(By.cssSelector("#notification>a")));
+                        String unarchivestatus = testDriver.findElement(By.cssSelector("#notification>a")).getText();
+
+                        if (unarchivestatus.equals("Question restored successfully.")) {
+                            //Do Nothing
+                        }
+                        //Verify Restore Junk questions
+
+                        pageObj.qandaArchiveTab.click();
+                        waitForPageLoad();
+                        waitForVisibility(pageObj.qandaArchiveTabCnt);
+                        String afterArchive = pageObj.qandaArchiveTabCnt.getText();
+                        int j = Integer.parseInt(afterArchive);
+
+                        if (j == i + 1) {
+                            pageObj.qandaArchiveTabCnt.click();
+                            waitForPageLoad();
+                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
+                            if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                                //Do nothing
+                            }
+                        }
+
+                    }
+                }
             }
         }else {
             keywordResult = false;
@@ -1462,11 +1519,15 @@ public class CommonFunctions {
             String currHandle = testDriver.getWindowHandle();
 
             if(elementExists(pageObj.qandaNewlyAddedTab)) {
-                List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
-                for (WebElement questionTextcount : allquestions) {
-                    String questiontext = questionTextcount.getText();
+                //List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+                int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+                for (int p =1; p <= allquestions; p++) {
+                    String questionTextcount = String.format(".lead",p);
+                    WebElement questionElement = testDriver.findElement(By.cssSelector(questionTextcount));
+                    String questiontext = questionElement.getText();
+
                     if (questiontext.equals(keywordArr.get(1).toString().trim())) {
-                        WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
+                        WebElement parent = questionElement.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
                         String answerprivateLink = "#" + linklocate + ">div:nth-child(1) div.pull-left a[class*=answer-privately]";
@@ -1509,15 +1570,7 @@ public class CommonFunctions {
                                 //Do nothing
                             }
                         }
-                    } else {
-                        try {
-                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-
-                        } catch (StaleElementReferenceException e) {
-                            return;
-                        }
                     }
-
                 }
             }
         } else {
@@ -1536,14 +1589,18 @@ public class CommonFunctions {
             String currHandle = testDriver.getWindowHandle();
 
             if(elementExists(pageObj.qandaNewlyAddedTab)) {
-                List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
-                for (WebElement questionTextcount : allquestions) {
-                    String questiontext = questionTextcount.getText();
+                //List<WebElement> allquestions = testDriver.findElements(By.cssSelector(".lead"));
+                int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+                for (int p =1; p <= allquestions; p++) {
+                    String questionTextcount = String.format(".lead",p);
+                    WebElement questionElement = testDriver.findElement(By.cssSelector(questionTextcount));
+                    String questiontext = questionElement.getText();
+
                     if (questiontext.equals(keywordArr.get(1).toString().trim())) {
-                        WebElement parent = questionTextcount.findElement(By.xpath("parent::*"));
+                        WebElement parent = questionElement.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
-                        String answerpublicLink = "#" + linklocate + ">div:nth-child(1) div.pull-left a[class*=answer-publicly]";
+                        String answerpublicLink = "#" + linklocate + " div:nth-child(1) div.pull-left a[class*=answer-publicly]";
                         testDriver.findElement(By.cssSelector(answerpublicLink)).click();
                         waitForPageLoad();
                         List<WebElement> desc = testDriver.findElements(By.cssSelector(".redactor_box"));
@@ -1585,15 +1642,7 @@ public class CommonFunctions {
                                 //Do nothing
                             }
                         }
-                    } else {
-                        try {
-                            waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
-
-                        } catch (StaleElementReferenceException e) {
-                            return;
-                        }
                     }
-
                 }
             }
         } else {

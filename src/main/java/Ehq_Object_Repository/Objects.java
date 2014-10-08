@@ -263,6 +263,9 @@ public class Objects
 
     @FindBy(xpath = "id('edit_question')/div[2]/div/input") public static WebElement qandaAnswerSubmitBttn;
 
+    @FindBy(css = ".unstyled.filters>li>a[href*=junk]") public static WebElement qandaJunkTab;
+
+    @FindBy(css = ".unstyled.filters>li>a[href*=junk] span.badge-info") public static WebElement qandaJunkTabCnt;
 
 
  /*   public static WebElement logoutTab(String username)
@@ -419,6 +422,36 @@ public class Objects
         if (testDriver.findElements(By.linkText("Junk")).size()!=0)
         {
             for(WebElement link: testDriver.findElements(By.linkText("Restore")))
+            {
+                if (link.getAttribute("href").contains(hrefTxt))
+                {
+                    return link;
+                }
+            }
+        }
+        return null;
+    }
+
+    public WebElement RestoreJunkQuestion(String hrefTxt)
+    {
+        if (testDriver.findElements(By.linkText("Delete")).size()!=0)
+        {
+            for(WebElement link: testDriver.findElements(By.linkText("Restore")))
+            {
+                if (link.getAttribute("href").contains(hrefTxt))
+                {
+                    return link;
+                }
+            }
+        }
+        return null;
+    }
+
+    public WebElement junkQuestion(String hrefTxt)
+    {
+        if (testDriver.findElements(By.linkText("Restore")).size()!=0)
+        {
+            for(WebElement link: testDriver.findElements(By.linkText("Junk")))
             {
                 if (link.getAttribute("href").contains(hrefTxt))
                 {
