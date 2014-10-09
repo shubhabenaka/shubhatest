@@ -1229,13 +1229,13 @@ public class CommonFunctions {
                     //do nothing
                 }
 
-            } else {
-                keywordResult = false;
             }
 
             testDriver.switchTo().window(tabs.get(1)).close();
             testDriver.switchTo().window(tabs.get(0));
             waitForPageLoad();
+        } else {
+        keywordResult = false;
         }
     }
 
@@ -1294,9 +1294,7 @@ public class CommonFunctions {
                     String linklocate = parent2.getAttribute("id");
                     String[] arr = (linklocate.split(Character.toString((char) 45)));
                     pageObj.archiveQuestion(arr[1]).click();
-                    Thread.sleep(1000);
-                    Alert alert = testDriver.switchTo().alert();
-                    alert.accept();
+                    testDriver.switchTo().alert().accept();
                     waitForPageLoad();
                     waitForVisibility(pageObj.qandaAdminStatusMsg);
                     String archivestatus = pageObj.qandaAdminStatusMsg.getText();
@@ -1334,7 +1332,7 @@ public class CommonFunctions {
             WebElement mngLnk = pageObj.manageLink("qanda");
             mngLnk.click();
             waitForPageLoad();
-            String beforeUnarchive = pageObj.qandaNewlyAddedTabCnt.getText();
+            String beforeUnarchive = pageObj.qandaArchiveTabCnt.getText();
             int i = Integer.parseInt(beforeUnarchive);
 
             if (i > 0) {
@@ -1344,19 +1342,18 @@ public class CommonFunctions {
                 waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
                 List<WebElement> allquestions = testDriver.findElements(By.cssSelector("ul.listing.projects.qa-listing.unstyled>li"));
                 //int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
-                for (int p=1;p < allquestions.size();p++) {
-                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p);
+                for (int p=0;p < allquestions.size();p++) {
+                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p+1);
                     WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
                     String text = questiontext.getText();
 
-                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                    if (text.equals(keywordArr.get(1).toString().trim())) {
                         WebElement parent = questiontext.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
                         String[] arr = (linklocate.split(Character.toString((char) 45)));
                         pageObj.unarchiveQuestion(arr[1]).click();
-                        Alert alert = testDriver.switchTo().alert();
-                        alert.accept();
+                        testDriver.switchTo().alert().accept();
                         waitForPageLoad();
                         waitForVisibility(pageObj.qandaAdminStatusMsg);
                         String unarchivestatus = pageObj.qandaAdminStatusMsg.getText();
@@ -1413,14 +1410,13 @@ public class CommonFunctions {
                     WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
                     String text = questiontext.getText();
 
-                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                    if (text.equals(keywordArr.get(1).toString().trim())) {
                         WebElement parent = questiontext.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
                         String[] arr = (linklocate.split(Character.toString((char) 45)));
                         pageObj.junkQuestion(arr[1]).click();
-                        Alert alert = testDriver.switchTo().alert();
-                        alert.accept();
+                        testDriver.switchTo().alert().accept();
                         waitForPageLoad();
                         waitForVisibility(pageObj.qandaAdminStatusMsg);
                         String Junkstatus = pageObj.qandaAdminStatusMsg.getText();
@@ -1435,10 +1431,10 @@ public class CommonFunctions {
                         pageObj.qandaJunkTab.click();
                         waitForPageLoad();
                         waitForVisibility(pageObj.qandaJunkTabCnt);
-                        String afterUnarchive = pageObj.qandaJunkTabCnt.getText();
-                        int j = Integer.parseInt(afterUnarchive);
+                        String junkcnt = pageObj.qandaJunkTabCnt.getText();
+                        int j = Integer.parseInt(junkcnt);
 
-                        if (j == i + 1) {
+                        if (j >0) {
                             pageObj.qandaJunkTab.click();
                             waitForPageLoad();
                             waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
@@ -1471,19 +1467,18 @@ public class CommonFunctions {
                 waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
                 List<WebElement> allquestions = testDriver.findElements(By.cssSelector("ul.listing.projects.qa-listing.unstyled>li"));
                 //int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
-                for (int p=1;p < allquestions.size();p++) {
-                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p);
+                for (int p=0;p < allquestions.size();p++) {
+                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p+1);
                     WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
                     String text = questiontext.getText();
 
-                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                    if (text.equals(keywordArr.get(1).toString().trim())) {
                         WebElement parent = questiontext.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
                         String[] arr = (linklocate.split(Character.toString((char) 45)));
                         pageObj.RestoreJunkQuestion(arr[1]).click();
-                        Alert alert = testDriver.switchTo().alert();
-                        alert.accept();
+                        testDriver.switchTo().alert().accept();
                         waitForPageLoad();
                         waitForVisibility(pageObj.qandaAdminStatusMsg);
                         String unarchivestatus = pageObj.qandaAdminStatusMsg.getText();
@@ -1532,20 +1527,22 @@ public class CommonFunctions {
             if(elementExists(pageObj.qandaNewlyAddedTab)) {
                 List<WebElement> allquestions = testDriver.findElements(By.cssSelector("ul.listing.projects.qa-listing.unstyled>li"));
                 //int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
-                for (int p=1;p < allquestions.size();p++) {
-                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p);
+                for (int p=0;p < allquestions.size();p++) {
+                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p+1);
                     WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
                     String text = questiontext.getText();
 
-                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                    if (text.equals(keywordArr.get(1).toString().trim())) {
                         WebElement parent = questiontext.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         linklocate = parent2.getAttribute("id");
                         String answerprivateLink = "#" + linklocate + ">div:nth-child(1) div.pull-left a[class*=answer-privately]";
                         testDriver.findElement(By.cssSelector(answerprivateLink)).click();
                         waitForPageLoad();
-                        //waitForVisibility(pageObj.descTB(4));
-                        pageObj.descTB(4).sendKeys("\n" + keywordArr.get(2).toString().trim());
+                        List<WebElement> desc = testDriver.findElements(By.cssSelector(".redactor_box"));
+                        System.out.println(desc);
+                        String privateDesc = "#"+linklocate+" .redactor_box textarea[id*=private]";
+                        testDriver.findElement(By.cssSelector(privateDesc)).sendKeys("\n" + keywordArr.get(2).toString().trim());
                         testDriver.switchTo().window(currHandle);
                         String submitBttn = "#" + linklocate + " #edit_question.js-private-answer-form>div:nth-child(3) input";
                         testDriver.findElement(By.cssSelector(submitBttn)).click();
@@ -1564,7 +1561,6 @@ public class CommonFunctions {
                         }
                     }
                 }
-
                         //Verify Privately answered questions
 
                         pageObj.qandaAnswerPrivatelyTab.click();
@@ -1598,29 +1594,29 @@ public class CommonFunctions {
             WebElement mngLnk = pageObj.manageLink("qanda");
             mngLnk.click();
             waitForPageLoad();
-            String beforeAnsPrivate = pageObj.qandaAnswerPrivatelyTabCnt.getText();
-            int i = Integer.parseInt(beforeAnsPrivate);
+            String beforeAnsPublic = pageObj.qandaAnswerPubliclyTabCnt.getText();
+            int i = Integer.parseInt(beforeAnsPublic);
             String currHandle = testDriver.getWindowHandle();
 
             if(elementExists(pageObj.qandaNewlyAddedTab)) {
                 List<WebElement> allquestions = testDriver.findElements(By.cssSelector("ul.listing.projects.qa-listing.unstyled>li"));
                 //int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
-                for (int p=1;p < allquestions.size();p++) {
-                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p);
+                for (int p=0;p < allquestions.size();p++) {
+                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p+1);
                     WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
                     String text = questiontext.getText();
 
-                    if (questiontext.equals(keywordArr.get(1).toString().trim())) {
+                    if (text.equals(keywordArr.get(1).toString().trim())) {
                         WebElement parent = questiontext.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
-                        String answerpublicLink = "#" + linklocate + " div:nth-child(1) div.pull-left a[class*=answer-publicly]";
+                        String answerpublicLink = "#"+linklocate+">div:nth-child(1) div.pull-left a[class*=answer-publicly]";
                         testDriver.findElement(By.cssSelector(answerpublicLink)).click();
                         waitForPageLoad();
                         List<WebElement> desc = testDriver.findElements(By.cssSelector(".redactor_box"));
                         System.out.println(desc);
-                        //waitForVisibility(pageObj.descTB(4));
-                        pageObj.descTB(1).sendKeys("\n" + keywordArr.get(2).toString().trim());
+                        String publicDesc = "#"+linklocate+" .redactor_box textarea[id*=public]";
+                        testDriver.findElement(By.cssSelector(publicDesc)).sendKeys(keywordArr.get(2).toString().trim());
                         testDriver.switchTo().window(currHandle);
                         String submitBttn = "#" + linklocate + " #edit_question.js-public-answer-form>div:nth-child(3) input";
                         testDriver.findElement(By.cssSelector(submitBttn)).click();
@@ -1632,9 +1628,9 @@ public class CommonFunctions {
                         }
 
                         waitForVisibility(pageObj.qandaAdminStatusMsg);
-                        String ansPrivateStatus = pageObj.qandaAdminStatusMsg.getText();
+                        String ansPublicStatus = pageObj.qandaAdminStatusMsg.getText();
 
-                        if (ansPrivateStatus.equals("Public answer sent successfully.")) {
+                        if (ansPublicStatus.equals("Public answer sent successfully.")) {
                             //Do Nothing
                         }
                     }
@@ -1645,10 +1641,10 @@ public class CommonFunctions {
                 pageObj.qandaAnswerPubliclyTab.click();
                 waitForPageLoad();
                 waitForVisibility(pageObj.qandaAnswerPubliclyTabCnt);
-                String afterAnsprivate = pageObj.qandaAnswerPubliclyTabCnt.getText();
-                int j = Integer.parseInt(afterAnsprivate);
+                String afterAnspublic = pageObj.qandaAnswerPubliclyTabCnt.getText();
+                int j = Integer.parseInt(afterAnspublic);
 
-                if (j == i + 1) {
+                if (j == i+1) {
                     pageObj.qandaAnswerPubliclyTabCnt.click();
                     waitForPageLoad();
 
@@ -1682,6 +1678,9 @@ public class CommonFunctions {
                         }
                     }
                 }
+                testDriver.switchTo().window(tabs.get(1)).close();
+                testDriver.switchTo().window(tabs.get(0));
+                waitForPageLoad();
             }
         } else {
             keywordResult = false;
@@ -1981,8 +1980,8 @@ public class CommonFunctions {
     {
         try
         {
-            Alert alert=driver.switchTo().alert();
-            String text= alert.getText();
+            Alert alert = driver.switchTo().alert();
+            String text = alert.getText();
             alert.accept();
             return text;
         }
