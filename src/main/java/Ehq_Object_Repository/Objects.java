@@ -267,6 +267,8 @@ public class Objects
 
     @FindBy(css = ".unstyled.filters>li>a[href*=junk] span.badge-info") public static WebElement qandaJunkTabCnt;
 
+    @FindBy(xpath = "id('notification')") public static WebElement qandaAdminStatusMsg;
+
 
  /*   public static WebElement logoutTab(String username)
     {
