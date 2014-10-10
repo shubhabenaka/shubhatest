@@ -1539,10 +1539,12 @@ public class CommonFunctions {
                         String answerprivateLink = "#" + linklocate + ">div:nth-child(1) div.pull-left a[class*=answer-privately]";
                         testDriver.findElement(By.cssSelector(answerprivateLink)).click();
                         waitForPageLoad();
-                        List<WebElement> desc = testDriver.findElements(By.cssSelector(".redactor_box"));
-                        System.out.println(desc);
-                        String privateDesc = "#"+linklocate+" .redactor_box textarea[id*=private]";
-                        testDriver.findElement(By.cssSelector(privateDesc)).sendKeys("\n" + keywordArr.get(2).toString().trim());
+
+                        String descFrame = "#"+linklocate+" iframe.redactor_redactor";
+                        WebElement publicFrame = testDriver.findElement(By.cssSelector(descFrame));
+                        boolean y = testDriver.findElement(By.cssSelector(descFrame)).isDisplayed();
+                        testDriver.switchTo().frame(publicFrame);
+                        testDriver.findElement(By.cssSelector("html > body > p > br")).sendKeys("\n" + keywordArr.get(2).toString().trim());
                         testDriver.switchTo().window(currHandle);
                         String submitBttn = "#" + linklocate + " #edit_question.js-private-answer-form>div:nth-child(3) input";
                         testDriver.findElement(By.cssSelector(submitBttn)).click();
@@ -1610,13 +1612,14 @@ public class CommonFunctions {
                         WebElement parent = questiontext.findElement(By.xpath("parent::*"));
                         WebElement parent2 = parent.findElement(By.xpath("parent::*"));
                         String linklocate = parent2.getAttribute("id");
-                        String answerpublicLink = "#"+linklocate+">div:nth-child(1) div.pull-left a[class*=answer-publicly]";
+                        String answerpublicLink = "#" + linklocate + ">div:nth-child(1) div.pull-left a[class*=answer-publicly]";
                         testDriver.findElement(By.cssSelector(answerpublicLink)).click();
                         waitForPageLoad();
-                        List<WebElement> desc = testDriver.findElements(By.cssSelector(".redactor_box"));
-                        System.out.println(desc);
-                        String publicDesc = "#"+linklocate+" .redactor_box textarea[id*=public]";
-                        testDriver.findElement(By.cssSelector(publicDesc)).sendKeys(keywordArr.get(2).toString().trim());
+                        //String publicDesc = "#"+linklocate+" .redactor_box textarea[id*=public]";
+                        String descFrame = "#"+linklocate+" .redactor_redactor";
+                        WebElement publicFrame = testDriver.findElement(By.cssSelector(descFrame));
+                        testDriver.switchTo().frame(publicFrame);
+                        testDriver.findElement(By.cssSelector("html>body>p>br")).sendKeys("\n" + keywordArr.get(2).toString().trim());
                         testDriver.switchTo().window(currHandle);
                         String submitBttn = "#" + linklocate + " #edit_question.js-public-answer-form>div:nth-child(3) input";
                         testDriver.findElement(By.cssSelector(submitBttn)).click();
