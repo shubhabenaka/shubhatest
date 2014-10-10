@@ -1371,7 +1371,7 @@ public class CommonFunctions {
                         String afterUnarchive = pageObj.qandaArchiveTabCnt.getText();
                         int j = Integer.parseInt(afterUnarchive);
 
-                        if (j == i + 1) {
+                        if (j == i - 1) {
                             pageObj.qandaNewlyAddedTab.click();
                             waitForPageLoad();
                             waitForVisibility(testDriver.findElement(By.cssSelector(".lead")));
@@ -1540,7 +1540,8 @@ public class CommonFunctions {
                         testDriver.findElement(By.cssSelector(answerprivateLink)).click();
                         waitForPageLoad();
 
-                        String descFrame = "#"+linklocate+" iframe.redactor_redactor";
+                        String descFrame = "#"+linklocate+" form.js-private-answer-form iframe.redactor_redactor";
+
                         WebElement publicFrame = testDriver.findElement(By.cssSelector(descFrame));
                         boolean y = testDriver.findElement(By.cssSelector(descFrame)).isDisplayed();
                         testDriver.switchTo().frame(publicFrame);
