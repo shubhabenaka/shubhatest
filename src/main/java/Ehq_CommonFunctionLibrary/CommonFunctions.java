@@ -969,7 +969,7 @@ public class CommonFunctions {
 
     public static void DeleteProject(ArrayList keywordArr) throws InterruptedException
     {
-        waitForElement(By.cssSelector(pageObj.projectsLinkCss));
+            waitForElement(By.cssSelector(pageObj.projectsLinkCss));
         if (elementExists(testDriver.findElement(By.xpath("//*[@id='project-listing']/tbody/tr/td/a[text()='" + keywordArr.get(2).toString().trim() + "']")))) {
             WebElement y = (testDriver.findElement(By.xpath("//*[@id='project-listing']/tbody/tr/td/a[text()='" + keywordArr.get(2).toString().trim() + "']")));
             //System.out.println(y.getAttribute("textContent"));
@@ -1585,6 +1585,49 @@ public class CommonFunctions {
                                 }
                             }
                         }
+            }
+        } else {
+            keywordResult = false;
+        }
+
+    }
+
+    public static void AddTags(ArrayList keywordArr) throws InterruptedException{
+        if (pageObj.projToolsTab.getAttribute("textContent").contains("Q & A")) {
+            WebElement mngLnk = pageObj.manageLink("qanda");
+            mngLnk.click();
+            waitForPageLoad();
+            String newlyAdedQues = pageObj.qandaNewlyAddedTabCnt.getText();
+            int i = Integer.parseInt(newlyAdedQues);
+
+            if(i > 0) {
+                List<WebElement> allquestions = testDriver.findElements(By.cssSelector("ul.listing.projects.qa-listing.unstyled>li"));
+                //int allquestions = testDriver.findElements(By.cssSelector(".lead")).size();
+                for (int p=0;p < allquestions.size();p++) {
+                    String questionTextcount = String.format("ul.listing.projects.qa-listing.unstyled>li:nth-child(%d) p",p+1);
+                    WebElement questiontext = testDriver.findElement(By.cssSelector(questionTextcount));
+                    String text = questiontext.getText();
+
+                    if (text.equals(keywordArr.get(1).toString().trim())) {
+                        WebElement parent = questiontext.findElement(By.xpath("parent::*"));
+                        WebElement parent2 = parent.findElement(By.xpath("parent::*"));
+                        String  linklocate = parent2.getAttribute("id");
+                        String tagLinkBox = "#" + linklocate + " form.js-tags-form li.select2-search-field input";
+                        testDriver.findElement(By.cssSelector(tagLinkBox)).sendKeys(keywordArr.get(2).toString().trim());
+                        testDriver.findElement(By.cssSelector(tagLinkBox)).sendKeys(Keys.TAB);
+                        testDriver.navigate().to(testDriver.getCurrentUrl());
+                        waitForPageLoad();
+
+                        //Verify Tags
+                        String tagLocate = "#"+linklocate+" form.js-tags-form li.select2-search-choice div";
+                        waitForElement(By.cssSelector(tagLocate));
+                        String tagText = testDriver.findElement(By.cssSelector(tagLocate)).getText();
+                        String[] arr = (keywordArr.get(2).toString().trim()).split(Character.toString((char) 44));
+                        if(tagText.equals(arr[0])){
+                            //Do nothing
+                        }
+                    }
+                }
             }
         } else {
             keywordResult = false;
