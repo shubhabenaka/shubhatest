@@ -10,35 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35ee1f3d-aafc-466c-aef6-f014039c088e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/commons-codec-1.8.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/commons-io-2.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/commons-lang3-3.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/cssparser-0.9.11.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/htmlunit-2.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/htmlunit-core-js-2.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/jetty-http-8.1.12.v20130726.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/jetty-io-8.1.12.v20130726.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/jetty-util-8.1.12.v20130726.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/jetty-websocket-8.1.12.v20130726.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/nekohtml-1.9.19.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/netty-3.5.2.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-api-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-chrome-driver-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-firefox-driver-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-htmlunit-driver-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-ie-driver-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-java-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-remote-driver-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-safari-driver-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-server-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/selenium-support-2.41.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/webbit-0.4.14.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite/Ehq_AutomationSuite.jar" afterPath="$PROJECT_DIR$/Ehq_AutomationSuite/Ehq_AutomationSuite.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ehq_AutomationSuite.iml" afterPath="$PROJECT_DIR$/Ehq_AutomationSuite.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" afterPath="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" afterPath="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ehq_AutomationSuite.iws" />
@@ -65,8 +37,8 @@
       <file leaf-file-name="AppTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1215">
-              <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1581">
+              <caret line="52" column="61" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -75,8 +47,8 @@
       <file leaf-file-name="Objects.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.576923" vertical-offset="3035" max-vertical-offset="6675">
-              <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2686" max-vertical-offset="9554">
+              <caret line="158" column="35" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -85,18 +57,57 @@
       <file leaf-file-name="CommonFunctions.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39696312" vertical-offset="10137" max-vertical-offset="20235">
-              <caret line="714" column="34" selection-start-line="714" selection-start-column="34" selection-end-line="714" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.63003665" vertical-offset="17608" max-vertical-offset="23409">
+              <caret line="1329" column="0" selection-start-line="1329" selection-start-column="0" selection-end-line="1329" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#11922#11930#0" expanded="true" />
+                <element signature="e#25036#25044#0" expanded="true" />
+                <element signature="e#25490#25498#0" expanded="true" />
+                <element signature="e#30433#30441#0" expanded="true" />
+                <element signature="e#39446#39454#0" expanded="true" />
+                <element signature="e#50441#50449#0" expanded="true" />
+                <element signature="e#53634#53642#0" expanded="true" />
+                <element signature="e#53837#53845#0" expanded="true" />
+                <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="e#56879#56887#0" expanded="true" />
+                <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="e#62230#62238#0" expanded="true" />
+                <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="e#63593#63601#0" expanded="true" />
+                <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+                <element signature="e#88810#88818#0" expanded="true" />
+                <element signature="e#90002#90010#0" expanded="true" />
+                <element signature="e#96765#96771#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParentRunner.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/runners/ParentRunner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4726" max-vertical-offset="6749">
+              <caret line="278" column="0" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="codeTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java">
+      <file leaf-file-name="ReflectiveCallable.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="83" max-vertical-offset="408">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -131,9 +142,9 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/Resources/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/TestRunner.java" />
-        <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java" />
         <option value="$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java" />
       </list>
@@ -147,10 +158,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="45" />
-    <option name="y" value="22" />
-    <option name="width" value="1235" />
-    <option name="height" value="778" />
+    <option name="x" value="-15" />
+    <option name="y" value="-2" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -197,56 +208,14 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="Ehq_AutomationSuite" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ehq_AutomationSuite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ehq_AutomationSuite" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ehq_AutomationSuite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ehq_AutomationSuite" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ehq_AutomationSuite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ehq_AutomationSuite" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -726,7 +695,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="22" width="1235" height="778" extended-state="6" />
+    <frame x="-15" y="-2" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -735,23 +704,23 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32863188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915374" sideWeight="0.49959514" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.325811" sideWeight="0.50040483" order="7" side_tool="true" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.49924356" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.50075644" order="7" side_tool="true" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32863188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32722145" sideWeight="0.49959514" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32863188" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25506073" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2919605" sideWeight="0.49959514" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2549168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28960818" sideWeight="0.49924356" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32863188" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.49924356" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -817,10 +786,48 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java</url>
+          <line>1654</line>
+          <properties />
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java</url>
+          <line>1335</line>
+          <properties />
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java</url>
+          <line>1415</line>
+          <properties />
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java</url>
+          <line>1534</line>
+          <properties />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java</url>
+          <line>972</line>
+          <properties />
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java</url>
+          <line>1610</line>
+          <properties />
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="67" />
+      <option name="time" value="87" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -840,17 +847,283 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/File.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="2355">
-          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="8041" max-vertical-offset="9554">
+          <caret line="473" column="60" selection-start-line="473" selection-start-column="55" selection-end-line="473" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/ImmutableBiMap.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="3720">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="27245" max-vertical-offset="33949">
+          <caret line="1621" column="0" selection-start-line="1621" selection-start-column="0" selection-end-line="1621" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11922#11930#0" expanded="true" />
+            <element signature="e#25036#25044#0" expanded="true" />
+            <element signature="e#25490#25498#0" expanded="true" />
+            <element signature="e#30433#30441#0" expanded="true" />
+            <element signature="e#39446#39454#0" expanded="true" />
+            <element signature="e#50441#50449#0" expanded="true" />
+            <element signature="e#53634#53642#0" expanded="true" />
+            <element signature="e#53837#53845#0" expanded="true" />
+            <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#56879#56887#0" expanded="true" />
+            <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#62230#62238#0" expanded="true" />
+            <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#63593#63601#0" expanded="true" />
+            <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#88810#88818#0" expanded="true" />
+            <element signature="e#90002#90010#0" expanded="true" />
+            <element signature="e#96765#96771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1581">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4573" max-vertical-offset="9554">
+          <caret line="269" column="77" selection-start-line="269" selection-start-column="77" selection-end-line="269" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="17168" max-vertical-offset="34051">
+          <caret line="1016" column="0" selection-start-line="1016" selection-start-column="0" selection-end-line="1016" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11922#11930#0" expanded="true" />
+            <element signature="e#25036#25044#0" expanded="true" />
+            <element signature="e#25490#25498#0" expanded="true" />
+            <element signature="e#30433#30441#0" expanded="true" />
+            <element signature="e#39446#39454#0" expanded="true" />
+            <element signature="e#50441#50449#0" expanded="true" />
+            <element signature="e#53634#53642#0" expanded="true" />
+            <element signature="e#53837#53845#0" expanded="true" />
+            <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#56879#56887#0" expanded="true" />
+            <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#62230#62238#0" expanded="true" />
+            <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#63593#63601#0" expanded="true" />
+            <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#88810#88818#0" expanded="true" />
+            <element signature="e#90002#90010#0" expanded="true" />
+            <element signature="e#96765#96771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1581">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4471" max-vertical-offset="8959">
+          <caret line="263" column="106" selection-start-line="263" selection-start-column="85" selection-end-line="263" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="20597" max-vertical-offset="28254">
+          <caret line="1392" column="27" selection-start-line="1392" selection-start-column="27" selection-end-line="1392" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11922#11930#0" expanded="true" />
+            <element signature="e#25036#25044#0" expanded="true" />
+            <element signature="e#25490#25498#0" expanded="true" />
+            <element signature="e#30433#30441#0" expanded="true" />
+            <element signature="e#39446#39454#0" expanded="true" />
+            <element signature="e#50441#50449#0" expanded="true" />
+            <element signature="e#53634#53642#0" expanded="true" />
+            <element signature="e#53837#53845#0" expanded="true" />
+            <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#56879#56887#0" expanded="true" />
+            <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#62230#62238#0" expanded="true" />
+            <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#63593#63601#0" expanded="true" />
+            <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#88810#88818#0" expanded="true" />
+            <element signature="e#90002#90010#0" expanded="true" />
+            <element signature="e#96765#96771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="83" max-vertical-offset="408">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1581">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4355" max-vertical-offset="8959">
+          <caret line="263" column="106" selection-start-line="263" selection-start-column="85" selection-end-line="263" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="20411" max-vertical-offset="28781">
+          <caret line="1237" column="0" selection-start-line="1237" selection-start-column="0" selection-end-line="1237" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11922#11930#0" expanded="true" />
+            <element signature="e#25036#25044#0" expanded="true" />
+            <element signature="e#25490#25498#0" expanded="true" />
+            <element signature="e#30433#30441#0" expanded="true" />
+            <element signature="e#39446#39454#0" expanded="true" />
+            <element signature="e#50441#50449#0" expanded="true" />
+            <element signature="e#53634#53642#0" expanded="true" />
+            <element signature="e#53837#53845#0" expanded="true" />
+            <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#56879#56887#0" expanded="true" />
+            <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#62230#62238#0" expanded="true" />
+            <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#63593#63601#0" expanded="true" />
+            <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#88810#88818#0" expanded="true" />
+            <element signature="e#90002#90010#0" expanded="true" />
+            <element signature="e#96765#96771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="83" max-vertical-offset="408">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1581">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3706" max-vertical-offset="7667">
+          <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="11696" max-vertical-offset="22933">
+          <caret line="714" column="34" selection-start-line="714" selection-start-column="34" selection-end-line="714" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11922#11930#0" expanded="true" />
+            <element signature="e#25036#25044#0" expanded="true" />
+            <element signature="e#25490#25498#0" expanded="true" />
+            <element signature="e#30433#30441#0" expanded="true" />
+            <element signature="e#39446#39454#0" expanded="true" />
+            <element signature="e#50441#50449#0" expanded="true" />
+            <element signature="e#53634#53642#0" expanded="true" />
+            <element signature="e#53837#53845#0" expanded="true" />
+            <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#56879#56887#0" expanded="true" />
+            <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#62230#62238#0" expanded="true" />
+            <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#63593#63601#0" expanded="true" />
+            <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#88810#88818#0" expanded="true" />
+            <element signature="e#90002#90010#0" expanded="true" />
+            <element signature="e#96765#96771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/CodeTest/codeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="714">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -868,38 +1141,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/Hashing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="310" max-vertical-offset="885">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.41.0/selenium-remote-driver-2.41.0-sources.jar!/org/openqa/selenium/remote/HttpVerb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="420">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.41.0/selenium-remote-driver-2.41.0-sources.jar!/org/openqa/selenium/remote/CommandInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="401" max-vertical-offset="900">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20080701/json-20080701.jar!/org/json/JSONObject.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.48" vertical-offset="1703" max-vertical-offset="2220">
           <caret line="122" column="28" selection-start-line="122" selection-start-column="28" selection-end-line="122" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.41.0/selenium-remote-driver-2.41.0-sources.jar!/org/openqa/selenium/remote/BeanToJsonConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="3960">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -924,20 +1169,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.41.0/selenium-remote-driver-2.41.0-sources.jar!/org/openqa/selenium/remote/HttpCommandExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2898" max-vertical-offset="6660">
-          <caret line="262" column="0" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/ImmutableSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="798" max-vertical-offset="7305">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-api/2.41.0/selenium-api-2.41.0.jar!/org/openqa/selenium/logging/HandlerBasedLocalLogs.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.16" vertical-offset="16" max-vertical-offset="330">
@@ -952,13 +1183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/SingletonImmutableSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29396984" vertical-offset="483" max-vertical-offset="1350">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.3.2/httpcore-4.3.2.jar!/org/apache/http/message/HeaderGroup.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31367293" vertical-offset="153" max-vertical-offset="735">
@@ -966,136 +1190,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="555">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/String.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3314917" vertical-offset="150" max-vertical-offset="3135">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Thread.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2400" max-vertical-offset="3495">
-          <caret line="169" column="28" selection-start-line="169" selection-start-column="28" selection-end-line="169" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/CollectPreconditions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="615">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/Collections2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3535" max-vertical-offset="8820">
-          <caret line="311" column="0" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/ImmutableCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1855" max-vertical-offset="4965">
-          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/RegularImmutableList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="1410">
-          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/RegularImmutableAsList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="765">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/ImmutableList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4210" max-vertical-offset="9060">
-          <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/RegularImmutableMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2215" max-vertical-offset="2685">
-          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/Iterators.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13990" max-vertical-offset="17715">
-          <caret line="1049" column="0" selection-start-line="1049" selection-start-column="0" selection-end-line="1049" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/base/Preconditions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2485" max-vertical-offset="6525">
-          <caret line="193" column="0" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/AbstractIndexedListIterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="685" max-vertical-offset="1320">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/base/Joiner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4060" max-vertical-offset="6225">
-          <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/Maps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="44070" max-vertical-offset="50085">
-          <caret line="3398" column="0" selection-start-line="3398" selection-start-column="0" selection-end-line="3398" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/15.0/guava-15.0-sources.jar!/com/google/common/collect/ImmutableMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6565" max-vertical-offset="7320">
-          <caret line="518" column="0" selection-start-line="518" selection-start-column="0" selection-end-line="518" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.41.0/selenium-remote-driver-2.41.0-sources.jar!/org/openqa/selenium/remote/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="555">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-api/2.41.0/selenium-api-2.41.0.jar!/org/openqa/selenium/By.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.8" vertical-offset="1680" max-vertical-offset="2175">
           <caret line="121" column="62" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.41.0/selenium-remote-driver-2.41.0-sources.jar!/org/openqa/selenium/remote/RemoteWebDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3565" max-vertical-offset="11520">
-          <caret line="335" column="0" selection-start-line="335" selection-start-column="0" selection-end-line="335" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1134,13 +1232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17162472" vertical-offset="0" max-vertical-offset="1035">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Resources/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5940594" vertical-offset="0" max-vertical-offset="505">
@@ -1166,7 +1257,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0443038" vertical-offset="45" max-vertical-offset="1530">
           <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1174,31 +1264,138 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
           <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.43.1/selenium-remote-driver-2.43.1.jar!/org/openqa/selenium/remote/RemoteWebElement.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.16" vertical-offset="1494" max-vertical-offset="1853">
+          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.43.1/selenium-remote-driver-2.43.1.jar!/org/openqa/selenium/remote/RemoteWebDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4499" max-vertical-offset="4811">
+          <caret line="278" column="0" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-remote-driver/2.43.1/selenium-remote-driver-2.43.1-sources.jar!/org/openqa/selenium/remote/RemoteWebDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3323077" vertical-offset="11" max-vertical-offset="13022">
+          <caret line="74" column="13" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/runner/JUnitCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30769232" vertical-offset="2280" max-vertical-offset="2839">
+          <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-support/2.43.1/selenium-support-2.43.1.jar!/org/openqa/selenium/support/ui/WebDriverWait.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.84" vertical-offset="57" max-vertical-offset="374">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/src.zip!/java/lang/reflect/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33112583" vertical-offset="7108" max-vertical-offset="9792">
+          <caret line="482" column="0" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/jre/lib/rt.jar!/sun/reflect/DelegatingMethodAccessorImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47058824" vertical-offset="34" max-vertical-offset="323">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40064102" vertical-offset="79" max-vertical-offset="391">
+          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Automated_Test_Suite/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1581">
+          <caret line="52" column="61" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_Object_Repository/Objects.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.576923" vertical-offset="3035" max-vertical-offset="6675">
-          <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2462" max-vertical-offset="9452">
+          <caret line="158" column="35" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/runners/BlockJUnit4ClassRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3323077" vertical-offset="640" max-vertical-offset="6273">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="83" max-vertical-offset="408">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/org/junit/runners/ParentRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3772" max-vertical-offset="5729">
+          <caret line="278" column="0" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Ehq_CommonFunctionLibrary/CommonFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39696312" vertical-offset="10137" max-vertical-offset="20235">
-          <caret line="714" column="34" selection-start-line="714" selection-start-column="34" selection-end-line="714" selection-end-column="34" />
-          <folding />
+        <state vertical-scroll-proportion="0.63003665" vertical-offset="17608" max-vertical-offset="23409">
+          <caret line="1329" column="0" selection-start-line="1329" selection-start-column="0" selection-end-line="1329" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11922#11930#0" expanded="true" />
+            <element signature="e#25036#25044#0" expanded="true" />
+            <element signature="e#25490#25498#0" expanded="true" />
+            <element signature="e#30433#30441#0" expanded="true" />
+            <element signature="e#39446#39454#0" expanded="true" />
+            <element signature="e#50441#50449#0" expanded="true" />
+            <element signature="e#53634#53642#0" expanded="true" />
+            <element signature="e#53837#53845#0" expanded="true" />
+            <element signature="method#AddReply#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#VerifyQandAadmin#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#56879#56887#0" expanded="true" />
+            <element signature="method#AddQandAQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UpdateQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#ArchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#62230#62238#0" expanded="true" />
+            <element signature="method#UnarchiveQandA#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#63593#63601#0" expanded="true" />
+            <element signature="method#ArchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#UnarchiveQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#JunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#RestoreJunkQuestions#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPrivately#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AddTags#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="method#AnswerPublicly#0;class#CommonFunctions#0" expanded="false" />
+            <element signature="e#88810#88818#0" expanded="true" />
+            <element signature="e#90002#90010#0" expanded="true" />
+            <element signature="e#96765#96771#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
